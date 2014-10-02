@@ -1,6 +1,7 @@
 package aed.spelling.app;
 
 import aed.dataStructures.List;
+import aed.spelling.Word;
 import aed.dataStructures.Iterator;
 
 public interface IAnalysisResults {
@@ -18,7 +19,7 @@ public interface IAnalysisResults {
 	 * @param word Word to check the frequency for
 	 * @return The frequency of a word
 	 */
-	int frequency(String word);
+	int frequency(Word word);
 	
 	/**
 	 * Returns an iterator of occurrences of a word
