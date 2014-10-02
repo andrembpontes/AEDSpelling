@@ -1,13 +1,19 @@
-package aed.spelling;
+package aed.spelling.app;
 
 import aed.dataStructures.Iterator;
-import aed.spelling.app.IWordOccurrence;
+import aed.spelling.InvalidWordException;
+import aed.spelling.Word;
 
 public class WordOccurrence extends Word implements IWordOccurrence{
 
 
 	
 	public WordOccurrence(String word) throws InvalidWordException {
+		super(word);
+		// TODO Auto-generated constructor stub
+	}
+
+	public WordOccurrence(String word, IDictionary dictionary) throws InvalidWordException {
 		super(word);
 		// TODO Auto-generated constructor stub
 	}
