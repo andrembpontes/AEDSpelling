@@ -13,7 +13,7 @@ public class WordOccurrence extends Word implements IWordOccurrence{
 	}
 
 	@Override
-	public int frequency() {
+	public int getFrequency() {
 		
 		return 0;
 	}
@@ -28,6 +28,12 @@ public class WordOccurrence extends Word implements IWordOccurrence{
 	public Iterator<Integer> linesNr() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void incrementFrequency() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

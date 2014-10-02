@@ -11,7 +11,12 @@ public interface IWordOccurrence {
 	 * 
 	 * @return Times word appear on text
 	 */
-	int frequency();
+	int getFrequency();
+	
+	/**
+	 * Increments the word frequency  
+	 */
+	void incrementFrequency();
 	
 	/**
 	 * Return word
