@@ -1,7 +1,7 @@
 package aed.spelling;
 
+import aed.dataStructures.ArrayIterator;
 import aed.dataStructures.Iterator;
-import aed.dataStructures.List;
 
 /**
  * Represents a text identified by its id
@@ -11,7 +11,7 @@ import aed.dataStructures.List;
 
 public class Text {
     private String id;
-    private List<Line> lines;
+    private Line[] lines;
 
     /**
      * Create a text
@@ -19,7 +19,7 @@ public class Text {
      * @param id Id
      * @param lines Lines list
      */
-    public Text(String id, List<Line> lines){
+    public Text(String id, Line[] lines){
         this.id = id;
         this.lines = lines;
     }
@@ -39,6 +39,6 @@ public class Text {
      * @return Lines
      */
     public Iterator<Line> lines(){
-        return this.lines.iterator();
+        return new ArrayIterator<Line>(this.lines);
     }
 }
