@@ -17,12 +17,13 @@ public interface ISpelling {
 	
 	
 	/**
-	 * Add a list word to the dictionary if the words werent already there
+	 * Add a list word to the dictionary if the words weren't already there
 	 * 
 	 * @param words Words to add
-	 * @return An iterator of the words that were added
+	 * @return True if any word was added false if not
+	 * @throws InvalidWordException 
 	 */
-	Iterator<Word> addWords(List<String> words);
+	boolean addWords(List<String> words) throws InvalidWordException;
 	
 	/**
 	 * Delete the text with the given ID

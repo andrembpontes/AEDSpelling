@@ -10,33 +10,39 @@ public class WordOccurrence extends Word implements IWordOccurrence{
 
 	private int frequency;
 	private boolean isCorrect;
+	private int nOfLines;
 	private List<Integer> lineNumbers;
 
 	public WordOccurrence(String word, IDictionary dictionary) throws InvalidWordException {
 		super(word);
+		this.frequency = 0;
 		this.isCorrect = dictionary.verifyWord(word);
+		this.nOfLines = 0;
 		this.lineNumbers = new LinkedList<Integer>();
 	}
 
 	@Override
 	public int getFrequency() {
-		return frequency;
+		return this.frequency;
 	}
 
 	@Override
 	public boolean isCorrect() {
-		return isCorrect;
+		return this.isCorrect;
 	}
 
 	@Override
 	public Iterator<Integer> linesNr() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.lineNumbers.iterator();
 	}
 
 	@Override
 	public void incrementFrequency(int lineNumber) {
 		this.frequency++;
+		//TODO:
+		//if(this.lineNumbers.getLast() != lineNumber) {
+		//	this.lineNumbers.add(lineNumber);
+		//}
 		this.lineNumbers.add(lineNumber);
 	}
 }

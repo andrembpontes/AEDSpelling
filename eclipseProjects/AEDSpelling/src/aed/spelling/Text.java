@@ -24,8 +24,8 @@ public class Text {
     public Text(String id, List<String> textLines){
         this.id = id;
         this.nOfLines = 0;
-        
         this.lines = new Line[textLines.size()];
+        
         for(Iterator<String> iterator = textLines.iterator(); iterator.hasNext(); ) {
         	this.lines[nOfLines++] = new Line(nOfLines, iterator.next());
         }
@@ -47,5 +47,23 @@ public class Text {
      */
     public Iterator<Line> lines(){
         return new ArrayIterator<Line>(this.lines);
+    }
+    
+    /**
+     * 
+     * @param firstLine first line of the text
+     * @param lastLine last line of the text
+     * @return An iterator of lines
+     */
+    public Iterator<Line> lines(int firstLine, int lastLine){
+    	int firstIndex = firstLine--;
+    	int lastIndex = lastLine--;
+    	Line[] selectedLines = new Line[lastLine - firstLine];
+    	
+    	int count = 0;
+    	for (int i = firstIndex; i < lastIndex; i++) {
+    		selectedLines[count++] = this.lines[i];
+    	}
+        return new ArrayIterator<Line>(selectedLines);
     }
 }

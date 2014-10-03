@@ -15,14 +15,13 @@ public class Dictionary implements IDictionary {
 	}
 	
 	@Override
-	public Word addWord(String word) {
-		try {
-			Word newWord = new Word(word);
-			this.words.add(newWord);
-			return newWord;
-		} catch (InvalidWordException e) {
+	public Word addWord(String word) throws InvalidWordException{
+		if (this.verifyWord(word)) {
 			return null;
-		} 
+		}
+		Word newWord = new Word(word);
+		this.words.add(newWord);
+		return newWord;
 	}
 
 	@Override

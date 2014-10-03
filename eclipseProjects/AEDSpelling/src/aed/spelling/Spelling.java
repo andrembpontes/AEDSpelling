@@ -26,16 +26,17 @@ public class Spelling implements ISpelling{
 	}
 
 	@Override
-	public Iterator<Word> addWords(List<String> words) {
-		List<Word> addedWords = new LinkedList<Word>();
+	public boolean addWords(List<String> words) throws InvalidWordException{
+		boolean anyAdded = false;		
 		for (Iterator<String> iterator = words.iterator(); iterator.hasNext();) {
 			String newWord = iterator.next();
-			
-			if (!this.dictionary.verifyWord(newWord)) {
-				addedWords.add(this.dictionary.addWord(newWord));
-			} 
+			anyAdded = (anyAdded || (this.dictionary.addWord(newWord) != null));
 		}
-		return addedWords.iterator();
+		
+		if (anyAdded) {
+			this.texts = new LinkedList<IAnalisableText>();
+		}
+		return anyAdded;
 	}
 
 	@Override
@@ -63,8 +64,7 @@ public class Spelling implements ISpelling{
 
 	@Override
 	public Iterator<Line> textLines(String id, int firstLine, int lastLine) {
-		//TODO
-		return null;
+		return this.searchText(id).lines(firstLine, lastLine);
 	}
 
 	@Override

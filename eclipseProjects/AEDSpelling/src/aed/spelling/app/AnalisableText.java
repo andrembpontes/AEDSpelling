@@ -19,24 +19,29 @@ public class AnalisableText extends Text implements IAnalisableText  {
 
 	@Override
 	public Iterator<IWordOccurrence> errors() {
-		if(this.analysisResults == null)
-			this.analise();
-		
+		checkAnalisys();
 		return this.analysisResults.errors();
 	}
 
 	@Override
 	public int frequency(Word word) {
+		checkAnalisys();
 		return this.analysisResults.frequency(word);
 	}
 
 	@Override
 	public Iterator<IWordOccurrence> occurrences() {
+		checkAnalisys();
 		return this.analysisResults.occurrences();
 	}
 	
 	private void analise(){
 		this.analysisResults = new AnalisysResults(this, this.dictionary);
+	}
+	
+	private void checkAnalisys() {
+		if(this.analysisResults == null)
+			this.analise();		
 	}
 
 }

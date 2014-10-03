@@ -34,6 +34,14 @@ public interface IAnalisableText {
 	 */
 	Iterator<Line> lines();
 	
+    /**
+     * 
+     * @param firstLine first line of the text
+     * @param lastLine last line of the text
+     * @return An iterator of lines
+     */
+    Iterator<Line> lines(int firstLine, int lastLine);
+	
 	/**
 	 * Iterator for word occurrences in text
 	 * 
