@@ -10,14 +10,12 @@ public class WordOccurrence extends Word implements IWordOccurrence{
 
 	private int frequency;
 	private boolean isCorrect;
-	private int nOfLines;
 	private List<Integer> lineNumbers;
 
 	public WordOccurrence(String word, IDictionary dictionary) throws InvalidWordException {
 		super(word);
 		this.frequency = 0;
 		this.isCorrect = dictionary.verifyWord(word);
-		this.nOfLines = 0;
 		this.lineNumbers = new LinkedList<Integer>();
 	}
 
