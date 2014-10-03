@@ -1,7 +1,7 @@
 package aed.spelling.app;
 
 import aed.dataStructures.Iterator;
-import aed.spelling.Line;
+import aed.dataStructures.List;
 import aed.spelling.Text;
 import aed.spelling.Word;
 
@@ -11,7 +11,7 @@ public class AnalisableText extends Text implements IAnalisableText  {
 	private IAnalysisResults analysisResults;
 	private IDictionary dictionary;
 	
-	public AnalisableText(String id, Line[] lines, IDictionary dictionary) {
+	public AnalisableText(String id, List<String> lines, IDictionary dictionary) {
 		super(id, lines);
 		
 		this.dictionary = dictionary;

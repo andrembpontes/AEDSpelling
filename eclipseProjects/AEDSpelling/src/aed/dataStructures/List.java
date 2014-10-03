@@ -29,4 +29,10 @@ public interface List <T> {
      * @return Deleted element from list. Null if nothing deleted
      */
     T del(T elem);
+    
+    /**
+     * Returns the list size 
+     * @return List size 
+     */
+    int size();
 }

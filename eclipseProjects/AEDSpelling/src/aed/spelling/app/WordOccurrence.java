@@ -1,33 +1,31 @@
 package aed.spelling.app;
 
 import aed.dataStructures.Iterator;
+import aed.dataStructures.LinkedList;
+import aed.dataStructures.List;
 import aed.spelling.InvalidWordException;
 import aed.spelling.Word;
 
 public class WordOccurrence extends Word implements IWordOccurrence{
 
-
-	
-	public WordOccurrence(String word) throws InvalidWordException {
-		super(word);
-		// TODO Auto-generated constructor stub
-	}
+	private int frequency;
+	private boolean isCorrect;
+	private List<Integer> lineNumbers;
 
 	public WordOccurrence(String word, IDictionary dictionary) throws InvalidWordException {
 		super(word);
-		// TODO Auto-generated constructor stub
+		this.isCorrect = dictionary.verifyWord(word);
+		this.lineNumbers = new LinkedList<Integer>();
 	}
 
 	@Override
 	public int getFrequency() {
-		
-		return 0;
+		return frequency;
 	}
 
 	@Override
 	public boolean isCorrect() {
-		// TODO Auto-generated method stub
-		return false;
+		return isCorrect;
 	}
 
 	@Override
@@ -37,9 +35,8 @@ public class WordOccurrence extends Word implements IWordOccurrence{
 	}
 
 	@Override
-	public void incrementFrequency() {
-		// TODO Auto-generated method stub
-		
+	public void incrementFrequency(int lineNumber) {
+		this.frequency++;
+		this.lineNumbers.add(lineNumber);
 	}
-
 }

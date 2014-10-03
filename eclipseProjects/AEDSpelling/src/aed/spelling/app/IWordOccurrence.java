@@ -16,7 +16,7 @@ public interface IWordOccurrence {
 	/**
 	 * Increments the word frequency  
 	 */
-	void incrementFrequency();
+	void incrementFrequency(int lineNumber);
 	
 	/**
 	 * Return word

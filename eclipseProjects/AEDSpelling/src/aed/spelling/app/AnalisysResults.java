@@ -30,13 +30,12 @@ public class AnalisysResults implements IAnalysisResults {
 			String[] words = line.getLine().split(" ");
 			
 			for(String word : words){
-				this.addOccurrence(word);
+				this.addOccurrence(word, line.getNr());
 			}
 		}
-		
 	}
 	
-	private void addOccurrence(String word){
+	private void addOccurrence(String word, int lineNumber){
 		IWordOccurrence occurrence = this.getWordOccurrence(word);
 		
 		if(occurrence == null){
@@ -50,15 +49,15 @@ public class AnalisysResults implements IAnalysisResults {
 			if(!occurrence.isCorrect())
 				this.errors.add(occurrence);
 		}
-		else{
-			occurrence.incrementFrequency();
-		}
+		occurrence.incrementFrequency(lineNumber);
 	}
 	
 	private IWordOccurrence getWordOccurrence(String word){
-		for(IWordOccurrence occurrence : this.occurrences){
-			if(occurrence.getWord().equals(word))
+		for(Iterator<IWordOccurrence> iterator = this.occurrences.iterator(); iterator.hasNext();){
+			IWordOccurrence occurrence = iterator.next();
+			if(occurrence.getWord().equals(word)) {
 				return occurrence;
+			}
 		}
 		
 		return null;
@@ -71,9 +70,12 @@ public class AnalisysResults implements IAnalysisResults {
 
 	@Override
 	public int frequency(Word word) {
-		for(IWordOccurrence occurrence : this.occurrences)
-			if(word.equals(occurrence))
+		for(Iterator<IWordOccurrence> iterator = this.occurrences.iterator(); iterator.hasNext();) {
+			IWordOccurrence occurrence = iterator.next();
+			if(word.equals(occurrence)) {
 				return occurrence.getFrequency();
+			}
+		}
 		
 		return 0;
 	}

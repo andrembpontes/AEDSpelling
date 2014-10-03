@@ -1,6 +1,5 @@
 package aed.spelling.app;
 
-import aed.dataStructures.List;
 import aed.spelling.Word;
 import aed.dataStructures.Iterator;
 

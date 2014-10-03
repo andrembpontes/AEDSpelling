@@ -6,7 +6,7 @@ package aed.dataStructures;
 /**
  * @author Andre Pontes (42845)
  */
-public class LinkedList<T> implements List<T> {
+public class LinkedList<T> implements List<T>{
 
 	class Node{
 		private Node previous, next;
@@ -58,6 +58,7 @@ public class LinkedList<T> implements List<T> {
 	}
 	
 	private Node first, last;
+	private int size;
 	
 	@Override
 	public Iterator<T> iterator() {
@@ -67,6 +68,7 @@ public class LinkedList<T> implements List<T> {
 	@Override
 	public boolean add(T elem) {
 		this.last = new Node(elem, this.last);
+		this.size++;		
 		return true;
 	}
 
@@ -78,6 +80,8 @@ public class LinkedList<T> implements List<T> {
 			return null;
 		
 		toDel.remove();
+		this.size--;
+		
 		return toDel.value();
 	}
 	
@@ -96,5 +100,12 @@ public class LinkedList<T> implements List<T> {
 	public Node last(){
 		return this.last;
 	}
+
+	@Override
+	public int size() {
+		return size;
+	}
+	
+	
 
 }
