@@ -34,6 +34,12 @@ public class Main {
 			case AT:
 				output = addText(spelling, scan);
 				break;
+			case RT:
+				output = removeText(spelling, scan);
+				break;
+			case LT:
+				output = listText(spelling, scan);
+				break;
 			case INVALID:
 			default:
 				output = Output.UNKNOWN_COMMAND.message();
@@ -97,7 +103,20 @@ public class Main {
 		boolean wasAdded = spelling.addText(textId, textLines);
 		
 		return wasAdded ? Output.ADD_TEXT_SUCCESS.message() : Output.ADD_TEXT_FAILED.message();
-					
+	}
+	
+	private static String removeText(ISpelling spelling, Scanner scan) {	
+		String textId = processInput(scan.nextLine());		
+		boolean wasRemoved = spelling.delText(textId);
+		
+		return wasRemoved ? Output.REMOVE_TEXT_SUCCESS.message() : Output.TEXT_NOT_FOUND.message();
+	}
+	
+	
+	private static String listText(ISpelling spelling, Scanner scan) {
+		String textId = processInput(scan.nextLine());
+		return "";
+		//TODO: finish
 	}
 	
 	private static String processInput(String input) {
