@@ -44,10 +44,13 @@ public class Spelling implements ISpelling{
 	}
 
 	@Override
-	public Text delText(String id) {
+	public boolean delText(String id) {
 		IAnalisableText text = this.searchText(id);
-		this.texts.del(text);
-		return (Text)text;
+		if(text != null) {
+			this.texts.del(text);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -58,17 +61,20 @@ public class Spelling implements ISpelling{
 
 	@Override
 	public Iterator<IWordOccurrence> textErrors(String id) {
-		return this.searchText(id).errors();
+		IAnalisableText text = this.searchText(id);
+		return (text != null) ? text.errors() : null;
 	}
 
 	@Override
 	public Iterator<Line> textLines(String id) {
-		returtn this.searchText(id).lines();
+		IAnalisableText text = this.searchText(id);
+		return (text != null) ? text.lines() : null;
 	}
 
 	@Override
 	public Iterator<Line> textLines(String id, int firstLine, int lastLine) {
-		return this.searchText(id).lines(firstLine, lastLine);
+		IAnalisableText text = this.searchText(id);
+		return (text != null) ? text.lines(firstLine, lastLine) : null;
 	}
 
 	@Override
@@ -78,7 +84,8 @@ public class Spelling implements ISpelling{
 
 	@Override
 	public Iterator<IWordOccurrence> wordsOf(String id) {
-		return this.searchText(id).occurrences();
+		IAnalisableText text = this.searchText(id);
+		return (text != null) ? text.occurrences() : null;
 	}
 	
 	private IAnalisableText searchText(String id) {

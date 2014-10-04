@@ -30,9 +30,9 @@ public interface ISpelling {
 	 * Delete the text with the given ID
 	 * 
 	 * @param id Id
-	 * @return Null if there is no text with the given ID else returns the deleted text
+	 * @return True if there is no text with the given ID else returns False
 	 */
-	Text delText(String id);
+	boolean delText(String id);
 	
 	/**
 	 * Returns the frequency of a given word on a text
