@@ -4,11 +4,15 @@ import java.util.Scanner;
 import aed.dataStructures.LinkedList;
 import aed.dataStructures.List;
 import aed.spelling.InvalidWordException;
+import aed.spelling.Line;
 import aed.spelling.Spelling;
 import aed.spelling.app.ISpelling;
 
 
 public class Main {
+	
+	private static final String END_TEXT_TOKEN= "\n";
+
 	
 	public static void main(String [] args) {		
 		
@@ -24,9 +28,15 @@ public class Main {
 			case AD:
 				output = addWordsToDictionary(spelling, scan);
 				break;
+			case PC:
+				output = searchWordInDictionary(spelling, scan);
+				break;
+			case AT:
+				output = addText(spelling, scan);
+				break;
 			case INVALID:
 			default:
-				output = Output.UNKNOWN_COMMAND;
+				output = Output.UNKNOWN_COMMAND.message();
 				break;
 			} 
 			System.out.println(output);
@@ -49,7 +59,7 @@ public class Main {
 		try {
 			numberOfWords= scan.nextInt();
 		} catch (InputMismatchException e) {
-			return Output.INPUT_ERROR;
+			return Output.INPUT_ERROR.message();
 		}
 
 		List<String> newWords = new LinkedList<String>();
@@ -61,9 +71,36 @@ public class Main {
 		try {
 			anyAdded = spelling.addWords(newWords);
 		} catch (InvalidWordException e) {
-			return Output.INPUT_ERROR;
+			return Output.INPUT_ERROR.message();
 		}
 		
-		return anyAdded ? Output.WORDS_ADDED_SUCCESS : Output.WORDS_ADDED_FAILED;	
+		return anyAdded ? Output.ADD_WORDS_SUCCESS.message() : Output.ADD_WORDS_FAILED.message();	
 	} 
+	
+	private static String searchWordInDictionary(ISpelling spelling, Scanner scan) {
+		String word = scan.nextLine();
+		
+		return spelling.verifyWord(word) ? Output.WORD_FOUND.message() : Output.WORD_NOT_FOUND.message();
+	}
+	
+	private static String addText(ISpelling spelling, Scanner scan) {	
+		String textId = processInput(scan.nextLine());
+				
+		List<String> textLines = new LinkedList<String>();
+		String line = scan.nextLine();
+		
+		while (!line.equals(END_TEXT_TOKEN)) {
+			textLines.add(line);
+			line = scan.nextLine();
+		}
+		
+		boolean wasAdded = spelling.addText(textId, textLines);
+		
+		return wasAdded ? Output.ADD_TEXT_SUCCESS.message() : Output.ADD_TEXT_FAILED.message();
+					
+	}
+	
+	private static String processInput(String input) {
+		return input.trim();
+	}
 }

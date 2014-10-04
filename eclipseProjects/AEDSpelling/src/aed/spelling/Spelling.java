@@ -21,8 +21,12 @@ public class Spelling implements ISpelling{
 	}
 	
 	@Override
-	public void addText(String id, List<String> text) {
+	public boolean addText(String id, List<String> text) {
+		if (this.searchText(id) != null) {
+			return false;
+		}
 		this.texts.add(new AnalisableText(id, text, this.dictionary));
+		return true;
 	}
 
 	@Override
@@ -59,7 +63,7 @@ public class Spelling implements ISpelling{
 
 	@Override
 	public Iterator<Line> textLines(String id) {
-		return this.searchText(id).lines();
+		returtn this.searchText(id).lines();
 	}
 
 	@Override

@@ -12,8 +12,9 @@ public interface ISpelling {
 	 * 
 	 * @param id Id
 	 * @param text Text to add
+	 * @return True if the text was added, false if the id is already in use
 	 */
-	void addText(String id, List<String> text);
+	boolean addText(String id, List<String> text);
 	
 	
 	/**
