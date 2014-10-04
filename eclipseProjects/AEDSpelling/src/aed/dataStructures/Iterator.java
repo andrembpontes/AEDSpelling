@@ -1,23 +1,28 @@
 package aed.dataStructures;
 
-/**
- * Object to iterate by collection
- *
- * @author Andre Pontes (42845)
- * @param <T> Type of objects on iteration
- */
-public interface Iterator<T> {
-    /**
-     * Return next element on current iteration
-     *
-     * @return Next element
-     */
-    T next();
+import java.io.Serializable;
+
+public interface Iterator<E> extends Serializable {
 
     /**
-     * Verify if has next element on current iteration
-     *
-     * @return True if has next element
+     * Verify if has next element in iteration
+     * 
+     * @return True if has next. Else false.
      */
-    boolean hasNext();
+    boolean hasNext( );
+
+    /**
+     * Returns next element in iteration
+     * 
+     * @return Next element in iteration
+     * @throws NoSuchElementException If !hasNext();
+     */
+    E next() throws NoSuchElementException;
+
+    /**
+     * Restarts iteration and return first element
+     * 
+     * @return First element
+     */
+    E first();
 }

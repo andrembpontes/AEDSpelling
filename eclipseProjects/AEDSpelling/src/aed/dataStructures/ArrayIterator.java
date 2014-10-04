@@ -1,36 +1,31 @@
-/**
- * 
- */
 package aed.dataStructures;
 
-/**
- * @author Andre Pontes (42845)
- *
- */
-public class ArrayIterator<T> implements Iterator<T>{
-	private int nElem, current;
-	private T[] array;
+public class ArrayIterator<E> implements Iterator<E> {
+
+	private static final long serialVersionUID = 1L;
+
+	private E[] array;
+	private int nElements, current;
 	
-	public ArrayIterator(T[] array, int nElem){
-		this.nElem = nElem;
+	public ArrayIterator(E[] array, int nElements){
+		this.nElements = nElements;
 		this.array = array;
 		this.current = 0;
 	}
 	
-	public ArrayIterator(T[] array){
-		this.nElem = array.length;
-		this.array = array;
-		this.current = 0;
+	@Override
+	public boolean hasNext() {
+		return this.current < this.nElements;
 	}
 
 	@Override
-	public T next() {
+	public E next() throws NoSuchElementException {
 		return this.array[this.current++];
 	}
 
 	@Override
-	public boolean hasNext() {
-		return this.current < this.nElem;
+	public E first() {
+		return this.array[this.current = 0];
 	}
 
 }

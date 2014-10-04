@@ -1,6 +1,7 @@
 package aed.spelling;
 
 import aed.dataStructures.ArrayIterator;
+import aed.dataStructures.ArrayList;
 import aed.dataStructures.Iterator;
 import aed.dataStructures.List;
 
@@ -13,7 +14,7 @@ import aed.dataStructures.List;
 public class Text {
     private String id;
     private int nOfLines;
-    private Line[] lines;
+    private ArrayList<Line> lines;
 
     /**
      * Create a text
@@ -24,10 +25,10 @@ public class Text {
     public Text(String id, List<String> textLines){
         this.id = id;
         this.nOfLines = 0;
-        this.lines = new Line[textLines.size()];
+        this.lines = new ArrayList<Line>(textLines.size());
         
         for(Iterator<String> iterator = textLines.iterator(); iterator.hasNext(); ) {
-        	this.lines[nOfLines++] = new Line(nOfLines, iterator.next());
+        	this.lines.addLast(new Line(nOfLines, iterator.next()));
         }
     }
 
@@ -46,7 +47,7 @@ public class Text {
      * @return Lines
      */
     public Iterator<Line> lines(){
-        return new ArrayIterator<Line>(this.lines);
+        return this.lines.iterator();
     }
     
     /**
@@ -62,8 +63,8 @@ public class Text {
     	
     	int count = 0;
     	for (int i = firstIndex; i < lastIndex; i++) {
-    		selectedLines[count++] = this.lines[i];
+    		selectedLines[count++] = this.lines.get(i);
     	}
-        return new ArrayIterator<Line>(selectedLines);
+        return new ArrayIterator<Line>(selectedLines, count);
     }
 }
