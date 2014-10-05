@@ -1,27 +1,23 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import aed.dataStructures.ArrayList;
 import aed.dataStructures.LinkedList;
 import aed.dataStructures.List;
 import aed.spelling.InvalidWordException;
-import aed.spelling.Line;
 import aed.spelling.Spelling;
 import aed.spelling.app.ISpelling;
 
 
 public class Main {
-	
-	private static final String END_TEXT_TOKEN= "\n";
-
-	
-	public static void main(String [] args) {		
+		
+	public static void main(String [] args) {
 		
 		Scanner scan = new Scanner(System.in);
 		Command command;
 		String output = null;
 		ISpelling spelling = new Spelling();
-		boolean exit = false;
-		
+		boolean exit = false;		
 		do {
 			command = getCommand(scan);
 			switch (command) {
@@ -64,13 +60,14 @@ public class Main {
 		int numberOfWords;
 		try {
 			numberOfWords= scan.nextInt();
+			scan.nextLine();
 		} catch (InputMismatchException e) {
 			return Output.INPUT_ERROR.message();
 		}
 
 		List<String> newWords = new LinkedList<String>();
 		for (int i = 0; i < numberOfWords; i++) {
-			newWords.add(scan.nextLine());
+			newWords.addLast(processInput(scan.nextLine()));
 		}
 		
 		boolean anyAdded ;
@@ -84,20 +81,25 @@ public class Main {
 	} 
 	
 	private static String searchWordInDictionary(ISpelling spelling, Scanner scan) {
-		String word = scan.nextLine();
-		
+		String word = processInput(scan.nextLine());
 		return spelling.verifyWord(word) ? Output.WORD_FOUND.message() : Output.WORD_NOT_FOUND.message();
 	}
 	
 	private static String addText(ISpelling spelling, Scanner scan) {	
-		String textId = processInput(scan.nextLine());
+		String textId = processInput(scan.next());
 				
-		List<String> textLines = new LinkedList<String>();
-		String line = scan.nextLine();
+		int numberOfLines;
+		try {
+			numberOfLines = scan.nextInt();
+			scan.nextLine();
+		} catch (InputMismatchException e) {
+			return Output.INPUT_ERROR.message();
+		}
 		
-		while (!line.equals(END_TEXT_TOKEN)) {
-			textLines.add(line);
-			line = scan.nextLine();
+		List<String> textLines = new LinkedList<String>();
+		
+		for(int i = 0; i < numberOfLines; i++) {
+			textLines.addLast(scan.nextLine());
 		}
 		
 		boolean wasAdded = spelling.addText(textId, textLines);
@@ -116,7 +118,7 @@ public class Main {
 	private static String listText(ISpelling spelling, Scanner scan) {
 		String textId = processInput(scan.nextLine());
 		return "";
-		//TODO: finish
+		
 	}
 	
 	private static String processInput(String input) {

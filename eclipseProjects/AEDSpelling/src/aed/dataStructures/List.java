@@ -73,6 +73,14 @@ public interface List<E> extends Serializable {
      * @param element Element
      */
     void addLast(E element);
+    
+    /**
+     * Inserts given element at list tail
+     * Same as addLast()
+     * 
+     * @param element Element
+     */
+    void add(E element);
 
     /**
      * Insert given element at specified index

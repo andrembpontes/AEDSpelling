@@ -14,5 +14,9 @@ public class InvalidPositionException extends RuntimeException
         super(message);
     }
 
+	public InvalidPositionException(int index, int counter) {
+		System.err.println("InvalidIndex: " + index + "; Counter; " + counter);
+	}
+
 }
 

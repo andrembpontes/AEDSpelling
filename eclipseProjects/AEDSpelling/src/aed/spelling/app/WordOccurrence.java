@@ -37,10 +37,8 @@ public class WordOccurrence extends Word implements IWordOccurrence{
 	@Override
 	public void incrementFrequency(int lineNumber) {
 		this.frequency++;
-		//TODO:
-		//if(this.lineNumbers.getLast() != lineNumber) {
-		//	this.lineNumbers.add(lineNumber);
-		//}
-		this.lineNumbers.add(lineNumber);
+		if(this.lineNumbers.find(lineNumber) == -1) {
+			this.lineNumbers.addLast(lineNumber);
+		}
 	}
 }

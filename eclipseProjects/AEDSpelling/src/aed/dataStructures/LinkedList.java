@@ -354,7 +354,7 @@ public class LinkedList<E> implements List<E> {
 		Node prev = node.getPrevious();
 		Node next = node.getNext();
 		prev.setNext(next);
-		node.setPrevious(prev);
+		next.setPrevious(prev);
 		this.size--;
 	}
 
@@ -379,6 +379,11 @@ public class LinkedList<E> implements List<E> {
 	 */
 	protected Node getLastNode(){
 		return this.last;
+	}
+
+	@Override
+	public void add(E element) {
+		this.addLast(element);
 	}
 
 }

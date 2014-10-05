@@ -20,14 +20,17 @@ public class Dictionary implements IDictionary {
 			return null;
 		}
 		Word newWord = new Word(word);
-		this.words.add(newWord);
+		this.words.addLast(newWord);
 		return newWord;
 	}
 
 	@Override
 	public boolean verifyWord(String word) {
+		System.out.println("--" + word + "--");
 		for(Iterator<Word> iterator = this.words.iterator(); iterator.hasNext();) {
-			if (iterator.next().getWord().equals(word)){
+			String dictionaryWord = iterator.next().getWord();
+			System.out.println("++" + dictionaryWord + "++");
+			if (dictionaryWord.equals(word)){
 				return true;
 			}
 		}

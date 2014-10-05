@@ -11,7 +11,7 @@ public class ArrayList<E> implements List<E> {
 	/**
 	 * If not specified, array will grow with DEFAULT_GROWTH_TAX
 	 */
-	private static final int DEFAULT_GROWTH_TAX = 0;
+	private static final int DEFAULT_GROWTH_TAX = 2;
 	
 	/**
 	 * Elements array

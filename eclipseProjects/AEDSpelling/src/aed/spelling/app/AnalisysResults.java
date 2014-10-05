@@ -45,9 +45,9 @@ public class AnalisysResults implements IAnalysisResults {
 				e.printStackTrace();
 			}
 		
-			this.occurrences.add(occurrence);
+			this.occurrences.addLast(occurrence);
 			if(!occurrence.isCorrect())
-				this.errors.add(occurrence);
+				this.errors.addLast(occurrence);
 		}
 		occurrence.incrementFrequency(lineNumber);
 	}

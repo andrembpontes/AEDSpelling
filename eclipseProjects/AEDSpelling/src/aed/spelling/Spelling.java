@@ -25,7 +25,7 @@ public class Spelling implements ISpelling{
 		if (this.searchText(id) != null) {
 			return false;
 		}
-		this.texts.add(new AnalisableText(id, text, this.dictionary));
+		this.texts.addLast(new AnalisableText(id, text, this.dictionary));
 		return true;
 	}
 
@@ -34,7 +34,7 @@ public class Spelling implements ISpelling{
 		boolean anyAdded = false;		
 		for (Iterator<String> iterator = words.iterator(); iterator.hasNext();) {
 			String newWord = iterator.next();
-			anyAdded = (anyAdded || (this.dictionary.addWord(newWord) != null));
+			anyAdded = ((this.dictionary.addWord(newWord) != null) || anyAdded);
 		}
 		
 		if (anyAdded) {
@@ -45,9 +45,10 @@ public class Spelling implements ISpelling{
 
 	@Override
 	public boolean delText(String id) {
+		//TODO: Optimizar?
 		IAnalisableText text = this.searchText(id);
 		if(text != null) {
-			this.texts.del(text);
+			this.texts.remove(text);
 			return true;
 		}
 		return false;
