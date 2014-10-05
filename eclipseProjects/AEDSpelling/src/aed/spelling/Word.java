@@ -15,7 +15,7 @@ public class Word {
      * @throws InvalidWordException Givens word are not a valid word. Have a space char.
      */
     public Word(String word) throws InvalidWordException{
-        if(this.word.contains(" "))
+        if(word.contains(" "))
             throw new InvalidWordException();
 
         this.word = word;
