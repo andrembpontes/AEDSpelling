@@ -12,7 +12,7 @@ import aed.spelling.app.ISpelling;
 public class Main {
 		
 	public static void main(String [] args) {
-				
+		
 		Scanner scan = new Scanner(System.in);
 		Command command;
 		String output = null;
@@ -86,7 +86,7 @@ public class Main {
 	}
 	
 	private static String addText(ISpelling spelling, Scanner scan) {	
-		String textId = processInput(scan.nextLine());
+		String textId = processInput(scan.next());
 				
 		int numberOfLines;
 		try {

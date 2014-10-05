@@ -5,7 +5,7 @@ public class ArrayList<E> implements List<E> {
 
 	private static final int DEFAULT_START_SIZE = 10;
 
-	private static final int GROWTH_TAX = 0;
+	private static final int GROWTH_TAX = 2;
 	
 	private E[] array;
 	private int counter;
