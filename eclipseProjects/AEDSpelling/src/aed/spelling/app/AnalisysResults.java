@@ -5,7 +5,6 @@ import aed.dataStructures.LinkedList;
 import aed.dataStructures.List;
 import aed.spelling.InvalidWordException;
 import aed.spelling.Line;
-import aed.spelling.Word;
 
 public class AnalisysResults implements IAnalysisResults {
 
@@ -69,15 +68,8 @@ public class AnalisysResults implements IAnalysisResults {
 	}
 
 	@Override
-	public int frequency(Word word) {
-		for(Iterator<IWordOccurrence> iterator = this.occurrences.iterator(); iterator.hasNext();) {
-			IWordOccurrence occurrence = iterator.next();
-			if(word.equals(occurrence)) {
-				return occurrence.getFrequency();
-			}
-		}
-		
-		return 0;
+	public int frequency(String word) {
+		return this.getWordOccurrence(word).getFrequency();
 	}
 
 	@Override
