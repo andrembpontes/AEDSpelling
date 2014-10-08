@@ -12,6 +12,13 @@ public interface IAnalisableText {
 	Iterator<IWordOccurrence> errors();
 	
 	/**
+	 * Return text words that are found in Dictionary
+	 * 
+	 * @return Text word that are not in Dictionary
+	 */
+	Iterator<IWordOccurrence> correct();
+	
+	/**
 	 * Calculate word frequency
 	 * 
 	 * @param word Word to calculate frequency

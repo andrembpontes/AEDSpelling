@@ -10,7 +10,7 @@ public class AnalisysResults implements IAnalysisResults {
 
 	private IAnalisableText analisableText;
 	private IDictionary dictionary;
-	private List<IWordOccurrence> errors, occurrences;
+	private List<IWordOccurrence> errors, corrects, occurrences;
 	
 	public AnalisysResults(IAnalisableText analisableText, IDictionary dictionary) {
 		this.analisableText = analisableText;
@@ -22,6 +22,7 @@ public class AnalisysResults implements IAnalysisResults {
 	private void analise(){
 		this.occurrences = new LinkedList<IWordOccurrence>();
 		this.errors = new LinkedList<IWordOccurrence>();
+		this.corrects = new LinkedList<IWordOccurrence>();
 		
 		Iterator<Line> lines = this.analisableText.lines();
 		
@@ -45,7 +46,10 @@ public class AnalisysResults implements IAnalysisResults {
 			}
 		
 			this.occurrences.addLast(occurrence);
-			if(!occurrence.isCorrect())
+			
+			if(occurrence.isCorrect())
+				this.corrects.addLast(occurrence);
+			else
 				this.errors.addLast(occurrence);
 		}
 		occurrence.incrementFrequency(lineNumber);
@@ -75,6 +79,11 @@ public class AnalisysResults implements IAnalysisResults {
 	@Override
 	public Iterator<IWordOccurrence> occurrences() {
 		return this.occurrences.iterator();
+	}
+
+	@Override
+	public Iterator<IWordOccurrence> correct() {
+		return this.corrects.iterator();
 	}
 
 }

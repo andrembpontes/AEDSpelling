@@ -5,9 +5,9 @@ import aed.dataStructures.Iterator;
 public interface IAnalysisResults {
 	
 	/**
-	 * Returns an iterator the errors found
+	 * Returns an iterator for the errors found
 	 * 
-	 * @return An iterator the errors found
+	 * @return An iterator for the errors found
 	 */
 	Iterator<IWordOccurrence> errors();
 	
@@ -24,6 +24,13 @@ public interface IAnalysisResults {
 	 * 
 	 * @return An iterator of occurrences of a word
 	 */
-	Iterator<IWordOccurrence> occurrences();	
+	Iterator<IWordOccurrence> occurrences();
+
+	/**
+	 * Returns an iterator for the correct found
+	 * 
+	 * @return An iterator for the correct found
+	 */
+	Iterator<IWordOccurrence> correct();	
 }
 

@@ -43,4 +43,10 @@ public class AnalisableText extends Text implements IAnalisableText  {
 			this.analise();		
 	}
 
+	@Override
+	public Iterator<IWordOccurrence> correct() {
+		checkAnalisys();
+		return this.analysisResults.correct();
+	}
+
 }
