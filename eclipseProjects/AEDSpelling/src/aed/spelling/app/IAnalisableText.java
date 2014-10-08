@@ -2,7 +2,6 @@ package aed.spelling.app;
 
 import aed.dataStructures.Iterator;
 import aed.spelling.Line;
-import aed.spelling.Word;
 
 public interface IAnalisableText {
 	/**
@@ -18,7 +17,7 @@ public interface IAnalisableText {
 	 * @param word Word to calculate frequency
 	 * @return Number of times word appears in text
 	 */
-	int frequency(Word word);
+	int frequency(String word);
 	
 	/**
 	 * Return id

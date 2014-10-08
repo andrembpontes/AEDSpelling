@@ -3,7 +3,6 @@ package aed.spelling.app;
 import aed.dataStructures.Iterator;
 import aed.dataStructures.List;
 import aed.spelling.Text;
-import aed.spelling.Word;
 
 public class AnalisableText extends Text implements IAnalisableText  {
 
@@ -24,7 +23,7 @@ public class AnalisableText extends Text implements IAnalisableText  {
 	}
 
 	@Override
-	public int frequency(Word word) {
+	public int frequency(String word) {
 		checkAnalisys();
 		return this.analysisResults.frequency(word);
 	}

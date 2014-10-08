@@ -45,7 +45,6 @@ public class Spelling implements ISpelling{
 
 	@Override
 	public boolean delText(String id) {
-		//TODO: Optimizar?
 		IAnalisableText text = this.searchText(id);
 		if(text != null) {
 			this.texts.remove(text);
@@ -56,8 +55,7 @@ public class Spelling implements ISpelling{
 
 	@Override
 	public int frequencyOf(String id, String word) {
-		//TODO: return this.searchText(id).frequency(word)
-		return 0;
+		return this.searchText(id).frequency(word);
 	}
 
 	@Override
