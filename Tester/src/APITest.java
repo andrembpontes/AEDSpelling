@@ -40,7 +40,13 @@ public class APITest {
 			
 			
 			System.out.println("Executing test " + input.getName());
-			new MainExecution().executeMain(new FileInputStream(input), new PrintStream(myOutput));
+			
+			try{
+				new MainExecution().executeMain(new FileInputStream(input), new PrintStream(myOutput));
+			}
+			catch(Exception e){
+				System.err.println("BOOM!");
+			}
 			
 			System.out.println("Oppening expected output file... [" + outputFileName + "]");
 			
