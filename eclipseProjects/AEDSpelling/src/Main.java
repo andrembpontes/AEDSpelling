@@ -20,17 +20,23 @@ public class Main {
 	public static PrintStream OUT = System.out;
 	public static InputStream IN = System.in;
 	
-	public static final String DATA_STORE_FILE = "file";
+	public static final String DATA_STORE_FILE = "store.data";
+	public static final String LINE_BREAK = "\n";
+	public static final String CLEAN_ARG = "CLEAN";
 	
-	public static void main(String [] args) {
+	public static void main(String... args) {
 			
 		Scanner scan = new Scanner(IN);
 		Command command;
 		String output = null;
 		
-		ISpelling spelling = initializeSpelling(); 			
+		ISpelling spelling = null;
+		if(args != null && args[1].equals(CLEAN_ARG))
+			spelling = new Spelling();
+		else
+			spelling = initializeSpelling(); 			
 		
-		while (scan.hasNextLine()) {
+		while (scan.hasNext()) {
 			command = getCommand(scan);
 			switch (command) {
 			case AD:
@@ -65,7 +71,7 @@ public class Main {
 				output = Output.UNKNOWN_COMMAND.message();
 				break;
 			} 
-			OUT.println(output);
+			OUT.println(output + LINE_BREAK);
 		} 
 		
 		storeData(spelling, DATA_STORE_FILE);
@@ -223,10 +229,10 @@ public class Main {
 			while(words.hasNext()){
 				IWordOccurrence word = words.next();
 				if(word.getFrequency() == freq)
-					output += word.getWord() + "\n";
+					output += word.getWord() + LINE_BREAK;
 			}
 		
-		return output + "\n";
+		return output;
 	}
 
 	private static String getWordFrequency(ISpelling spelling, Scanner scan) {
@@ -252,15 +258,15 @@ public class Main {
 		do{
 			IWordOccurrence error = errors.next();
 			Iterator<Integer> linesN = error.linesNr();
-			output += error.getWord() + "\n";
+			output += error.getWord() + LINE_BREAK;
 			do{
-				output += linesN.next() + "\n";
+				output += (linesN.next() + 1) + LINE_BREAK;
 			}
 			while(linesN.hasNext());
 		}
 		while(errors.hasNext());
 		
-		return output + "\n";
+		return output;
 	}
 
 	private static String listTextExcerpt(ISpelling spelling, Scanner scan) {
@@ -290,7 +296,7 @@ public class Main {
 		String output = "";
 		
 		while (iterator.hasNext()) {
-			output += iterator.next().getLine() + "\n";
+			output += iterator.next().getLine() + LINE_BREAK;
 		}
 		
 		return output;

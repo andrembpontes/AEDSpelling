@@ -1,5 +1,7 @@
 package aed.spelling;
 
+import java.io.Serializable;
+
 import aed.dataStructures.ArrayIterator;
 import aed.dataStructures.ArrayList;
 import aed.dataStructures.Iterator;
@@ -11,7 +13,7 @@ import aed.dataStructures.List;
  * @author Andre Pontes (42845)
  */
 
-public class Text {
+public class Text implements Serializable{
     private String id;
     private int nOfLines;
     private ArrayList<Line> lines;

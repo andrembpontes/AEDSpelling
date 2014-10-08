@@ -1,11 +1,13 @@
 package aed.spelling;
 
+import java.io.Serializable;
+
 /**
  * Represents a text line with correspondent position in text
  *
  * @author Andre Pontes (42845)
  */
-public class Line {
+public class Line implements Serializable{
     private String line;
     private int nr;
 

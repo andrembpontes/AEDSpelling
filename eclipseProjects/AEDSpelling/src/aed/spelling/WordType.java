@@ -1,6 +1,8 @@
 package aed.spelling;
 
-public enum WordType {
+import java.io.Serializable;
+
+public enum WordType implements Serializable{
 	C, //Correct word
 	E, //Wrong word
 	P; //Word

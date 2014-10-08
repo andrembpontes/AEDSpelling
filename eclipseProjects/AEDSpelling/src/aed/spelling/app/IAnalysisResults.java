@@ -1,8 +1,10 @@
 package aed.spelling.app;
 
+import java.io.Serializable;
+
 import aed.dataStructures.Iterator;
 
-public interface IAnalysisResults {
+public interface IAnalysisResults extends Serializable{
 	
 	/**
 	 * Returns an iterator for the errors found

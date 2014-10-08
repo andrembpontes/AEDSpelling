@@ -1,11 +1,13 @@
 package aed.spelling.app;
 
+import java.io.Serializable;
+
 import aed.dataStructures.List;
 import aed.dataStructures.Iterator;
 import aed.spelling.*;
 
 
-public interface ISpelling {
+public interface ISpelling extends Serializable{
 	
 	/**
 	 * Create a new text with the given ID

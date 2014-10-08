@@ -1,11 +1,13 @@
 package aed.spelling;
 
+import java.io.Serializable;
+
 /**
  * Represents a word. Its considered a word a char sequence without spaces
  *
  * @author Andre Pontes (42845)
  */
-public class Word {
+public class Word implements Serializable{
     private String word;
 
     /**

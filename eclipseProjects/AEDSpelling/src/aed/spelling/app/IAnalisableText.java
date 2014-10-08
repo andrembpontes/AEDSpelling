@@ -1,9 +1,11 @@
 package aed.spelling.app;
 
+import java.io.Serializable;
+
 import aed.dataStructures.Iterator;
 import aed.spelling.Line;
 
-public interface IAnalisableText {
+public interface IAnalisableText extends Serializable{
 	/**
 	 * Return text words that are not found in Dictionary
 	 * 

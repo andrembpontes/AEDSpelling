@@ -1,8 +1,10 @@
 package aed.spelling.app;
 
+import java.io.Serializable;
+
 import aed.spelling.Word;
 
-public interface IDictionaryWord {
+public interface IDictionaryWord extends Serializable{
 	
 	/**
 	 * Returns true if this is equal to the specified word, false if not

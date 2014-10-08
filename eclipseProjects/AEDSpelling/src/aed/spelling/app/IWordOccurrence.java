@@ -1,11 +1,13 @@
 package aed.spelling.app;
 
+import java.io.Serializable;
+
 import aed.dataStructures.Iterator;
 
 /**
  * @author Andre Pontes (42845)
  */
-public interface IWordOccurrence {
+public interface IWordOccurrence extends Serializable {
 	/**
 	 * Return times word appear on text
 	 * 

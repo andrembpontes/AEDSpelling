@@ -52,22 +52,28 @@ public class APITest {
 			
 			File output = new File(TEST_OUTPUT_DIR + outputFileName);
 			
-			
-			Scanner myScan = new Scanner(myOutput);
-			Scanner expScan = new Scanner(output);
-			
-			while(myScan.hasNext()){
-				String myOut = myScan.nextLine();
-				String expOut = expScan.nextLine();
-				
-				if(!myOut.equals(expOut)){
-					diffs = true;
-					System.err.println(myOut + " | <- my vs. expected -> | " + expOut);
+			if(output.exists()){
+
+				Scanner myScan = new Scanner(myOutput);
+				Scanner expScan = new Scanner(output);
+
+				while(myScan.hasNext()){
+					String myOut = myScan.nextLine();
+					String expOut = expScan.nextLine();
+
+					if(!myOut.equals(expOut)){
+						diffs = true;
+						System.err.println(myOut + " | <- my vs. expected -> | " + expOut);
+					}
 				}
+				
+				myScan.close();
+				expScan.close();
+				
 			}
-			
-			myScan.close();
-			expScan.close();
+			else{
+				System.err.println("No output expected for " + input.getName());
+			}
 			
 		}
 		

@@ -1,9 +1,11 @@
 package aed.spelling.app;
 
+import java.io.Serializable;
+
 import aed.spelling.InvalidWordException;
 import aed.spelling.Word;
 
-public interface IDictionary {
+public interface IDictionary extends Serializable{
 
 	/**
 	 * Adds a word to the dictionary
