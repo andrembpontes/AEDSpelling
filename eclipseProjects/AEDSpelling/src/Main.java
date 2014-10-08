@@ -1,3 +1,5 @@
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -8,12 +10,14 @@ import aed.spelling.*;
 import aed.spelling.app.ISpelling;
 import aed.spelling.app.IWordOccurrence;
 
-
 public class Main {
 		
+	public static PrintStream OUT = System.out;
+	public static InputStream IN = System.in;
+	
 	public static void main(String [] args) {
 		
-		Scanner scan = new Scanner(System.in);
+		Scanner scan = new Scanner(IN);
 		Command command;
 		String output = null;
 		ISpelling spelling = new Spelling();
@@ -53,7 +57,7 @@ public class Main {
 				output = Output.UNKNOWN_COMMAND.message();
 				break;
 			} 
-			System.out.println(output);
+			OUT.println(output);
 		} while (!exit);
 		
 		scan.close();
