@@ -13,7 +13,7 @@ public enum Output {
 	REMOVE_TEXT_SUCCESS("Remocao de texto com sucesso."),
 	INVALID_LINE_INTERVAL("Intervalo de numero de linhas mal definido."),
 	EXCERPT_NOT_FOUND("Troco inexistente."),
-	LIST_ERRORS_SUCCESS("palavra ocorre frequencia vezes no texto referido."),
+	LIST_ERRORS_SUCCESS("palavra ocorre %s vezes no texto referido."),
 	LIST_ERRORS_FAIL("Inexistencia de erros ortograficos no texto."),	
 	TEXT_NOT_FOUND("Texto inexistente.");
 	
@@ -28,7 +28,7 @@ public enum Output {
 	 * @param values Values to replace the placeholder for
 	 * @return The corresponding string output
 	 */
-	public String message(String[] values){
+	public String message(String ... values){
 		String result = this.string;
 				
 		for(String value : values){

@@ -131,7 +131,6 @@ public class Main {
 	private static String listText(ISpelling spelling, Scanner scan) {
 		String textId = processInput(scan.nextLine());
 		return "";
-		
 	}
 	
 	private static String processInput(String input) {
@@ -186,8 +185,11 @@ public class Main {
 	}
 
 	private static String getWordFrequency(ISpelling spelling, Scanner scan) {
-		// TODO Auto-generated method stub
-		return null;
+		String textId = processInput(scan.nextLine());		
+		String word = processInput(scan.nextLine());
+		int wordFrequency =  spelling.frequencyOf(textId, word);
+		
+		return (wordFrequency > 0) ? Output.LIST_ERRORS_SUCCESS.message(Integer.toString(wordFrequency)) : Output.TEXT_NOT_FOUND.message();
 	}
 
 	private static String listError(ISpelling spelling, Scanner scan) {
