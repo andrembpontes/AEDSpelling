@@ -68,6 +68,12 @@ public class Main {
 		scan.close();
 	}
 
+	/**
+	 * Converts a string to a command, if no match is found returns Command.INVALID
+	 * 
+	 * @param in Input scanner 
+	 * @return Command matching the input
+	 */
 	private static Command getCommand(Scanner in) {
 		try {
 			String input = in.next().toUpperCase().trim();
@@ -77,6 +83,13 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Add a word specified by input to the dictionary
+	 * 
+	 * @param spelling Instance containing the dictionary to add word to
+	 * @param scan Input scanner 
+	 * @return Output string
+	 */
 	private static String addWordsToDictionary(ISpelling spelling, Scanner scan) {
 		int numberOfWords;
 		try {
@@ -101,11 +114,25 @@ public class Main {
 		return anyAdded ? Output.ADD_WORDS_SUCCESS.message() : Output.ADD_WORDS_FAILED.message();	
 	} 
 	
+	/**
+	 * Search a word specified by input in the dictionary
+	 * 
+	 * @param spelling Instance containing the dictionary to search in
+	 * @param scan Input scanner 
+	 * @return Output string
+	 */
 	private static String searchWordInDictionary(ISpelling spelling, Scanner scan) {
 		String word = processInput(scan.nextLine());
 		return spelling.verifyWord(word) ? Output.WORD_FOUND.message() : Output.WORD_NOT_FOUND.message();
 	}
 	
+	/**
+	 * Add a text specified by input
+	 * 
+	 * @param spelling Instance to add the text to
+	 * @param scan Input scanner 
+	 * @return Output string
+	 */
 	private static String addText(ISpelling spelling, Scanner scan) {	
 		String textId = processInput(scan.next());
 				
@@ -128,6 +155,13 @@ public class Main {
 		return wasAdded ? Output.ADD_TEXT_SUCCESS.message() : Output.ADD_TEXT_FAILED.message();
 	}
 	
+	/**
+	 * Remove a text specified by input
+	 * 
+	 * @param spelling Instance to remove the text from
+	 * @param scan Input scanner 
+	 * @return Output string
+	 */
 	private static String removeText(ISpelling spelling, Scanner scan) {	
 		String textId = processInput(scan.nextLine());		
 		boolean wasRemoved = spelling.delText(textId);
@@ -135,6 +169,11 @@ public class Main {
 		return wasRemoved ? Output.REMOVE_TEXT_SUCCESS.message() : Output.TEXT_NOT_FOUND.message();
 	}
 	
+	/**
+	 * Process input
+	 * @param input Input to process
+	 * @return Processed input
+	 */
 	private static String processInput(String input) {
 		return input.trim();
 	}
@@ -234,13 +273,13 @@ public class Main {
 		}
 		
 		Iterator<Line> iterator = spelling.textLines(textId, firstLine, lastLine);
-		return (iterator == null) ? listLines(iterator) : Output.TEXT_NOT_FOUND.message();
+		return (iterator != null) ? listLines(iterator) : Output.TEXT_NOT_FOUND.message();
 	}
 	
 	private static String listText(ISpelling spelling, Scanner scan) {
 		String textId = processInput(scan.nextLine());
 		Iterator<Line> iterator = spelling.textLines(textId);
-		return (iterator == null) ? listLines(iterator) : Output.TEXT_NOT_FOUND.message();
+		return (iterator != null) ? listLines(iterator) : Output.TEXT_NOT_FOUND.message();
 	}
 	
 	private static String listLines(Iterator<Line> iterator) {
