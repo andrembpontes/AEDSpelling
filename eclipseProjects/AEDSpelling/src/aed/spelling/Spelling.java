@@ -97,4 +97,10 @@ public class Spelling implements ISpelling{
 		return null;
 	}
 
+	@Override
+	public Iterator<IWordOccurrence> textCorrects(String id) {
+		IAnalisableText text = this.searchText(id);
+		return (text != null) ? text.correct() : null;
+	}
+
 }
