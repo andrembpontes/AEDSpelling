@@ -290,7 +290,7 @@ public class Main {
 		String output = "";
 		
 		while (iterator.hasNext()) {
-			output += iterator.next().getLine();
+			output += iterator.next().getLine() + "\n";
 		}
 		
 		return output;
