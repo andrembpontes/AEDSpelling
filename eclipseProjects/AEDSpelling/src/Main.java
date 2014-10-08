@@ -2,11 +2,12 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import aed.dataStructures.ArrayList;
+import aed.dataStructures.Iterator;
 import aed.dataStructures.LinkedList;
 import aed.dataStructures.List;
-import aed.spelling.InvalidWordException;
-import aed.spelling.Spelling;
+import aed.spelling.*;
 import aed.spelling.app.ISpelling;
+import aed.spelling.app.IWordOccurrence;
 
 
 public class Main {
@@ -138,8 +139,50 @@ public class Main {
 	}
 	
 	private static String listWordFrequency(ISpelling spelling, Scanner scan) {
-		// TODO Auto-generated method stub
-		return null;
+		String textId = scan.next();
+		WordType wType;
+		int freq;
+		
+		try {
+			wType = WordType.valueOf(scan.next());
+		} catch (IllegalArgumentException e) {
+			scan.nextLine();
+			return Output.UNKNOWN_WORD_TYPE.message();
+		}
+		
+		try {
+			freq = scan.nextInt();
+		} catch (InputMismatchException e) {
+			scan.nextLine();
+			return Output.INPUT_ERROR.message();
+		}
+		
+		String output = new String();
+		
+		Iterator<IWordOccurrence> words = null; 
+		
+		switch(wType){
+		case C:	
+			words = spelling.textCorrects(textId);
+			break;
+		case E:
+			words = spelling.textErrors(textId);
+			break;
+		case P:
+			words = spelling.wordsOf(textId);
+			break;
+		}
+		
+		if(words == null)
+			output += Output.TEXT_NOT_FOUND;
+		else
+			while(words.hasNext()){
+				IWordOccurrence word = words.next();
+				if(word.getFrequency() == freq)
+					output += word.getWord() + "\n";
+			}
+		
+		return output + "\n";
 	}
 
 	private static String getWordFrequency(ISpelling spelling, Scanner scan) {
