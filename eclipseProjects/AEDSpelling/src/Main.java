@@ -36,6 +36,18 @@ public class Main {
 			case LT:
 				output = listText(spelling, scan);
 				break;
+			case LR:
+				output = listTextExcerpt(spelling, scan);
+				break;
+			case LE:
+				output = listError(spelling, scan);
+				break;
+			case FP:
+				output = getWordFrequency(spelling, scan);
+				break;
+			case LF:
+				output = listWordFrequency(spelling, scan);
+				break;
 			case INVALID:
 			default:
 				output = Output.UNKNOWN_COMMAND.message();
@@ -46,7 +58,7 @@ public class Main {
 		
 		scan.close();
 	}
-	
+
 	private static Command getCommand(Scanner in) {
 		try {
 			String input = in.next().toUpperCase().trim();
@@ -123,5 +135,25 @@ public class Main {
 	
 	private static String processInput(String input) {
 		return input.trim();
+	}
+	
+	private static String listWordFrequency(ISpelling spelling, Scanner scan) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private static String getWordFrequency(ISpelling spelling, Scanner scan) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private static String listError(ISpelling spelling, Scanner scan) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private static String listTextExcerpt(ISpelling spelling, Scanner scan) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
