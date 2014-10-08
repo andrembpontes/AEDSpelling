@@ -193,8 +193,29 @@ public class Main {
 	}
 
 	private static String listError(ISpelling spelling, Scanner scan) {
-		// TODO Auto-generated method stub
-		return null;
+		String textId = scan.next();
+		
+		Iterator<IWordOccurrence> errors = spelling.textErrors(textId);
+		
+		if(errors == null)
+			return Output.TEXT_NOT_FOUND.message();
+		
+		if(!errors.hasNext())
+			return Output.LIST_ERRORS_FAIL.message();
+		
+		String output = new String();
+		do{
+			IWordOccurrence error = errors.next();
+			Iterator<Integer> linesN = error.linesNr();
+			output += error.getWord() + "\n";
+			do{
+				output += linesN.next() + "\n";
+			}
+			while(linesN.hasNext());
+		}
+		while(errors.hasNext());
+		
+		return output + "\n";
 	}
 
 	private static String listTextExcerpt(ISpelling spelling, Scanner scan) {
