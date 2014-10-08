@@ -189,7 +189,7 @@ public class Main {
 		String word = processInput(scan.nextLine());
 		int wordFrequency =  spelling.frequencyOf(textId, word);
 		
-		return (wordFrequency > 0) ? Output.LIST_ERRORS_SUCCESS.message(Integer.toString(wordFrequency)) : Output.TEXT_NOT_FOUND.message();
+		return (wordFrequency >= 0) ? Output.LIST_ERRORS_SUCCESS.message(Integer.toString(wordFrequency)) : Output.TEXT_NOT_FOUND.message();
 	}
 
 	private static String listError(ISpelling spelling, Scanner scan) {
