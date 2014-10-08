@@ -205,11 +205,13 @@ public class LinkedList<E> implements List<E> {
 	 * @return Node of given node. Null if not found
 	 */
 	protected Node findNode(E element) {
-		for(Node node = this.first; node.getNext() != null; node = node.getNext()){
-			if(node.getValue().equals(element))
+		Node node = this.first;
+		do {
+			if(node.getValue().equals(element)) {
 				return node;
-		}
-		
+			}
+			node = node.getNext();
+		} while(node.getNext() != null);
 		return null;
 	}
 
