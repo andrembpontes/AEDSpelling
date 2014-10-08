@@ -1,5 +1,7 @@
 package aed.spelling;
 
+import java.io.Serializable;
+
 import aed.dataStructures.Iterator;
 import aed.dataStructures.LinkedList;
 import aed.dataStructures.List;
@@ -10,7 +12,10 @@ import aed.spelling.app.IDictionary;
 import aed.spelling.app.ISpelling;
 import aed.spelling.app.IWordOccurrence;
 
-public class Spelling implements ISpelling{
+public class Spelling implements ISpelling, Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	
 	private List<IAnalisableText> texts;
 	private IDictionary dictionary;

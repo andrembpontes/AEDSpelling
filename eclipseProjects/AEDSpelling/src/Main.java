@@ -1,7 +1,11 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import aed.dataStructures.ArrayList;
 import aed.dataStructures.Iterator;
 import aed.dataStructures.LinkedList;
 import aed.dataStructures.List;
@@ -12,14 +16,17 @@ import aed.spelling.app.IWordOccurrence;
 
 public class Main {
 		
+	public static final String DATA_STORE_FILE = "file";
+	
 	public static void main(String [] args) {
-		
+			
 		Scanner scan = new Scanner(System.in);
 		Command command;
 		String output = null;
-		ISpelling spelling = new Spelling();
-		boolean exit = false;		
-		do {
+		
+		ISpelling spelling = initializeSpelling(); 			
+		
+		while (scan.hasNextLine()) {
 			command = getCommand(scan);
 			switch (command) {
 			case AD:
@@ -55,7 +62,7 @@ public class Main {
 				break;
 			} 
 			System.out.println(output);
-		} while (!exit);
+		} 
 		
 		scan.close();
 	}
@@ -244,4 +251,37 @@ public class Main {
 		
 		return output;
 	}
+	
+	private static void storeData(ISpelling spelling, String filePath){
+		try {
+			ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream(filePath));
+				file.writeObject(spelling);
+				file.flush();
+				file.close();
+			}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static ISpelling loadData(String filePath){
+		try{ 
+			ObjectInputStream file = new ObjectInputStream(new FileInputStream(filePath));
+			ISpelling spelling  = (ISpelling) file.readObject();
+			file.close();
+			return spelling;
+		}
+		catch (IOException e) {
+			return null;
+		}
+		catch (ClassNotFoundException e) {
+			return null;
+		}
+	}
+	
+	private static ISpelling initializeSpelling() {
+		ISpelling loadedData = loadData(DATA_STORE_FILE);
+		return (loadedData != null) ? loadedData : new Spelling();
+	}
+	
 }
