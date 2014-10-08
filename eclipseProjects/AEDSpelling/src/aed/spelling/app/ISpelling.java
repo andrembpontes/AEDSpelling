@@ -44,12 +44,20 @@ public interface ISpelling {
 	int frequencyOf(String id, String word);
 	
 	/**
-	 * Returns an iterator of word occurrences off a given text
+	 * Returns an iterator of wrong words off a given text
 	 * 
 	 * @param id Id
-	 * @return An iterator of word occurrences off a given text
+	 * @return An iterator of wrong words off a given text
 	 */
 	Iterator<IWordOccurrence> textErrors(String id);
+	
+	/**
+	 * Returns an iterator of correct words off a given text
+	 * 
+	 * @param id Id
+	 * @return An iterator of correct words off a given text
+	 */
+	Iterator<IWordOccurrence> textCorrects(String id);
 
 	/**
 	 * Returns an iterator of lines off a given text
@@ -79,10 +87,10 @@ public interface ISpelling {
 	
 	
 	/**
-	 * Returns an iterator of lines off a given text
+	 * Returns an iterator of words off a given text
 	 * 
 	 * @param id Id
-	 * @return An iterator of lines off a given text
+	 * @return An iterator of words off a given text
 	 */
 	Iterator<IWordOccurrence> wordsOf(String id);
 }
