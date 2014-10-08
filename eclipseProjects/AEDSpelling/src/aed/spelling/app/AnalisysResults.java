@@ -73,7 +73,11 @@ public class AnalisysResults implements IAnalysisResults {
 
 	@Override
 	public int frequency(String word) {
-		return this.getWordOccurrence(word).getFrequency();
+		IWordOccurrence wordOccurrence = this.getWordOccurrence(word);
+		if (wordOccurrence != null) {
+			return wordOccurrence.getFrequency();
+		}
+		return 0;
 	}
 
 	@Override

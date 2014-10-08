@@ -188,13 +188,20 @@ public class LinkedList<E> implements List<E> {
 	@Override
 	public int find(E element) {
 		int i = 0;
-		for(Node node = this.first; node.getNext() != null; node = node.getNext()){
-			if(node.getValue().equals(element))
-				return i;
-			
-			i++;
+				
+		Node node = this.first;
+		
+		if(node == null) {
+			return -1;
 		}
 		
+		do {
+			if(node.getValue().equals(element)) {
+				return i;
+			}
+			node = node.getNext();
+			i++;
+		} while(node.getNext() != null);
 		return -1;
 	}
 

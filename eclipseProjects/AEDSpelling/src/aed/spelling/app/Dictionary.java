@@ -26,7 +26,6 @@ public class Dictionary implements IDictionary {
 
 	@Override
 	public boolean verifyWord(String word) {
-		System.out.println("--" + word + "--");
 		for(Iterator<Word> iterator = this.words.iterator(); iterator.hasNext();) {
 			String dictionaryWord = iterator.next().getWord();
 			System.out.println("++" + dictionaryWord + "++");
