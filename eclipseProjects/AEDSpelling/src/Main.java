@@ -64,6 +64,7 @@ public class Main {
 			System.out.println(output);
 		} 
 		
+		storeData(spelling, DATA_STORE_FILE);
 		scan.close();
 	}
 
