@@ -26,7 +26,8 @@ public class AnalisysResults implements IAnalysisResults {
 		
 		Iterator<Line> lines = this.analisableText.lines();
 		
-		for(Line line = lines.next(); lines.hasNext(); line = lines.next()){
+		while(lines.hasNext()){
+			Line line = lines.next();
 			String[] words = line.getLine().split(" ");
 			
 			for(String word : words){
