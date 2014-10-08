@@ -55,7 +55,11 @@ public class Spelling implements ISpelling{
 
 	@Override
 	public int frequencyOf(String id, String word) {
-		return this.searchText(id).frequency(word);
+		IAnalisableText text = this.searchText(id);
+		if(text != null) {
+			return text.frequency(word);
+		}
+		return -1;
 	}
 
 	@Override

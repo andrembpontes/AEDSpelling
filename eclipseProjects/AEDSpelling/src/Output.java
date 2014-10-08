@@ -27,7 +27,7 @@ public enum Output {
 	 * @param values Values to replace the placeholder for
 	 * @return The corresponding string output
 	 */
-	public String message(String[] values){
+	public String message(String ... values){
 		String result = this.string;
 				
 		for(String value : values){
