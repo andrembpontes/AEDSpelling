@@ -127,12 +127,6 @@ public class Main {
 		return wasRemoved ? Output.REMOVE_TEXT_SUCCESS.message() : Output.TEXT_NOT_FOUND.message();
 	}
 	
-	
-	private static String listText(ISpelling spelling, Scanner scan) {
-		String textId = processInput(scan.nextLine());
-		return "";
-	}
-	
 	private static String processInput(String input) {
 		return input.trim();
 	}
@@ -219,7 +213,35 @@ public class Main {
 	}
 
 	private static String listTextExcerpt(ISpelling spelling, Scanner scan) {
-		// TODO Auto-generated method stub
-		return null;
+		String textId = processInput(scan.nextLine());
+		
+		int firstLine;
+		int lastLine;
+		try {
+			firstLine = scan.nextInt();
+			lastLine = scan.nextInt();
+			scan.nextLine();
+		} catch (InputMismatchException e) {
+			return Output.INPUT_ERROR.message();
+		}
+		
+		Iterator<Line> iterator = spelling.textLines(textId, firstLine, lastLine);
+		return (iterator == null) ? listLines(iterator) : Output.TEXT_NOT_FOUND.message();
+	}
+	
+	private static String listText(ISpelling spelling, Scanner scan) {
+		String textId = processInput(scan.nextLine());
+		Iterator<Line> iterator = spelling.textLines(textId);
+		return (iterator == null) ? listLines(iterator) : Output.TEXT_NOT_FOUND.message();
+	}
+	
+	private static String listLines(Iterator<Line> iterator) {
+		String output = "";
+		
+		while (iterator.hasNext()) {
+			output += iterator.next().getLine();
+		}
+		
+		return output;
 	}
 }
