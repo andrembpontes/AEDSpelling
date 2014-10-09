@@ -53,20 +53,42 @@ public class Text implements Serializable{
     }
     
     /**
+     * @param firstLine first line of the text
+     * @return An iterator of lines
+     */
+    public Iterator<Line> lines(int firstLine) throws InvalidLineNumberException {  	
+    	return this.getLinesIterator(firstLine, this.nOfLines - 1);
+    }
+    
+    /**
      * 
      * @param firstLine first line of the text
      * @param lastLine last line of the text
      * @return An iterator of lines
      */
-    public Iterator<Line> lines(int firstLine, int lastLine){
-    	int firstIndex = firstLine--;
-    	int lastIndex = lastLine--;
+    public Iterator<Line> lines(int firstLine, int lastLine) throws InvalidLineNumberException {    	
+    	return this.getLinesIterator(firstLine, lastLine);
+    }
+    
+    /**
+     * @param firstLine first line of the text
+     * @param lastLine last line of the text
+     * @return An iterator of lines
+     */
+    private Iterator<Line> getLinesIterator(int firstLine, int lastLine) throws InvalidLineNumberException {
+    	
+    	if (!((firstLine >= 0) && (lastLine < this.lines.size()))) {
+    		throw new InvalidLineNumberException();
+    	}
+    	
     	Line[] selectedLines = new Line[lastLine - firstLine];
     	
     	int count = 0;
-    	for (int i = firstIndex; i < lastIndex; i++) {
+    	for (int i = firstLine; i < lastLine; i++) {
     		selectedLines[count++] = this.lines.get(i);
     	}
+    	
         return new ArrayIterator<Line>(selectedLines, count);
+    	
     }
 }

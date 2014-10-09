@@ -3,6 +3,7 @@ package aed.spelling.app;
 import java.io.Serializable;
 
 import aed.dataStructures.Iterator;
+import aed.spelling.InvalidLineNumberException;
 import aed.spelling.Line;
 
 public interface IAnalisableText extends Serializable{
@@ -48,7 +49,7 @@ public interface IAnalisableText extends Serializable{
      * @param lastLine last line of the text
      * @return An iterator of lines
      */
-    Iterator<Line> lines(int firstLine, int lastLine);
+    Iterator<Line> lines(int firstLine, int lastLine) throws InvalidLineNumberException;
 	
 	/**
 	 * Iterator for word occurrences in text

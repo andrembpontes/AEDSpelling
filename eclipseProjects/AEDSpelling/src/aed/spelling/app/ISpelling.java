@@ -77,7 +77,7 @@ public interface ISpelling extends Serializable{
 	 * @param lastLine Last included line
 	 * @return An iterator of lines off a given text enumerated between boundaries
 	 */
-	Iterator<Line> textLines(String id, int firstLine, int lastLine);
+	Iterator<Line> textLines(String id, int firstLine, int lastLine) throws InvalidLineNumberException;
 	
 	/**
 	 * Verifies if a word exists in the dictionary 

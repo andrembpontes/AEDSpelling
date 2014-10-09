@@ -271,7 +271,7 @@ public class Main {
 	}
 
 	private static String listTextExcerpt(ISpelling spelling, Scanner scan) {
-		String textId = processInput(scan.next());
+		String textId = processInput(scan.nextLine());
 		
 		int firstLine;
 		int lastLine;
@@ -283,7 +283,13 @@ public class Main {
 			return Output.INPUT_ERROR.message();
 		}
 		
-		Iterator<Line> iterator = spelling.textLines(textId, firstLine, lastLine);
+		Iterator<Line> iterator = null;
+		try {
+			iterator = spelling.textLines(textId, firstLine, lastLine);
+		} catch (InvalidLineNumberException e) {
+			return Output.INPUT_ERROR.message();
+		}
+		
 		return (iterator != null) ? listLines(iterator) : Output.TEXT_NOT_FOUND.message() + LINE_BREAK;
 	}
 	
