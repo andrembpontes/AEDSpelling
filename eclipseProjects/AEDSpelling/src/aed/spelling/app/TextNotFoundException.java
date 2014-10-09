@@ -6,9 +6,6 @@ package aed.spelling.app;
  */
 public class TextNotFoundException extends RuntimeException {
 	
-	/**
-	 * 
-	 */
 	private static final long	serialVersionUID	= 1L;
 	
 }

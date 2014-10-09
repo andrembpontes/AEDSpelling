@@ -3,7 +3,7 @@ package aed.dataStructures;
 /**
  * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
  * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
- * @param <E>
+ * @param <E>Type of list elements
  */
 public interface TwoWayIterator<E> extends Iterator<E> {
 	

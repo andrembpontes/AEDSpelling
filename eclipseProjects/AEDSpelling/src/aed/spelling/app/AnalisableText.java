@@ -10,9 +10,6 @@ import aed.spelling.Text;
  */
 public class AnalisableText extends Text implements IAnalisableText {
 	
-	/**
-	 * 
-	 */
 	private static final long	serialVersionUID	= 1L;
 	private IAnalysisResults	analysisResults;
 	private IDictionary			dictionary;
@@ -23,10 +20,16 @@ public class AnalisableText extends Text implements IAnalisableText {
 		this.dictionary = dictionary;
 	}
 	
+	/**
+	 * Analysis a text 
+	 */
 	private void analise() {
 		this.analysisResults = new AnalisysResults(this, this.dictionary);
 	}
 	
+	/**
+	 * Verifies if a text was already analised
+	 */
 	private void checkAnalisys() {
 		if (this.analysisResults == null)
 			this.analise();

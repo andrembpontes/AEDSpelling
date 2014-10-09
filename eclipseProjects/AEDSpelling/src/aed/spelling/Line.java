@@ -3,14 +3,12 @@ package aed.spelling;
 import java.io.Serializable;
 
 /**
+ * Represents a text line with correspondent position in text
  * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
- * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt> Represents a text line with correspondent position in text
+ * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
  */
 public class Line implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long	serialVersionUID	= 1L;
 	
 	private String				line;

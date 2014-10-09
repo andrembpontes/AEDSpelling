@@ -12,9 +12,6 @@ import aed.spelling.Word;
  */
 public class Dictionary implements IDictionary {
 	
-	/**
-	 * 
-	 */
 	private static final long	serialVersionUID	= 1L;
 	private List<Word>			words;
 	

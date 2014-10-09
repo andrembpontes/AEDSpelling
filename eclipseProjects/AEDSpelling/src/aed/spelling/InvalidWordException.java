@@ -6,8 +6,5 @@ package aed.spelling;
  */
 public class InvalidWordException extends RuntimeException {
 	
-	/**
-	 * 
-	 */
 	private static final long	serialVersionUID	= 1L;
 }

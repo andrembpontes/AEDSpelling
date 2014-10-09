@@ -11,9 +11,6 @@ import aed.spelling.Line;
  */
 public class AnalisysResults implements IAnalysisResults {
 	
-	/**
-	 * 
-	 */
 	private static final long	serialVersionUID	= 1L;
 	private IAnalisableText		analisableText;
 	private IDictionary			dictionary;
@@ -26,6 +23,11 @@ public class AnalisysResults implements IAnalysisResults {
 		this.analise();
 	}
 	
+	/**
+	 * Adds an occurrence of a word
+	 * @param word Word to add 
+	 * @param lineNumber Line number of the occurence
+	 */
 	private void addOccurrence(String word, int lineNumber) {
 		IWordOccurrence occurrence = this.getWordOccurrence(word);
 		
@@ -42,6 +44,9 @@ public class AnalisysResults implements IAnalysisResults {
 		occurrence.incrementFrequency(lineNumber);
 	}
 	
+	/**
+	 * Analyzes a text
+	 */
 	private void analise() {
 		this.occurrences = new LinkedList<IWordOccurrence>();
 		this.errors = new LinkedList<IWordOccurrence>();
@@ -78,6 +83,11 @@ public class AnalisysResults implements IAnalysisResults {
 		return 0;
 	}
 	
+	/**
+	 * Returns an iterator of the occurrences of a specified word
+	 * @param word Word to search for
+	 * @return An iterator of the occurrences of a specified word
+	 */
 	private IWordOccurrence getWordOccurrence(String word) {
 		for (Iterator<IWordOccurrence> iterator = this.occurrences.iterator(); iterator.hasNext();) {
 			IWordOccurrence occurrence = iterator.next();

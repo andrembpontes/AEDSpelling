@@ -8,14 +8,12 @@ import aed.dataStructures.Iterator;
 import aed.dataStructures.List;
 
 /**
+ * Represents a text identified by its id
  * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
- * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt> Represents a text identified by its id
+ * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
  */
 public class Text implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long	serialVersionUID	= 1L;
 	private String				id;
 	private ArrayList<Line>		lines;
@@ -44,6 +42,8 @@ public class Text implements Serializable {
 	}
 	
 	/**
+	 * Returns an iterator of text lines between two specified boundaries
+	 * 
 	 * @param firstLine first line of the text
 	 * @param lastLine last line of the text
 	 * @return An iterator of lines
@@ -70,6 +70,8 @@ public class Text implements Serializable {
 	}
 	
 	/**
+	 * Returns an iterator of text lines starting from a specified line
+	 * 
 	 * @param firstLine first line of the text
 	 * @return An iterator of lines
 	 * @throws InvalidLineRangeException

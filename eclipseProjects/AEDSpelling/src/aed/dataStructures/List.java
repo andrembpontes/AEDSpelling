@@ -22,9 +22,7 @@ public interface List<E> extends Serializable {
 	 * @param element Element
 	 */
 	void addFirst(E element);
-	
-	// Returns an iterator of the elements in the list (in proper sequence).
-	
+		
 	/**
 	 * Inserts given element at list tail
 	 * 
@@ -120,10 +118,6 @@ public interface List<E> extends Serializable {
 	 * @throws EmptyListException List is empty
 	 */
 	E removeLast() throws EmptyListException;
-	
-	// Removes the first occurrence of the specified element from the list
-	// and returns true, if the list contains the element.
-	// Otherwise, returns false.
 	
 	/**
 	 * Returns list size

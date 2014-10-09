@@ -12,9 +12,6 @@ import aed.spelling.Word;
  */
 public class WordOccurrence extends Word implements IWordOccurrence {
 	
-	/**
-	 * 
-	 */
 	private static final long	serialVersionUID	= 1L;
 	private int					frequency;
 	private boolean				isCorrect;

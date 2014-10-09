@@ -3,8 +3,9 @@ package aed.spelling;
 import java.io.Serializable;
 
 /**
+ * Represents a word. Its considered a word a char sequence without spaces
  * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
- * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt> Represents a word. Its considered a word a char sequence without spaces
+ * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
  */
 public class Word implements Serializable {
 	

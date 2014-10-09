@@ -6,9 +6,6 @@ package aed.spelling;
  */
 public class InvalidLineRangeException extends Exception {
 	
-	/**
-	 * 
-	 */
 	private static final long	serialVersionUID	= 1L;
 	
 }

@@ -66,6 +66,12 @@ public class Spelling implements ISpelling {
 		return -1;
 	}
 	
+	/**
+	 * Returns the text with the specified id, null if the text is not found 
+	 * 
+	 * @param id Id to search for
+	 * @return The text with the specified id, null if the text is not found 
+	 */
 	private IAnalisableText searchText(String id) {
 		for (Iterator<IAnalisableText> iterator = this.texts.iterator(); iterator.hasNext();) {
 			IAnalisableText text = iterator.next();
