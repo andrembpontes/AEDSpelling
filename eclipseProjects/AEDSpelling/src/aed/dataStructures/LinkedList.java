@@ -5,68 +5,61 @@ import java.io.Serializable;
 /**
  * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
  * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
- *
  * @param <E> Type of list elements
  */
 public class LinkedList<E> implements List<E> {
-
+	
 	class Node implements Serializable {
-
-		static final long serialVersionUID = 0L;
-
+		
+		static final long	serialVersionUID	= 0L;
+		
 		/**
 		 * Stores value
 		 */
-		private E value;
-
+		private E			value;
+		
 		/**
 		 * Pointer to previous node
 		 */
-		private Node previous;
-
+		private Node		previous;
+		
 		/**
 		 * Pointer to next node
 		 */
-		private Node next;
-
+		private Node		next;
+		
 		/**
 		 * Creates a node without previous or next node
 		 * 
-		 * @param value
-		 *            Node value
+		 * @param value Node value
 		 */
 		public Node(E value) {
 			this(value, null, null);
 		}
-
+		
 		/**
 		 * Creates a node with only previous pointer
 		 * 
-		 * @param value
-		 *            Node value
-		 * @param previous
-		 *            pointer to previous node
+		 * @param value Node value
+		 * @param previous pointer to previous node
 		 */
 		public Node(E value, Node previous) {
 			this(value, previous, null);
 		}
-
+		
 		/**
 		 * Creates a node with given previous and next node pointers
 		 * 
-		 * @param value
-		 *            Node value
-		 * @param previous
-		 *            Pointer to previous node
-		 * @param next
-		 *            Pointer to next node
+		 * @param value Node value
+		 * @param previous Pointer to previous node
+		 * @param next Pointer to next node
 		 */
 		public Node(E value, Node previous, Node next) {
 			this.value = value;
 			this.previous = previous;
 			this.next = next;
 		}
-
+		
 		/**
 		 * Return next node
 		 * 
@@ -75,7 +68,7 @@ public class LinkedList<E> implements List<E> {
 		public Node getNext() {
 			return this.next;
 		}
-
+		
 		/**
 		 * Return previous node
 		 * 
@@ -84,7 +77,7 @@ public class LinkedList<E> implements List<E> {
 		public Node getPrevious() {
 			return this.previous;
 		}
-
+		
 		/**
 		 * Return node value
 		 * 
@@ -93,12 +86,11 @@ public class LinkedList<E> implements List<E> {
 		public E getValue() {
 			return this.value;
 		}
-
+		
 		/**
 		 * Set next node and return old next node
 		 * 
-		 * @param next
-		 *            Pointer to next node
+		 * @param next Pointer to next node
 		 * @return Old next node
 		 */
 		public Node setNext(Node next) {
@@ -106,12 +98,11 @@ public class LinkedList<E> implements List<E> {
 			this.next = next;
 			return oldNext;
 		}
-
+		
 		/**
 		 * Set previous node and return old previous node
 		 * 
-		 * @param previous
-		 *            Pointer to previous node
+		 * @param previous Pointer to previous node
 		 * @return Old previous node
 		 */
 		public Node setPrevious(Node previous) {
@@ -119,79 +110,78 @@ public class LinkedList<E> implements List<E> {
 			this.previous = previous;
 			return oldPrevious;
 		}
-
+		
 		/**
 		 * Set node value
 		 * 
-		 * @param value
-		 *            Node value
+		 * @param value Node value
 		 */
 		public void setValue(E value) {
 			this.value = value;
 		}
-
+		
 	}
-
-	static final long serialVersionUID = 0L;
-
+	
+	static final long	serialVersionUID	= 0L;
+	
 	/**
 	 * List head
 	 */
-	private Node first;
-
+	private Node		first;
+	
 	/**
 	 * List tail
 	 */
-	private Node last;
-
+	private Node		last;
+	
 	/**
 	 * Number of elements
 	 */
-	private int size;
-
+	private int			size;
+	
 	public LinkedList() {
 		this.first = null;
 		this.last = null;
 		this.size = 0;
 	}
-
+	
 	@Override
 	public void add(E element) {
 		this.addLast(element);
 	}
-
+	
 	@Override
 	public void addFirst(E element) {
 		Node toAdd = new Node(element, null, this.first);
-
+		
 		if (this.isEmpty())
 			this.last = toAdd;
 		else
 			this.first.setPrevious(toAdd);
-
+		
 		this.first = toAdd;
 		this.size++;
 	}
-
+	
 	@Override
 	public void addLast(E element) {
 		Node toAdd = new Node(element, this.last, null);
-
+		
 		if (this.isEmpty())
 			this.first = toAdd;
 		else
 			this.last.setNext(toAdd);
-
+		
 		this.last = toAdd;
 		this.size++;
 	}
-
+	
 	@Override
 	public int find(E element) {
 		int i = 0;
-
+		
 		Node node = this.first;
-
+		
 		while (node != null && !node.getValue().equals(element)) {
 			node = node.getNext();
 			i++;
@@ -201,12 +191,11 @@ public class LinkedList<E> implements List<E> {
 		else
 			return i;
 	}
-
+	
 	/**
 	 * Look for given element at list and return correspondent node.
 	 * 
-	 * @param element
-	 *            Element to found
+	 * @param element Element to found
 	 * @return Node of given node. Null if not found
 	 */
 	protected Node findNode(E element) {
@@ -215,26 +204,27 @@ public class LinkedList<E> implements List<E> {
 			if (node.getValue().equals(element))
 				return node;
 			node = node.getNext();
-		} while (node.getNext() != null);
+		}
+		while (node.getNext() != null);
 		return null;
 	}
-
+	
 	@Override
 	public E get(int position) throws InvalidPositionException {
 		if (position < 0 || position >= this.size)
 			throw new InvalidPositionException();
-
+		
 		return this.getNode(position).getValue();
 	}
-
+	
 	@Override
 	public E getFirst() throws EmptyListException {
 		if (this.isEmpty())
 			throw new EmptyListException();
-
+		
 		return this.first.getValue();
 	}
-
+	
 	/**
 	 * Returns first list node
 	 * 
@@ -243,15 +233,15 @@ public class LinkedList<E> implements List<E> {
 	protected Node getFirstNode() {
 		return this.first;
 	}
-
+	
 	@Override
 	public E getLast() throws EmptyListException {
 		if (this.isEmpty())
 			throw new EmptyListException();
-
+		
 		return this.last.getValue();
 	}
-
+	
 	/**
 	 * Returns last list node
 	 * 
@@ -260,12 +250,11 @@ public class LinkedList<E> implements List<E> {
 	protected Node getLastNode() {
 		return this.last;
 	}
-
+	
 	/**
 	 * Return node at given index
 	 * 
-	 * @param index
-	 *            Node index to get
+	 * @param index Node index to get
 	 * @return Node at given index
 	 */
 	protected Node getNode(int index) {
@@ -274,19 +263,20 @@ public class LinkedList<E> implements List<E> {
 			node = this.first;
 			for (int i = 0; i < index; i++)
 				node = node.getNext();
-		} else {
+		}
+		else {
 			node = this.last;
 			for (int i = this.size - 1; i > index; i--)
 				node = node.getPrevious();
 		}
 		return node;
 	}
-
+	
 	@Override
 	public void insert(int index, E element) throws InvalidPositionException {
 		if (index < 0 || index > this.size)
 			throw new InvalidPositionException();
-
+		
 		if (index == 0)
 			this.addFirst(element);
 		else if (index == this.size)
@@ -300,21 +290,21 @@ public class LinkedList<E> implements List<E> {
 			this.size++;
 		}
 	}
-
+	
 	@Override
 	public boolean isEmpty() {
 		return this.size == 0;
 	}
-
+	
 	@Override
 	public Iterator<E> iterator() {
 		return new LinkedListIterator<E>(this);
 	}
-
+	
 	@Override
 	public boolean remove(E element) {
 		Node node = this.findNode(element);
-
+		
 		if (node == null)
 			return false;
 		else {
@@ -327,12 +317,12 @@ public class LinkedList<E> implements List<E> {
 			return true;
 		}
 	}
-
+	
 	@Override
 	public E remove(int position) throws InvalidPositionException {
 		if (position < 0 || position >= this.size)
 			throw new InvalidPositionException();
-
+		
 		if (position == 0)
 			return this.removeFirst();
 		else if (position == this.size - 1)
@@ -343,17 +333,17 @@ public class LinkedList<E> implements List<E> {
 			return toRemove.getValue();
 		}
 	}
-
+	
 	@Override
 	public E removeFirst() throws EmptyListException {
 		if (this.isEmpty())
 			throw new EmptyListException();
-
+		
 		E element = this.first.getValue();
 		this.removeFirstNode();
 		return element;
 	}
-
+	
 	/**
 	 * Remove first node
 	 */
@@ -365,17 +355,17 @@ public class LinkedList<E> implements List<E> {
 			this.first.setPrevious(null);
 		this.size--;
 	}
-
+	
 	@Override
 	public E removeLast() throws EmptyListException {
 		if (this.isEmpty())
 			throw new EmptyListException();
-
+		
 		E element = this.last.getValue();
 		this.removeLastNode();
 		return element;
 	}
-
+	
 	/**
 	 * Remove last node
 	 */
@@ -387,12 +377,11 @@ public class LinkedList<E> implements List<E> {
 			this.last.setNext(null);
 		this.size--;
 	}
-
+	
 	/**
 	 * Remove given node
 	 * 
-	 * @param node
-	 *            Node to remove
+	 * @param node Node to remove
 	 */
 	protected void removeNode(Node node) {
 		Node prev = node.getPrevious();
@@ -401,10 +390,10 @@ public class LinkedList<E> implements List<E> {
 		next.setPrevious(prev);
 		this.size--;
 	}
-
+	
 	@Override
 	public int size() {
 		return this.size;
 	}
-
+	
 }

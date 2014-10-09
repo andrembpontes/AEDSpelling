@@ -8,34 +8,32 @@ import aed.spelling.Line;
 /**
  * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
  * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
- *
  */
 public class AnalisysResults implements IAnalysisResults {
-
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	private IAnalisableText analisableText;
-	private IDictionary dictionary;
-	private List<IWordOccurrence> errors, corrects, occurrences;
-
-	public AnalisysResults(IAnalisableText analisableText,
-			IDictionary dictionary) {
+	private static final long	serialVersionUID	= 1L;
+	private IAnalisableText		analisableText;
+	private IDictionary			dictionary;
+	private List<IWordOccurrence>	errors, corrects, occurrences;
+	
+	public AnalisysResults(IAnalisableText analisableText, IDictionary dictionary) {
 		this.analisableText = analisableText;
 		this.dictionary = dictionary;
-
+		
 		this.analise();
 	}
-
+	
 	private void addOccurrence(String word, int lineNumber) {
 		IWordOccurrence occurrence = this.getWordOccurrence(word);
-
+		
 		if (occurrence == null) {
 			occurrence = new WordOccurrence(word, this.dictionary);
-
+			
 			this.occurrences.addLast(occurrence);
-
+			
 			if (occurrence.isCorrect())
 				this.corrects.addLast(occurrence);
 			else
@@ -43,35 +41,35 @@ public class AnalisysResults implements IAnalysisResults {
 		}
 		occurrence.incrementFrequency(lineNumber);
 	}
-
+	
 	private void analise() {
 		this.occurrences = new LinkedList<IWordOccurrence>();
 		this.errors = new LinkedList<IWordOccurrence>();
 		this.corrects = new LinkedList<IWordOccurrence>();
-
+		
 		Iterator<Line> lines = this.analisableText.lines();
-
+		
 		while (lines.hasNext()) {
 			Line line = lines.next();
-
+			
 			String[] words = line.getLine().split("\\s+");
-
+			
 			for (String word : words)
 				if (!word.isEmpty())
 					this.addOccurrence(word, line.getNr());
 		}
 	}
-
+	
 	@Override
 	public Iterator<IWordOccurrence> correct() {
 		return this.corrects.iterator();
 	}
-
+	
 	@Override
 	public Iterator<IWordOccurrence> errors() {
 		return this.errors.iterator();
 	}
-
+	
 	@Override
 	public int frequency(String word) {
 		IWordOccurrence wordOccurrence = this.getWordOccurrence(word);
@@ -79,21 +77,20 @@ public class AnalisysResults implements IAnalysisResults {
 			return wordOccurrence.getFrequency();
 		return 0;
 	}
-
+	
 	private IWordOccurrence getWordOccurrence(String word) {
-		for (Iterator<IWordOccurrence> iterator = this.occurrences.iterator(); iterator
-				.hasNext();) {
+		for (Iterator<IWordOccurrence> iterator = this.occurrences.iterator(); iterator.hasNext();) {
 			IWordOccurrence occurrence = iterator.next();
 			if (occurrence.getWord().equalsIgnoreCase(word))
 				return occurrence;
 		}
-
+		
 		return null;
 	}
-
+	
 	@Override
 	public Iterator<IWordOccurrence> occurrences() {
 		return this.occurrences.iterator();
 	}
-
+	
 }

@@ -14,20 +14,19 @@ import aed.spelling.app.TextNotFoundException;
 /**
  * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
  * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
- *
  */
 public class Spelling implements ISpelling {
-
-	private static final long serialVersionUID = 1L;
-
-	private List<IAnalisableText> texts;
-	private IDictionary dictionary;
-
+	
+	private static final long		serialVersionUID	= 1L;
+	
+	private List<IAnalisableText>	texts;
+	private IDictionary				dictionary;
+	
 	public Spelling() {
 		this.texts = new LinkedList<IAnalisableText>();
 		this.dictionary = new Dictionary();
 	}
-
+	
 	@Override
 	public boolean addText(String id, List<String> text) {
 		if (this.searchText(id) != null)
@@ -35,7 +34,7 @@ public class Spelling implements ISpelling {
 		this.texts.addLast(new AnalisableText(id, text, this.dictionary));
 		return true;
 	}
-
+	
 	@Override
 	public boolean addWords(List<String> words) throws InvalidWordException {
 		boolean anyAdded = false;
@@ -43,12 +42,12 @@ public class Spelling implements ISpelling {
 			String newWord = iterator.next();
 			anyAdded = this.dictionary.addWord(newWord) != null || anyAdded;
 		}
-
+		
 		if (anyAdded)
 			this.texts = new LinkedList<IAnalisableText>();
 		return anyAdded;
 	}
-
+	
 	@Override
 	public boolean delText(String id) {
 		IAnalisableText text = this.searchText(id);
@@ -58,7 +57,7 @@ public class Spelling implements ISpelling {
 		}
 		return false;
 	}
-
+	
 	@Override
 	public int frequencyOf(String id, String word) {
 		IAnalisableText text = this.searchText(id);
@@ -66,48 +65,46 @@ public class Spelling implements ISpelling {
 			return text.frequency(word);
 		return -1;
 	}
-
+	
 	private IAnalisableText searchText(String id) {
-		for (Iterator<IAnalisableText> iterator = this.texts.iterator(); iterator
-				.hasNext();) {
+		for (Iterator<IAnalisableText> iterator = this.texts.iterator(); iterator.hasNext();) {
 			IAnalisableText text = iterator.next();
 			if (text.getId().equals(id))
 				return text;
 		}
 		return null;
 	}
-
+	
 	@Override
 	public Iterator<IWordOccurrence> textCorrects(String id) {
 		IAnalisableText text = this.searchText(id);
-		if(text == null)
+		if (text == null)
 			throw new TextNotFoundException();
 		
 		return text.correct();
 	}
-
+	
 	@Override
 	public Iterator<IWordOccurrence> textErrors(String id) {
 		IAnalisableText text = this.searchText(id);
-		if(text == null)
+		if (text == null)
 			throw new TextNotFoundException();
 		
 		return text.errors();
 	}
-
+	
 	@Override
 	public Iterator<Line> textLines(String id) {
 		IAnalisableText text = this.searchText(id);
 		
-		if(text == null)
+		if (text == null)
 			throw new TextNotFoundException();
 		
 		return text.lines();
 	}
-
+	
 	@Override
-	public Iterator<Line> textLines(String id, int firstLine, int lastLine)
-			throws InvalidLineNumberException, InvalidLineRangeException {
+	public Iterator<Line> textLines(String id, int firstLine, int lastLine) throws InvalidLineNumberException, InvalidLineRangeException {
 		IAnalisableText text = this.searchText(id);
 		if (text == null)
 			throw new TextNotFoundException();
@@ -117,20 +114,20 @@ public class Spelling implements ISpelling {
 		
 		return text.lines(firstLine, lastLine);
 	}
-
+	
 	@Override
 	public boolean verifyWord(String word) {
 		return this.dictionary.verifyWord(word);
 	}
-
+	
 	@Override
 	public Iterator<IWordOccurrence> wordsOf(String id) {
 		IAnalisableText text = this.searchText(id);
-
-		if(text == null)
+		
+		if (text == null)
 			throw new TextNotFoundException();
 		
 		return text.occurrences();
 	}
-
+	
 }
