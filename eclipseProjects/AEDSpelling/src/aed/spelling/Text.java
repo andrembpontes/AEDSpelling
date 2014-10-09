@@ -55,8 +55,9 @@ public class Text implements Serializable{
     /**
      * @param firstLine first line of the text
      * @return An iterator of lines
+     * @throws InvalidLineRangeException 
      */
-    public Iterator<Line> lines(int firstLine) throws InvalidLineNumberException {  	
+    public Iterator<Line> lines(int firstLine) throws InvalidLineNumberException, InvalidLineRangeException {  	
     	return this.getLinesIterator(firstLine, this.nOfLines - 1);
     }
     
@@ -65,8 +66,9 @@ public class Text implements Serializable{
      * @param firstLine first line of the text
      * @param lastLine last line of the text
      * @return An iterator of lines
+     * @throws InvalidLineRangeException 
      */
-    public Iterator<Line> lines(int firstLine, int lastLine) throws InvalidLineNumberException {    	
+    public Iterator<Line> lines(int firstLine, int lastLine) throws InvalidLineNumberException, InvalidLineRangeException {    	
     	return this.getLinesIterator(firstLine, lastLine);
     }
     
@@ -75,10 +77,14 @@ public class Text implements Serializable{
      * @param lastLine last line of the text
      * @return An iterator of lines
      */
-    private Iterator<Line> getLinesIterator(int firstLine, int lastLine) throws InvalidLineNumberException {
+    private Iterator<Line> getLinesIterator(int firstLine, int lastLine) throws InvalidLineNumberException, InvalidLineRangeException {
     	
     	if (!((firstLine >= 0) && (lastLine < this.lines.size()))) {
     		throw new InvalidLineNumberException();
+    	}
+    	
+    	if ((lastLine - firstLine) < 0) {
+    		throw new InvalidLineRangeException();
     	}
     	
     	Line[] selectedLines = new Line[lastLine - firstLine];

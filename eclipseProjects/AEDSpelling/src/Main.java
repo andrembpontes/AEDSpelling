@@ -287,7 +287,9 @@ public class Main {
 		try {
 			iterator = spelling.textLines(textId, firstLine, lastLine);
 		} catch (InvalidLineNumberException e) {
-			return Output.INPUT_ERROR.message();
+			return Output.INVALID_LINE_INTERVAL.message();
+		} catch (InvalidLineRangeException e) {
+			return Output.EXCERPT_NOT_FOUND.message();
 		}
 		
 		return (iterator != null) ? listLines(iterator) : Output.TEXT_NOT_FOUND.message() + LINE_BREAK;

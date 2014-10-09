@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import aed.dataStructures.Iterator;
 import aed.spelling.InvalidLineNumberException;
+import aed.spelling.InvalidLineRangeException;
 import aed.spelling.Line;
 
 public interface IAnalisableText extends Serializable{
@@ -49,7 +50,14 @@ public interface IAnalisableText extends Serializable{
      * @param lastLine last line of the text
      * @return An iterator of lines
      */
-    Iterator<Line> lines(int firstLine, int lastLine) throws InvalidLineNumberException;
+    Iterator<Line> lines(int firstLine, int lastLine) throws InvalidLineNumberException, InvalidLineRangeException;
+    
+    /**
+     * 
+     * @param firstLine first line of the text
+     * @return An iterator of lines
+     */
+    Iterator<Line> lines(int firstLine) throws InvalidLineNumberException, InvalidLineRangeException;
 	
 	/**
 	 * Iterator for word occurrences in text

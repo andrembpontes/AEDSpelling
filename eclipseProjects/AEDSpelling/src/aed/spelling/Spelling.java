@@ -78,7 +78,7 @@ public class Spelling implements ISpelling {
 	}
 
 	@Override
-	public Iterator<Line> textLines(String id, int firstLine, int lastLine) throws InvalidLineNumberException {
+	public Iterator<Line> textLines(String id, int firstLine, int lastLine) throws InvalidLineNumberException, InvalidLineRangeException {
 		IAnalisableText text = this.searchText(id);
 		return (text != null) ? text.lines(firstLine, lastLine) : null;
 	}
