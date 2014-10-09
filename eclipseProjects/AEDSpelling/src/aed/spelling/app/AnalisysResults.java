@@ -32,7 +32,8 @@ public class AnalisysResults implements IAnalysisResults {
 			String[] words = line.getLine().split("\\s+");
 			
 			for(String word : words){
-				this.addOccurrence(word, line.getNr());
+				if(!word.isEmpty())
+					this.addOccurrence(word, line.getNr());
 			}
 		}
 	}
@@ -41,12 +42,7 @@ public class AnalisysResults implements IAnalysisResults {
 		IWordOccurrence occurrence = this.getWordOccurrence(word);
 		
 		if(occurrence == null){
-			//TODO: qual é o objectivo disto ?
-			try {
-				occurrence = new WordOccurrence(word, this.dictionary);
-			} catch (InvalidWordException e) {
-				e.printStackTrace();
-			}
+			occurrence = new WordOccurrence(word, this.dictionary);
 		
 			this.occurrences.addLast(occurrence);
 			
@@ -61,7 +57,7 @@ public class AnalisysResults implements IAnalysisResults {
 	private IWordOccurrence getWordOccurrence(String word){
 		for(Iterator<IWordOccurrence> iterator = this.occurrences.iterator(); iterator.hasNext();){
 			IWordOccurrence occurrence = iterator.next();
-			if(occurrence.getWord().equals(word)) {
+			if(occurrence.getWord().equalsIgnoreCase(word)) {
 				return occurrence;
 			}
 		}
