@@ -61,7 +61,7 @@ public class AnalisysResults implements IAnalysisResults {
 	private IWordOccurrence getWordOccurrence(String word){
 		for(Iterator<IWordOccurrence> iterator = this.occurrences.iterator(); iterator.hasNext();){
 			IWordOccurrence occurrence = iterator.next();
-			if(occurrence.getWord().equals(word)) {
+			if(occurrence.getWord().equalsIgnoreCase(word)) {
 				return occurrence;
 			}
 		}
