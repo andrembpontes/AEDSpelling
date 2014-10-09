@@ -87,10 +87,10 @@ public class Text implements Serializable{
     		throw new InvalidLineRangeException();
     	}
     	
-    	Line[] selectedLines = new Line[lastLine - firstLine];
+    	Line[] selectedLines = new Line[lastLine - firstLine + 1];
     	
     	int count = 0;
-    	for (int i = firstLine; i < lastLine; i++) {
+    	for (int i = firstLine; i <= lastLine; i++) {
     		selectedLines[count++] = this.lines.get(i);
     	}
     	
