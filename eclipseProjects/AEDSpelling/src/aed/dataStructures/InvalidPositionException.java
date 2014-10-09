@@ -1,22 +1,24 @@
 package aed.dataStructures;
 
-public class InvalidPositionException extends RuntimeException
-{
+/**
+ * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
+ * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ *
+ */
+public class InvalidPositionException extends RuntimeException {
 
-    static final long serialVersionUID = 0L;
+	static final long serialVersionUID = 0L;
 
-
-    public InvalidPositionException(){
-        super();
-    }
-
-    public InvalidPositionException(String message){
-        super(message);
-    }
+	public InvalidPositionException() {
+		super();
+	}
 
 	public InvalidPositionException(int index, int counter) {
 		System.err.println("InvalidIndex: " + index + "; Counter; " + counter);
 	}
 
-}
+	public InvalidPositionException(String message) {
+		super(message);
+	}
 
+}

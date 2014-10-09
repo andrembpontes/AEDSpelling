@@ -6,13 +6,23 @@ import aed.dataStructures.List;
 import aed.spelling.InvalidWordException;
 import aed.spelling.Word;
 
-public class WordOccurrence extends Word implements IWordOccurrence{
+/**
+ * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
+ * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ *
+ */
+public class WordOccurrence extends Word implements IWordOccurrence {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int frequency;
 	private boolean isCorrect;
 	private List<Integer> lineNumbers;
 
-	public WordOccurrence(String word, IDictionary dictionary) throws InvalidWordException {
+	public WordOccurrence(String word, IDictionary dictionary)
+			throws InvalidWordException {
 		super(word);
 		this.frequency = 0;
 		this.isCorrect = dictionary.verifyWord(word);
@@ -25,6 +35,13 @@ public class WordOccurrence extends Word implements IWordOccurrence{
 	}
 
 	@Override
+	public void incrementFrequency(int lineNumber) {
+		this.frequency++;
+		if (this.lineNumbers.find(lineNumber) == -1)
+			this.lineNumbers.addLast(lineNumber);
+	}
+
+	@Override
 	public boolean isCorrect() {
 		return this.isCorrect;
 	}
@@ -32,13 +49,5 @@ public class WordOccurrence extends Word implements IWordOccurrence{
 	@Override
 	public Iterator<Integer> linesNr() {
 		return this.lineNumbers.iterator();
-	}
-
-	@Override
-	public void incrementFrequency(int lineNumber) {
-		this.frequency++;
-		if(this.lineNumbers.find(lineNumber) == -1) {
-			this.lineNumbers.addLast(lineNumber);
-		}
 	}
 }

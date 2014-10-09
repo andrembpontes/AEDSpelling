@@ -4,49 +4,57 @@ import aed.dataStructures.Iterator;
 import aed.dataStructures.List;
 import aed.spelling.Text;
 
-public class AnalisableText extends Text implements IAnalisableText  {
+/**
+ * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
+ * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ *
+ */
+public class AnalisableText extends Text implements IAnalisableText {
 
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private IAnalysisResults analysisResults;
 	private IDictionary dictionary;
-	
+
 	public AnalisableText(String id, List<String> lines, IDictionary dictionary) {
 		super(id, lines);
-		
+
 		this.dictionary = dictionary;
+	}
+
+	private void analise() {
+		this.analysisResults = new AnalisysResults(this, this.dictionary);
+	}
+
+	private void checkAnalisys() {
+		if (this.analysisResults == null)
+			this.analise();
+	}
+
+	@Override
+	public Iterator<IWordOccurrence> correct() {
+		this.checkAnalisys();
+		return this.analysisResults.correct();
 	}
 
 	@Override
 	public Iterator<IWordOccurrence> errors() {
-		checkAnalisys();
+		this.checkAnalisys();
 		return this.analysisResults.errors();
 	}
 
 	@Override
 	public int frequency(String word) {
-		checkAnalisys();
+		this.checkAnalisys();
 		return this.analysisResults.frequency(word);
 	}
 
 	@Override
 	public Iterator<IWordOccurrence> occurrences() {
-		checkAnalisys();
+		this.checkAnalisys();
 		return this.analysisResults.occurrences();
-	}
-	
-	private void analise(){
-		this.analysisResults = new AnalisysResults(this, this.dictionary);
-	}
-	
-	private void checkAnalisys() {
-		if(this.analysisResults == null)
-			this.analise();		
-	}
-
-	@Override
-	public Iterator<IWordOccurrence> correct() {
-		checkAnalisys();
-		return this.analysisResults.correct();
 	}
 
 }

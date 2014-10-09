@@ -2,12 +2,10 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.io.Writer;
 import java.util.Scanner;
 
 import org.junit.Test;
@@ -38,13 +36,13 @@ public class APITest {
 			PrintStream printStream = new PrintStream(new FileOutputStream(myOutput));
 			
 			Main.IN = new FileInputStream(input);
-			Main.OUT = printStream;
+			Main.OUT = new Printer(printStream);
 			
 			
 			System.out.println("Executing test " + input.getName());
 			
 			try{
-				new MainExecution().executeMain(new FileInputStream(input), new PrintStream(myOutput));
+				new MainExecution().executeMain(new FileInputStream(input), new Printer(new PrintStream(myOutput)));
 			}
 			catch(Exception e){
 				System.err.println("BOOM!");
@@ -87,7 +85,7 @@ public class APITest {
 	
 	class MainExecution extends Thread{
 
-		public void executeMain(InputStream in, PrintStream out){
+		public void executeMain(InputStream in, Printer out){
 			Main.IN = in;
 			Main.OUT = out;
 			this.run();

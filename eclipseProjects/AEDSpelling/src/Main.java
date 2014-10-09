@@ -1,8 +1,7 @@
-import java.io.InputStream;
-import java.io.PrintStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.InputMismatchException;
@@ -11,78 +10,153 @@ import java.util.Scanner;
 import aed.dataStructures.Iterator;
 import aed.dataStructures.LinkedList;
 import aed.dataStructures.List;
-import aed.spelling.*;
+import aed.spelling.InvalidLineNumberException;
+import aed.spelling.InvalidLineRangeException;
+import aed.spelling.InvalidWordException;
+import aed.spelling.Line;
+import aed.spelling.Spelling;
+import aed.spelling.WordType;
 import aed.spelling.app.ISpelling;
 import aed.spelling.app.IWordOccurrence;
+import aed.spelling.app.TextNotFoundException;
 
+/**
+ * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
+ * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ *
+ */
 public class Main {
-		
-	public static PrintStream OUT = System.out;
-	public static InputStream IN = System.in;
 	
+	public static Printer OUT = new Printer();
+
+	public static InputStream IN = System.in;
+
 	public static final String DATA_STORE_FILE = "store.data";
+
 	public static final String LINE_BREAK = "\n";
+
 	public static final String CLEAN_ARG = "CLEAN";
 	
 	public static void main(String... args) {
-			
-		Scanner scan = new Scanner(IN);
-		Command command;
-		String output = null;
+
+		//Initialise ins / outs
+		Scanner scan = new Scanner(Main.IN);
+		Printer printer = new Printer();
 		
+		//Verify if has to load stored data
 		ISpelling spelling = null;
-		if(args.length > 0 && args[0].equals(CLEAN_ARG))
+		if (args.length > 0 && args[0].equals(Main.CLEAN_ARG))
 			spelling = new Spelling();
 		else
-			spelling = initializeSpelling(); 			
-		
+			spelling = Main.initializeSpelling();
+
+		//Start command interpretation
+		Command command;
 		while (scan.hasNext()) {
-			command = getCommand(scan);
-			switch (command) {
-			case AD:
-				output = addWordsToDictionary(spelling, scan);
-				break;
-			case PC:
-				output = searchWordInDictionary(spelling, scan);
-				break;
-			case AT:
-				output = addText(spelling, scan);
-				break;
-			case RT:
-				output = removeText(spelling, scan);
-				break;
-			case LT:
-				output = listText(spelling, scan);
-				break;
-			case LR:
-				output = listTextExcerpt(spelling, scan);
-				break;
-			case LE:
-				output = listError(spelling, scan);
-				break;
-			case FP:
-				output = getWordFrequency(spelling, scan);
-				break;
-			case LF:
-				output = listWordFrequency(spelling, scan);
-				break;
-			case INVALID:
-			default:
-				output = Output.UNKNOWN_COMMAND.message() + LINE_BREAK;
-				break;
-			} 
-			OUT.println(output);
-			OUT.flush();
-		} 
-		
-		storeData(spelling, DATA_STORE_FILE);
+			try {
+				command = Main.getCommand(scan);
+				switch (command) {
+				case AD:
+					Main.addWordsToDictionary(spelling, scan);
+					break;
+				case PC:
+					Main.searchWordInDictionary(spelling, scan);
+					break;
+				case AT:
+					Main.addText(spelling, scan);
+					break;
+				case RT:
+					Main.removeText(spelling, scan);
+					break;
+				case LT:
+					Main.listText(spelling, scan);
+					break;
+				case LR:
+					Main.listTextExcerpt(spelling, scan);
+					break;
+				case LE:
+					Main.listError(spelling, scan);
+					break;
+				case FP:
+					Main.getWordFrequency(spelling, scan);
+					break;
+				case LF:
+					Main.listWordFrequency(spelling, scan);
+					break;
+				case INVALID:
+				default:
+					printer.printMsg(Output.UNKNOWN_COMMAND);
+					break;
+				}
+			} catch (InputMismatchException e) {
+				OUT.printMsg(Output.INPUT_ERROR);
+				scan.nextLine();
+			} catch (TextNotFoundException e1){
+				OUT.printMsg(Output.TEXT_NOT_FOUND);
+			}
+			
+			OUT.println();
+		}
+
+		Main.storeData(spelling, Main.DATA_STORE_FILE);
 		scan.close();
 	}
 
 	/**
-	 * Converts a string to a command, if no match is found returns Command.INVALID
+	 * Add a text specified by input
 	 * 
-	 * @param in Input scanner 
+	 * @param spelling
+	 *            Instance to add the text to
+	 * @param scan
+	 *            Input scanner
+	 * @return Output string
+	 */
+	private static void addText(ISpelling spelling, Scanner scan) {
+		String textId = Main.processInput(scan.next());
+
+		int numberOfLines = scan.nextInt(); scan.nextLine();
+		List<String> textLines = new LinkedList<String>();
+
+		for (int i = 0; i < numberOfLines; i++)
+			textLines.addLast(scan.nextLine());
+
+		boolean wasAdded = spelling.addText(textId, textLines);
+
+		OUT.printMsg(wasAdded ? Output.ADD_TEXT_SUCCESS : Output.ADD_TEXT_FAILED);
+	}
+
+	/**
+	 * Add a word specified by input to the dictionary
+	 * 
+	 * @param spelling
+	 *            Instance containing the dictionary to add word to
+	 * @param scan
+	 *            Input scanner
+	 * @return Output string
+	 */
+	private static void addWordsToDictionary(ISpelling spelling, Scanner scan) {
+		int numberOfWords = scan.nextInt();
+		scan.nextLine();
+		
+		List<String> newWords = new LinkedList<String>();
+		for (int i = 0; i < numberOfWords; i++)
+			newWords.addLast(Main.processInput(scan.nextLine()));
+
+		try {
+			OUT.printMsg(
+					spelling.addWords(newWords) ? Output.ADD_WORDS_SUCCESS : Output.ADD_WORDS_FAILED);
+		
+		} catch (InvalidWordException e) {
+			OUT.printMsg(Output.INPUT_ERROR);
+		}
+	}
+
+	/**
+	 * Converts a string to a command, if no match is found returns
+	 * Command.INVALID
+	 * 
+	 * @param in
+	 *            Input scanner
 	 * @return Command matching the input
 	 */
 	private static Command getCommand(Scanner in) {
@@ -93,307 +167,256 @@ public class Main {
 			return Command.INVALID;
 		}
 	}
-	
-	/**
-	 * Add a word specified by input to the dictionary
-	 * 
-	 * @param spelling Instance containing the dictionary to add word to
-	 * @param scan Input scanner 
-	 * @return Output string
-	 */
-	private static String addWordsToDictionary(ISpelling spelling, Scanner scan) {
-		int numberOfWords;
-		try {
-			numberOfWords= scan.nextInt();
-			scan.nextLine();
-		} catch (InputMismatchException e) {
-			return Output.INPUT_ERROR.message() + LINE_BREAK;
-		}
 
-		List<String> newWords = new LinkedList<String>();
-		for (int i = 0; i < numberOfWords; i++) {
-			newWords.addLast(processInput(scan.nextLine()));
-		}
-		
-		boolean anyAdded ;
-		try {
-			anyAdded = spelling.addWords(newWords);
-		} catch (InvalidWordException e) {
-			return Output.INPUT_ERROR.message() + LINE_BREAK;
-		}
-		
-		return (anyAdded ? Output.ADD_WORDS_SUCCESS.message() : Output.ADD_WORDS_FAILED.message()) + LINE_BREAK;	
-	} 
-	
 	/**
-	 * Search a word specified by input in the dictionary
+	 * Print the frequency of a word on a text, both specified by input
 	 * 
-	 * @param spelling Instance containing the dictionary to search in
-	 * @param scan Input scanner 
+	 * @param spelling
+	 *            Instance to get the word and text from
+	 * @param scan
+	 *            Input scanner
 	 * @return Output string
 	 */
-	private static String searchWordInDictionary(ISpelling spelling, Scanner scan) {
-		String word = processInput(scan.nextLine());
-		return (spelling.verifyWord(word) ? Output.WORD_FOUND.message() : Output.WORD_NOT_FOUND.message()) + LINE_BREAK;
+	private static void getWordFrequency(ISpelling spelling, Scanner scan) {
+		String textId = Main.processInput(scan.next());
+		String word = Main.processInput(scan.nextLine());
+		int wordFrequency = spelling.frequencyOf(textId, word);
+
+		if(wordFrequency >= 0)
+			OUT.printMsg(Output.LIST_ERRORS_SUCCESS, word, Integer.toString(wordFrequency));
+		else
+			OUT.printMsg(Output.TEXT_NOT_FOUND);
 	}
-	
+
 	/**
-	 * Add a text specified by input
+	 * Initialize ISpelling instance with old data if available
 	 * 
-	 * @param spelling Instance to add the text to
-	 * @param scan Input scanner 
+	 * @return Initialized ISpelling instance
+	 */
+	private static ISpelling initializeSpelling() {
+		ISpelling loadedData = Main.loadData(Main.DATA_STORE_FILE);
+		return loadedData != null ? loadedData : new Spelling();
+	}
+
+	/**
+	 * List all errors on text specified by input
+	 * 
+	 * @param spelling
+	 *            Instance to get the text from
+	 * @param scan
+	 *            Input scanner
 	 * @return Output string
 	 */
-	private static String addText(ISpelling spelling, Scanner scan) {	
-		String textId = processInput(scan.next());
-				
-		int numberOfLines;
+	private static void listError(ISpelling spelling, Scanner scan) {
+		String textId = scan.next();
+
+		Iterator<IWordOccurrence> errors = spelling.textErrors(textId);
+
+		if (!errors.hasNext())
+			OUT.printMsg(Output.LIST_ERRORS_FAIL);
+		else{
+			do {
+				IWordOccurrence error = errors.next();
+				Iterator<Integer> linesN = error.linesNr();
+				OUT.println(error.getWord());
+
+				do
+					OUT.println(linesN.next());
+				while (linesN.hasNext());
+			} while (errors.hasNext());
+		}
+	}
+
+	/**
+	 * List text lines
+	 * 
+	 * @param iterator
+	 *            Iterator of text lines
+	 * @return Text excerpt
+	 */
+	private static void listLines(Iterator<Line> iterator) {
+		while (iterator.hasNext())
+			OUT.println(iterator.next().getLine());
+	}
+
+	/**
+	 * List an entire text specified by input
+	 * 
+	 * @param spelling
+	 *            Instance to get the text from
+	 * @param scan
+	 *            Input scanner
+	 * @return Output string
+	 */
+	private static void listText(ISpelling spelling, Scanner scan) {
+		String textId = Main.processInput(scan.nextLine());
+		Iterator<Line> iterator = spelling.textLines(textId);
+		
+		Main.listLines(iterator);
+	}
+
+	/**
+	 * List a text excerpt specified by input
+	 * 
+	 * @param spelling
+	 *            Instance to get the text from
+	 * @param scan
+	 *            Input scanner
+	 * @return Output string
+	 */
+	private static void listTextExcerpt(ISpelling spelling, Scanner scan) {
+		String textId = Main.processInput(scan.next());
+
+		int firstLine;
+		int lastLine;
+		
+		firstLine = scan.nextInt();
+		lastLine = scan.nextInt();
+		scan.nextLine();
+
 		try {
-			numberOfLines = scan.nextInt();
+			Main.listLines(
+					spelling.textLines(textId, firstLine, lastLine))
+					;
+		} catch (InvalidLineNumberException e) {
+			OUT.printMsg(Output.EXCERPT_NOT_FOUND);
+		} catch (InvalidLineRangeException e) {
+			OUT.printMsg(Output.INVALID_LINE_INTERVAL);
+		}
+	}
+
+	/**
+	 * List the frequency of all words of given type on a text specified by
+	 * input
+	 * 
+	 * @param spelling
+	 *            Instance to get the text from
+	 * @param scan
+	 *            Input scanner
+	 * @return Output string
+	 */
+	private static void listWordFrequency(ISpelling spelling, Scanner scan) {
+		String textId = scan.next();
+		WordType wType;
+		int freq;
+
+		try {
+			wType = WordType.valueOf(scan.next());
+			freq = scan.nextInt();
+			
+			Iterator<IWordOccurrence> words = null;
+
+			switch (wType) {
+			case C:
+				words = spelling.textCorrects(textId);
+				break;
+			case E:
+				words = spelling.textErrors(textId);
+				break;
+			case P:
+				words = spelling.wordsOf(textId);
+				break;
+			}
+
+			while (words.hasNext()) {
+				IWordOccurrence word = words.next();
+				if (word.getFrequency() == freq)
+					OUT.println(word.getWord());
+			}
+			
+			
+		} catch (IllegalArgumentException e) {
 			scan.nextLine();
-		} catch (InputMismatchException e) {
-			return Output.INPUT_ERROR.message() + LINE_BREAK;
+			OUT.printMsg(Output.UNKNOWN_WORD_TYPE);
 		}
-		
-		List<String> textLines = new LinkedList<String>();
-		
-		for(int i = 0; i < numberOfLines; i++) {
-			textLines.addLast(scan.nextLine());
-		}
-		
-		boolean wasAdded = spelling.addText(textId, textLines);
-		
-		return (wasAdded ? Output.ADD_TEXT_SUCCESS.message() : Output.ADD_TEXT_FAILED.message()) + LINE_BREAK;
 	}
-	
+
 	/**
-	 * Remove a text specified by input
+	 * Load ISpelling instance from a file
 	 * 
-	 * @param spelling Instance to remove the text from
-	 * @param scan Input scanner 
-	 * @return Output string
+	 * @param filePath
+	 *            File path
+	 * @return Spelling instance loaded from a file
 	 */
-	private static String removeText(ISpelling spelling, Scanner scan) {	
-		String textId = processInput(scan.nextLine());		
-		boolean wasRemoved = spelling.delText(textId);
-		
-		return (wasRemoved ? Output.REMOVE_TEXT_SUCCESS.message() : Output.TEXT_NOT_FOUND.message()) + LINE_BREAK;
+	private static ISpelling loadData(String filePath) {
+		try {
+			ObjectInputStream file = new ObjectInputStream(new FileInputStream(
+					filePath));
+			ISpelling spelling = (ISpelling) file.readObject();
+			file.close();
+			return spelling;
+		} catch (IOException e) {
+			return null;
+		} catch (ClassNotFoundException e) {
+			return null;
+		}
 	}
-	
+
 	/**
 	 * Process input
 	 * 
-	 * @param input Input to process
+	 * @param input
+	 *            Input to process
 	 * @return Processed input
 	 */
 	private static String processInput(String input) {
 		return input.trim();
 	}
-	
+
 	/**
-	 * List the frequency of all words of given type on a text specified by input
+	 * Remove a text specified by input
 	 * 
-	 * @param spelling Instance to get the text from
-	 * @param scan Input scanner 
+	 * @param spelling
+	 *            Instance to remove the text from
+	 * @param scan
+	 *            Input scanner
 	 * @return Output string
 	 */
-	private static String listWordFrequency(ISpelling spelling, Scanner scan) {
-		String textId = scan.next();
-		WordType wType;
-		int freq;
-		
-		try {
-			wType = WordType.valueOf(scan.next());
-		} catch (IllegalArgumentException e) {
-			scan.nextLine();
-			return Output.UNKNOWN_WORD_TYPE.message() + LINE_BREAK;
-		}
-		
-		try {
-			freq = scan.nextInt();
-		} catch (InputMismatchException e) {
-			scan.nextLine();
-			return Output.INPUT_ERROR.message() + LINE_BREAK;
-		}
-		
-		String output = new String();
-		
-		Iterator<IWordOccurrence> words = null; 
-		
-		switch(wType){
-		case C:	
-			words = spelling.textCorrects(textId);
-			break;
-		case E:
-			words = spelling.textErrors(textId);
-			break;
-		case P:
-			words = spelling.wordsOf(textId);
-			break;
-		}
-		
-		if(words == null)
-			output += Output.TEXT_NOT_FOUND;
+	private static void removeText(ISpelling spelling, Scanner scan) {
+		String textId = Main.processInput(scan.nextLine());
+
+		if(spelling.delText(textId))
+			OUT.printMsg(Output.REMOVE_TEXT_SUCCESS);
 		else
-			while(words.hasNext()){
-				IWordOccurrence word = words.next();
-				if(word.getFrequency() == freq)
-					output += word.getWord() + LINE_BREAK;
-			}
-		
-		return output;
+			OUT.printMsg(Output.TEXT_NOT_FOUND);
 	}
 
 	/**
-	 * Print the frequency of a word on a text, both specified by input
+	 * Search a word specified by input in the dictionary
 	 * 
-	 * @param spelling Instance to get the word and text from
-	 * @param scan Input scanner 
+	 * @param spelling
+	 *            Instance containing the dictionary to search in
+	 * @param scan
+	 *            Input scanner
 	 * @return Output string
 	 */
-	private static String getWordFrequency(ISpelling spelling, Scanner scan) {
-		String textId = processInput(scan.next());		
-		String word = processInput(scan.nextLine());
-		int wordFrequency =  spelling.frequencyOf(textId, word);
-		
-		return ((wordFrequency >= 0) ? Output.LIST_ERRORS_SUCCESS.message(word, Integer.toString(wordFrequency)) : Output.TEXT_NOT_FOUND.message()) + LINE_BREAK;
-	}
-	
-	/**
-	 * List all errors on text specified by input
-	 * 
-	 * @param spelling Instance to get the text from
-	 * @param scan Input scanner 
-	 * @return Output string
-	 */
-	private static String listError(ISpelling spelling, Scanner scan) {
-		String textId = scan.next();
-		
-		Iterator<IWordOccurrence> errors = spelling.textErrors(textId);
-		
-		if(errors == null)
-			return Output.TEXT_NOT_FOUND.message() + LINE_BREAK;
-		
-		if(!errors.hasNext())
-			return Output.LIST_ERRORS_FAIL.message() + LINE_BREAK;
-		
-		String output = new String();
-		do{
-			IWordOccurrence error = errors.next();
-			Iterator<Integer> linesN = error.linesNr();
-			output += error.getWord() + LINE_BREAK;
-			do{
-				output += (linesN.next()) + LINE_BREAK;
-			}
-			while(linesN.hasNext());
-		}
-		while(errors.hasNext());
-		
-		return output;
+	private static void searchWordInDictionary(ISpelling spelling,
+			Scanner scan) {
+		String word = Main.processInput(scan.nextLine());
+
+		if(spelling.verifyWord(word))
+			OUT.printMsg(Output.WORD_FOUND);
+		else
+			OUT.printMsg(Output.WORD_NOT_FOUND);
 	}
 
-	/**
-	 * List a text excerpt specified by input
-	 * @param spelling Instance to get the text from 
-	 * @param scan Input scanner
-	 * @return Output string
-	 */
-	private static String listTextExcerpt(ISpelling spelling, Scanner scan) {
-		String textId = processInput(scan.next());
-		
-		int firstLine;
-		int lastLine;
-		try {
-			firstLine = scan.nextInt();
-			lastLine = scan.nextInt();
-			scan.nextLine();
-		} catch (InputMismatchException e) {
-			return Output.INPUT_ERROR.message() + LINE_BREAK;
-		}
-		
-		Iterator<Line> iterator = null;
-		try {
-			iterator = spelling.textLines(textId, firstLine, lastLine);
-		} catch (InvalidLineNumberException e) {
-			return Output.EXCERPT_NOT_FOUND.message() + LINE_BREAK;
-		} catch (InvalidLineRangeException e) {
-			return Output.INVALID_LINE_INTERVAL.message() + LINE_BREAK;
-		}
-		
-		return (iterator != null) ? listLines(iterator) : Output.TEXT_NOT_FOUND.message() + LINE_BREAK;
-	}
-	
-	/**
-	 * List an entire text specified by input
-	 * @param spelling Instance to get the text from 
-	 * @param scan Input scanner
-	 * @return Output string
-	 */
-	private static String listText(ISpelling spelling, Scanner scan) {
-		String textId = processInput(scan.nextLine());
-		Iterator<Line> iterator = spelling.textLines(textId);
-		return (iterator != null) ? listLines(iterator) : Output.TEXT_NOT_FOUND.message() + LINE_BREAK;
-	}
-	
-	/**
-	 * List text lines
-	 * @param iterator Iterator of text lines
-	 * @return Text excerpt
-	 */
-	private static String listLines(Iterator<Line> iterator) {
-		String output = "";
-		
-		while (iterator.hasNext()) {
-			output += iterator.next().getLine() + LINE_BREAK;
-		}
-		
-		return output;
-	}
-	
 	/**
 	 * Store ISpelling instance from a file
-	 * @param spelling Instance to store
-	 * @param filePath File path
+	 * 
+	 * @param spelling
+	 *            Instance to store
+	 * @param filePath
+	 *            File path
 	 */
-	private static void storeData(ISpelling spelling, String filePath){
+	private static void storeData(ISpelling spelling, String filePath) {
 		try {
-			ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream(filePath));
-				file.writeObject(spelling);
-				file.flush();
-				file.close();
-			}
-		catch (IOException e) {
+			ObjectOutputStream file = new ObjectOutputStream(
+					new FileOutputStream(filePath));
+			file.writeObject(spelling);
+			file.flush();
+			file.close();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	/**
-	 * Load ISpelling instance from a file
-	 * @param filePath File path
-	 * @return Spelling instance loaded from a file
-	 */
-	private static ISpelling loadData(String filePath){
-		try{ 
-			ObjectInputStream file = new ObjectInputStream(new FileInputStream(filePath));
-			ISpelling spelling  = (ISpelling) file.readObject();
-			file.close();
-			return spelling;
-		}
-		catch (IOException e) {
-			return null;
-		}
-		catch (ClassNotFoundException e) {
-			return null;
-		}
-	}
-	
-	/**
-	 * Initialize ISpelling instance with old data if available
-	 * @return Initialized ISpelling instance
-	 */
-	private static ISpelling initializeSpelling() {
-		ISpelling loadedData = loadData(DATA_STORE_FILE);
-		return (loadedData != null) ? loadedData : new Spelling();
-	}
-	
 }

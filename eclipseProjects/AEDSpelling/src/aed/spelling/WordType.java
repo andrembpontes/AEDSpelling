@@ -2,8 +2,22 @@ package aed.spelling;
 
 import java.io.Serializable;
 
-public enum WordType implements Serializable{
-	C, //Correct word
-	E, //Wrong word
-	P; //Word
+/**
+ * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
+ * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ *
+ */
+public enum WordType implements Serializable {
+	/**
+	 * Correct word
+	 */
+	C,
+	/**
+	 * Wrong word
+	 */
+	E,
+	/**
+	 * Word
+	 */
+	P;
 }
