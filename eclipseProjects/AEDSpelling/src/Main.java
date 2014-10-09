@@ -271,7 +271,7 @@ public class Main {
 	}
 
 	private static String listTextExcerpt(ISpelling spelling, Scanner scan) {
-		String textId = processInput(scan.nextLine());
+		String textId = processInput(scan.next());
 		
 		int firstLine;
 		int lastLine;
