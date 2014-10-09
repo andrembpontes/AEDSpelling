@@ -72,6 +72,7 @@ public class Main {
 				break;
 			} 
 			OUT.println(output);
+			OUT.flush();
 		} 
 		
 		storeData(spelling, DATA_STORE_FILE);
@@ -275,8 +276,8 @@ public class Main {
 		int firstLine;
 		int lastLine;
 		try {
-			firstLine = scan.nextInt();
-			lastLine = scan.nextInt();
+			firstLine = scan.nextInt() - 1;
+			lastLine = scan.nextInt() - 1;
 			scan.nextLine();
 		} catch (InputMismatchException e) {
 			return Output.INPUT_ERROR.message();
