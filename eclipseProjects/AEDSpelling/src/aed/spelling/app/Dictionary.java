@@ -28,7 +28,7 @@ public class Dictionary implements IDictionary {
 	public boolean verifyWord(String word) {
 		for(Iterator<Word> iterator = this.words.iterator(); iterator.hasNext();) {
 			String dictionaryWord = iterator.next().getWord();
-			if (dictionaryWord.equals(word)){
+			if (dictionaryWord.equalsIgnoreCase(word)){
 				return true;
 			}
 		}
