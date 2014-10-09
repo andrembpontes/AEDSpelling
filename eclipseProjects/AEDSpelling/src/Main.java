@@ -31,7 +31,7 @@ public class Main {
 		String output = null;
 		
 		ISpelling spelling = null;
-		if(args != null && args[1].equals(CLEAN_ARG))
+		if(args.length > 0 && args[0].equals(CLEAN_ARG))
 			spelling = new Spelling();
 		else
 			spelling = initializeSpelling(); 			
@@ -71,7 +71,7 @@ public class Main {
 				output = Output.UNKNOWN_COMMAND.message();
 				break;
 			} 
-			OUT.println(output + LINE_BREAK);
+			OUT.println(output);
 		} 
 		
 		storeData(spelling, DATA_STORE_FILE);
@@ -121,7 +121,7 @@ public class Main {
 			return Output.INPUT_ERROR.message();
 		}
 		
-		return anyAdded ? Output.ADD_WORDS_SUCCESS.message() : Output.ADD_WORDS_FAILED.message();	
+		return (anyAdded ? Output.ADD_WORDS_SUCCESS.message() : Output.ADD_WORDS_FAILED.message()) + LINE_BREAK;	
 	} 
 	
 	/**
@@ -133,7 +133,7 @@ public class Main {
 	 */
 	private static String searchWordInDictionary(ISpelling spelling, Scanner scan) {
 		String word = processInput(scan.nextLine());
-		return spelling.verifyWord(word) ? Output.WORD_FOUND.message() : Output.WORD_NOT_FOUND.message();
+		return (spelling.verifyWord(word) ? Output.WORD_FOUND.message() : Output.WORD_NOT_FOUND.message()) + LINE_BREAK;
 	}
 	
 	/**
@@ -151,7 +151,7 @@ public class Main {
 			numberOfLines = scan.nextInt();
 			scan.nextLine();
 		} catch (InputMismatchException e) {
-			return Output.INPUT_ERROR.message();
+			return Output.INPUT_ERROR.message() + LINE_BREAK;
 		}
 		
 		List<String> textLines = new LinkedList<String>();
@@ -162,7 +162,7 @@ public class Main {
 		
 		boolean wasAdded = spelling.addText(textId, textLines);
 		
-		return wasAdded ? Output.ADD_TEXT_SUCCESS.message() : Output.ADD_TEXT_FAILED.message();
+		return (wasAdded ? Output.ADD_TEXT_SUCCESS.message() : Output.ADD_TEXT_FAILED.message()) + LINE_BREAK;
 	}
 	
 	/**
@@ -176,7 +176,7 @@ public class Main {
 		String textId = processInput(scan.nextLine());		
 		boolean wasRemoved = spelling.delText(textId);
 		
-		return wasRemoved ? Output.REMOVE_TEXT_SUCCESS.message() : Output.TEXT_NOT_FOUND.message();
+		return (wasRemoved ? Output.REMOVE_TEXT_SUCCESS.message() : Output.TEXT_NOT_FOUND.message()) + LINE_BREAK;
 	}
 	
 	/**
@@ -197,14 +197,14 @@ public class Main {
 			wType = WordType.valueOf(scan.next());
 		} catch (IllegalArgumentException e) {
 			scan.nextLine();
-			return Output.UNKNOWN_WORD_TYPE.message();
+			return Output.UNKNOWN_WORD_TYPE.message() + LINE_BREAK;
 		}
 		
 		try {
 			freq = scan.nextInt();
 		} catch (InputMismatchException e) {
 			scan.nextLine();
-			return Output.INPUT_ERROR.message();
+			return Output.INPUT_ERROR.message() + LINE_BREAK;
 		}
 		
 		String output = new String();
@@ -240,7 +240,7 @@ public class Main {
 		String word = processInput(scan.nextLine());
 		int wordFrequency =  spelling.frequencyOf(textId, word);
 		
-		return (wordFrequency >= 0) ? Output.LIST_ERRORS_SUCCESS.message(Integer.toString(wordFrequency)) : Output.TEXT_NOT_FOUND.message();
+		return ((wordFrequency >= 0) ? Output.LIST_ERRORS_SUCCESS.message(Integer.toString(wordFrequency)) : Output.TEXT_NOT_FOUND.message()) + LINE_BREAK;
 	}
 
 	private static String listError(ISpelling spelling, Scanner scan) {
@@ -283,13 +283,13 @@ public class Main {
 		}
 		
 		Iterator<Line> iterator = spelling.textLines(textId, firstLine, lastLine);
-		return (iterator != null) ? listLines(iterator) : Output.TEXT_NOT_FOUND.message();
+		return (iterator != null) ? listLines(iterator) : Output.TEXT_NOT_FOUND.message() + LINE_BREAK;
 	}
 	
 	private static String listText(ISpelling spelling, Scanner scan) {
 		String textId = processInput(scan.nextLine());
 		Iterator<Line> iterator = spelling.textLines(textId);
-		return (iterator != null) ? listLines(iterator) : Output.TEXT_NOT_FOUND.message();
+		return (iterator != null) ? listLines(iterator) : Output.TEXT_NOT_FOUND.message() + LINE_BREAK;
 	}
 	
 	private static String listLines(Iterator<Line> iterator) {

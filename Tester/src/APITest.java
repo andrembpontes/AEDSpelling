@@ -21,6 +21,8 @@ public class APITest {
 	String CH_INPUT = "in";
 	String CH_OUTPUT = "out";
 	
+	static int execs = 0;
+	
 	@Test
 	public void test() throws IOException {
 		
@@ -46,6 +48,7 @@ public class APITest {
 			}
 			catch(Exception e){
 				System.err.println("BOOM!");
+				e.printStackTrace();
 			}
 			
 			System.out.println("Oppening expected output file... [" + outputFileName + "]");
@@ -57,7 +60,7 @@ public class APITest {
 				Scanner myScan = new Scanner(myOutput);
 				Scanner expScan = new Scanner(output);
 
-				while(myScan.hasNext()){
+				while(myScan.hasNext() && expScan.hasNext()){
 					String myOut = myScan.nextLine();
 					String expOut = expScan.nextLine();
 
@@ -83,7 +86,7 @@ public class APITest {
 	}
 	
 	class MainExecution extends Thread{
-		
+
 		public void executeMain(InputStream in, PrintStream out){
 			Main.IN = in;
 			Main.OUT = out;
@@ -92,7 +95,10 @@ public class APITest {
 		
 		@Override
 		public void run(){
-			Main.main(null);
+			if(execs ++ == 0)
+				Main.main(Main.CLEAN_ARG);
+			else
+				Main.main();
 		}
 	}
 
