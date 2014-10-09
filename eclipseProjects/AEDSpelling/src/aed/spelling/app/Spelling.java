@@ -1,15 +1,12 @@
-package aed.spelling;
+package aed.spelling.app;
 
 import aed.dataStructures.Iterator;
 import aed.dataStructures.LinkedList;
 import aed.dataStructures.List;
-import aed.spelling.app.AnalisableText;
-import aed.spelling.app.Dictionary;
-import aed.spelling.app.IAnalisableText;
-import aed.spelling.app.IDictionary;
-import aed.spelling.app.ISpelling;
-import aed.spelling.app.IWordOccurrence;
-import aed.spelling.app.TextNotFoundException;
+import aed.spelling.InvalidLineNumberException;
+import aed.spelling.InvalidLineRangeException;
+import aed.spelling.InvalidWordException;
+import aed.spelling.Line;
 
 /**
  * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>

@@ -14,10 +14,10 @@ import aed.spelling.InvalidLineNumberException;
 import aed.spelling.InvalidLineRangeException;
 import aed.spelling.InvalidWordException;
 import aed.spelling.Line;
-import aed.spelling.Spelling;
 import aed.spelling.WordType;
 import aed.spelling.app.ISpelling;
 import aed.spelling.app.IWordOccurrence;
+import aed.spelling.app.Spelling;
 import aed.spelling.app.TextNotFoundException;
 
 /**
