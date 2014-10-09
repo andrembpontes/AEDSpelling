@@ -68,7 +68,7 @@ public class Main {
 				break;
 			case INVALID:
 			default:
-				output = Output.UNKNOWN_COMMAND.message();
+				output = Output.UNKNOWN_COMMAND.message() + LINE_BREAK;
 				break;
 			} 
 			OUT.println(output);
@@ -107,7 +107,7 @@ public class Main {
 			numberOfWords= scan.nextInt();
 			scan.nextLine();
 		} catch (InputMismatchException e) {
-			return Output.INPUT_ERROR.message();
+			return Output.INPUT_ERROR.message() + LINE_BREAK;
 		}
 
 		List<String> newWords = new LinkedList<String>();
@@ -119,7 +119,7 @@ public class Main {
 		try {
 			anyAdded = spelling.addWords(newWords);
 		} catch (InvalidWordException e) {
-			return Output.INPUT_ERROR.message();
+			return Output.INPUT_ERROR.message() + LINE_BREAK;
 		}
 		
 		return (anyAdded ? Output.ADD_WORDS_SUCCESS.message() : Output.ADD_WORDS_FAILED.message()) + LINE_BREAK;	
@@ -272,10 +272,10 @@ public class Main {
 		Iterator<IWordOccurrence> errors = spelling.textErrors(textId);
 		
 		if(errors == null)
-			return Output.TEXT_NOT_FOUND.message();
+			return Output.TEXT_NOT_FOUND.message() + LINE_BREAK;
 		
 		if(!errors.hasNext())
-			return Output.LIST_ERRORS_FAIL.message();
+			return Output.LIST_ERRORS_FAIL.message() + LINE_BREAK;
 		
 		String output = new String();
 		do{

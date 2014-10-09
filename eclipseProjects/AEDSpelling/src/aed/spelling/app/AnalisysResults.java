@@ -29,7 +29,7 @@ public class AnalisysResults implements IAnalysisResults {
 		while(lines.hasNext()){
 			Line line = lines.next();
 			
-			String[] words = line.getLine().split(" ");
+			String[] words = line.getLine().split("\\s+");
 			
 			for(String word : words){
 				this.addOccurrence(word, line.getNr());
