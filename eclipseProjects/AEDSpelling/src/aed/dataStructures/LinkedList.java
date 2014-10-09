@@ -191,19 +191,16 @@ public class LinkedList<E> implements List<E> {
 				
 		Node node = this.first;
 		
-		if(node == null) {
-			return -1;
-		}
-		
-		do {
-			if(node.getValue().equals(element)) {
-				return i;
-			}
-			node = node.getNext();
-			i++;
-		} while(node.getNext() != null);
-		return -1;
+        while ((node != null) && (!node.getValue().equals(element))) {
+            node = node.getNext();
+            i++;
+        }
+        if ( node == null )
+            return -1;
+        else
+            return i;
 	}
+	
 
 	/**
 	 * Look for given element at list and return correspondent node.

@@ -57,7 +57,7 @@ public interface IAnalisableText extends Serializable{
      * @param firstLine first line of the text
      * @return An iterator of lines
      */
-    Iterator<Line> lines(int firstLine) throws InvalidLineNumberException, InvalidLineRangeException;
+    Iterator<Line> lines(int firstLine) throws InvalidLineNumberException;
 	
 	/**
 	 * Iterator for word occurrences in text

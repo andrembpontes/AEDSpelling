@@ -28,6 +28,7 @@ public class AnalisysResults implements IAnalysisResults {
 		
 		while(lines.hasNext()){
 			Line line = lines.next();
+			
 			String[] words = line.getLine().split(" ");
 			
 			for(String word : words){
@@ -40,6 +41,7 @@ public class AnalisysResults implements IAnalysisResults {
 		IWordOccurrence occurrence = this.getWordOccurrence(word);
 		
 		if(occurrence == null){
+			//TODO: qual é o objectivo disto ?
 			try {
 				occurrence = new WordOccurrence(word, this.dictionary);
 			} catch (InvalidWordException e) {

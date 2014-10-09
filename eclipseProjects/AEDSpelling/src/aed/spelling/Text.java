@@ -15,7 +15,6 @@ import aed.dataStructures.List;
 
 public class Text implements Serializable{
     private String id;
-    private int nOfLines;
     private ArrayList<Line> lines;
 
     /**
@@ -26,11 +25,10 @@ public class Text implements Serializable{
      */
     public Text(String id, List<String> textLines){
         this.id = id;
-        this.nOfLines = 0;
         this.lines = new ArrayList<Line>(textLines.size());
         
         for(Iterator<String> iterator = textLines.iterator(); iterator.hasNext(); ) {
-        	this.lines.addLast(new Line(nOfLines, iterator.next()));
+        	this.lines.addLast(new Line(this.lines.size() + 1, iterator.next()));
         }
     }
 
@@ -57,8 +55,14 @@ public class Text implements Serializable{
      * @return An iterator of lines
      * @throws InvalidLineRangeException 
      */
-    public Iterator<Line> lines(int firstLine) throws InvalidLineNumberException, InvalidLineRangeException {  	
-    	return this.getLinesIterator(firstLine, this.nOfLines - 1);
+    public Iterator<Line> lines(int firstLine) throws InvalidLineNumberException {  
+    	int firstIndex = firstLine - 1;
+    	
+    	if (firstIndex < 0) {
+    		throw new InvalidLineNumberException();
+    	}
+    	
+    	return this.getLinesIterator(firstIndex, this.lines.size() - 1);
     }
     
     /**
@@ -69,7 +73,18 @@ public class Text implements Serializable{
      * @throws InvalidLineRangeException 
      */
     public Iterator<Line> lines(int firstLine, int lastLine) throws InvalidLineNumberException, InvalidLineRangeException {    	
-    	return this.getLinesIterator(firstLine, lastLine);
+    	int firstIndex = firstLine - 1;
+    	int lastIndex = lastLine - 1;
+    	
+    	if (!((firstIndex >= 0) && (lastIndex < this.lines.size()))) {
+    		throw new InvalidLineNumberException();
+    	}
+    	
+    	if ((lastIndex - firstIndex) < 0) {
+    		throw new InvalidLineRangeException();
+    	}
+    	
+    	return this.getLinesIterator(firstIndex, lastIndex);
     }
     
     /**
@@ -77,16 +92,8 @@ public class Text implements Serializable{
      * @param lastLine last line of the text
      * @return An iterator of lines
      */
-    private Iterator<Line> getLinesIterator(int firstLine, int lastLine) throws InvalidLineNumberException, InvalidLineRangeException {
-    	
-    	if (!((firstLine >= 0) && (lastLine < this.lines.size()))) {
-    		throw new InvalidLineNumberException();
-    	}
-    	
-    	if ((lastLine - firstLine) < 0) {
-    		throw new InvalidLineRangeException();
-    	}
-    	
+    private Iterator<Line> getLinesIterator(int firstLine, int lastLine) {
+   	
     	Line[] selectedLines = new Line[lastLine - firstLine + 1];
     	
     	int count = 0;

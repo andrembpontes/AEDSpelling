@@ -182,6 +182,7 @@ public class Main {
 	
 	/**
 	 * Process input
+	 * 
 	 * @param input Input to process
 	 * @return Processed input
 	 */
@@ -189,6 +190,13 @@ public class Main {
 		return input.trim();
 	}
 	
+	/**
+	 * List the frequency of all words of given type on a text specified by input
+	 * 
+	 * @param spelling Instance to get the text from
+	 * @param scan Input scanner 
+	 * @return Output string
+	 */
 	private static String listWordFrequency(ISpelling spelling, Scanner scan) {
 		String textId = scan.next();
 		WordType wType;
@@ -236,14 +244,28 @@ public class Main {
 		return output;
 	}
 
+	/**
+	 * Print the frequency of a word on a text, both specified by input
+	 * 
+	 * @param spelling Instance to get the word and text from
+	 * @param scan Input scanner 
+	 * @return Output string
+	 */
 	private static String getWordFrequency(ISpelling spelling, Scanner scan) {
-		String textId = processInput(scan.nextLine());		
+		String textId = processInput(scan.next());		
 		String word = processInput(scan.nextLine());
 		int wordFrequency =  spelling.frequencyOf(textId, word);
 		
 		return ((wordFrequency >= 0) ? Output.LIST_ERRORS_SUCCESS.message(Integer.toString(wordFrequency)) : Output.TEXT_NOT_FOUND.message()) + LINE_BREAK;
 	}
-
+	
+	/**
+	 * List all errors on text specified by input
+	 * 
+	 * @param spelling Instance to get the text from
+	 * @param scan Input scanner 
+	 * @return Output string
+	 */
 	private static String listError(ISpelling spelling, Scanner scan) {
 		String textId = scan.next();
 		
@@ -261,7 +283,7 @@ public class Main {
 			Iterator<Integer> linesN = error.linesNr();
 			output += error.getWord() + LINE_BREAK;
 			do{
-				output += (linesN.next() + 1) + LINE_BREAK;
+				output += (linesN.next()) + LINE_BREAK;
 			}
 			while(linesN.hasNext());
 		}
@@ -270,37 +292,54 @@ public class Main {
 		return output;
 	}
 
+	/**
+	 * List a text excerpt specified by input
+	 * @param spelling Instance to get the text from 
+	 * @param scan Input scanner
+	 * @return Output string
+	 */
 	private static String listTextExcerpt(ISpelling spelling, Scanner scan) {
 		String textId = processInput(scan.next());
 		
 		int firstLine;
 		int lastLine;
 		try {
-			firstLine = scan.nextInt() - 1;
-			lastLine = scan.nextInt() - 1;
+			firstLine = scan.nextInt();
+			lastLine = scan.nextInt();
 			scan.nextLine();
 		} catch (InputMismatchException e) {
-			return Output.INPUT_ERROR.message();
+			return Output.INPUT_ERROR.message() + LINE_BREAK;
 		}
 		
 		Iterator<Line> iterator = null;
 		try {
 			iterator = spelling.textLines(textId, firstLine, lastLine);
 		} catch (InvalidLineNumberException e) {
-			return Output.INVALID_LINE_INTERVAL.message();
+			return Output.EXCERPT_NOT_FOUND.message() + LINE_BREAK;
 		} catch (InvalidLineRangeException e) {
-			return Output.EXCERPT_NOT_FOUND.message();
+			return Output.INVALID_LINE_INTERVAL.message() + LINE_BREAK;
 		}
 		
 		return (iterator != null) ? listLines(iterator) : Output.TEXT_NOT_FOUND.message() + LINE_BREAK;
 	}
 	
+	/**
+	 * List an entire text specified by input
+	 * @param spelling Instance to get the text from 
+	 * @param scan Input scanner
+	 * @return Output string
+	 */
 	private static String listText(ISpelling spelling, Scanner scan) {
 		String textId = processInput(scan.nextLine());
 		Iterator<Line> iterator = spelling.textLines(textId);
 		return (iterator != null) ? listLines(iterator) : Output.TEXT_NOT_FOUND.message() + LINE_BREAK;
 	}
 	
+	/**
+	 * List text lines
+	 * @param iterator Iterator of text lines
+	 * @return Text excerpt
+	 */
 	private static String listLines(Iterator<Line> iterator) {
 		String output = "";
 		
@@ -311,6 +350,11 @@ public class Main {
 		return output;
 	}
 	
+	/**
+	 * Store ISpelling instance from a file
+	 * @param spelling Instance to store
+	 * @param filePath File path
+	 */
 	private static void storeData(ISpelling spelling, String filePath){
 		try {
 			ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream(filePath));
@@ -323,6 +367,11 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Load ISpelling instance from a file
+	 * @param filePath File path
+	 * @return Spelling instance loaded from a file
+	 */
 	private static ISpelling loadData(String filePath){
 		try{ 
 			ObjectInputStream file = new ObjectInputStream(new FileInputStream(filePath));
@@ -338,6 +387,10 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Initialize ISpelling instance with old data if available
+	 * @return Initialized ISpelling instance
+	 */
 	private static ISpelling initializeSpelling() {
 		ISpelling loadedData = loadData(DATA_STORE_FILE);
 		return (loadedData != null) ? loadedData : new Spelling();
