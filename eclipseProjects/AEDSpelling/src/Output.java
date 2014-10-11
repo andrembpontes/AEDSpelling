@@ -5,7 +5,7 @@
 public enum Output {
 	
 	UNKNOWN_COMMAND("Unknown Command"),
-	UNKNOWN_WORD_TYPE("Unknow Word Type"),
+	UNKNOWN_WORD_TYPE("Unknown Word Type"),
 	INPUT_ERROR("Invalid Input"),
 	ADD_WORDS_SUCCESS("Atualizacao do dicionario com sucesso."),
 	ADD_WORDS_FAILED("Lista de palavras nao contem palavras novas."),
