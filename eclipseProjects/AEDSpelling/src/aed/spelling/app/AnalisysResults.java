@@ -66,12 +66,12 @@ public class AnalisysResults implements IAnalysisResults {
 	}
 	
 	@Override
-	public Iterator<IWordOccurrence> correct() {
+	public Iterator<? extends IWordInText> correct() {
 		return this.corrects.iterator();
 	}
 	
 	@Override
-	public Iterator<IWordOccurrence> errors() {
+	public Iterator<? extends IWordInText> errors() {
 		return this.errors.iterator();
 	}
 	
@@ -99,7 +99,7 @@ public class AnalisysResults implements IAnalysisResults {
 	}
 	
 	@Override
-	public Iterator<IWordOccurrence> occurrences() {
+	public Iterator<? extends IWordInText> occurrences() {
 		return this.occurrences.iterator();
 	}
 	
