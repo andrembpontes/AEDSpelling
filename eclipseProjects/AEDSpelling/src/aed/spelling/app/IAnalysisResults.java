@@ -15,14 +15,14 @@ public interface IAnalysisResults extends Serializable {
 	 * 
 	 * @return An iterator for the correct found
 	 */
-	Iterator<IWordOccurrence> correct();
+	Iterator<? extends IWordInText> correct();
 	
 	/**
 	 * Returns an iterator for the errors found
 	 * 
 	 * @return An iterator for the errors found
 	 */
-	Iterator<IWordOccurrence> errors();
+	Iterator<? extends IWordInText> errors();
 	
 	/**
 	 * Returns the frequency of a word
@@ -37,5 +37,5 @@ public interface IAnalysisResults extends Serializable {
 	 * 
 	 * @return An iterator of occurrences of a word
 	 */
-	Iterator<IWordOccurrence> occurrences();
+	Iterator<? extends IWordInText> occurrences();
 }

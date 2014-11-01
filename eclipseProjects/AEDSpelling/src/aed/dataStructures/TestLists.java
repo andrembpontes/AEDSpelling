@@ -12,7 +12,7 @@ import org.junit.Test;
  * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
  */
 public class TestLists {
-	
+
 	public static final int	testPopulation	= 10000;	// Integer.MAX_VALUE;
 														
 	private List<String>	arrayList, linkedList;
