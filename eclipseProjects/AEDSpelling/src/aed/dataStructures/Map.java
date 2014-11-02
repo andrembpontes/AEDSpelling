@@ -20,7 +20,7 @@ public interface Map<K,V> extends Serializable
      * Returns the number of entries in the dictionary.
      * @return
      */
-    int size( );                                                  
+    int currentSize( );
 
     /**
      * If there is an entry in the dictionary whose key is the specified key,
@@ -46,11 +46,5 @@ public interface Map<K,V> extends Serializable
      * @return
      */
     V remove( K key );                                
-
-    /**
-     * Returns an iterator of the entries in the dictionary.
-     * @return
-     */
-    Iterator<Entry<K,V>> iterator( );  
 
 } 
