@@ -21,7 +21,7 @@ public class Dictionary implements IDictionary {
 	@Override
 	public Word addWord(String word) throws InvalidWordException {
 		Word newWord = new Word(word);
-        if (!this.verifyWord(word)) {
+        if (this.verifyWord(word)) {
             return null;
         }
 		return this.words.insert(word, newWord);

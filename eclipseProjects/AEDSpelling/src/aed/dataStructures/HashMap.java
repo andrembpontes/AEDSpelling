@@ -61,7 +61,8 @@ public class HashMap<K, V> implements Map<K, V> {
      * @return the hashcode
      */
     private int getHashCode(K key) {
-        return key.hashCode() % this.hashTable.length;
+        int rawCode = key.hashCode();
+        return (rawCode < 0 ? -rawCode : rawCode ) % this.hashTable.length;
     }
 
 	@Override
@@ -76,26 +77,26 @@ public class HashMap<K, V> implements Map<K, V> {
 
 	@Override
 	public V find(K key) {
-		try{
-			Iterator<Entry<K,V>> iterator = this.hashTable[this.getHashCode(key)].iterator();
+        List<Entry<K,V>> list =this.hashTable[this.getHashCode(key)];
+        if (list == null) {
+            return null;
+        }
 
-			while(iterator.hasNext()){
-				Entry<K, V> entryI = iterator.next();
-				if(entryI.getKey().equals(key))
-					return entryI.getValue();
-			}
+        Iterator<Entry<K,V>> iterator = list.iterator();
 
-			return null;
-		}
-		catch(NullPointerException e){
-			return null;
-		}
+        while(iterator.hasNext()){
+            Entry<K, V> entryI = iterator.next();
+            if(entryI.getKey().equals(key))
+                return entryI.getValue();
+        }
 
-	}
+        return null;
+    }
+
 
 	@Override
 	public V insert(K key, V value) {
-		int hashCode = key.hashCode();
+		int hashCode = this.getHashCode(key);
 		
 		if(this.hashTable[hashCode] == null)
 			this.createList(hashCode);
@@ -115,23 +116,24 @@ public class HashMap<K, V> implements Map<K, V> {
 
 	@Override
 	public V remove(K key) {
-		try{
-			int hashCode = this.getHashCode(key);
-			Iterator<Entry<K, V>> iterator = this.hashTable[hashCode].iterator();
-			while(iterator.hasNext()){
-				Entry<K, V> entryI = iterator.next();
-				if(entryI.getKey().equals(key)){
-					this.hashTable[hashCode].remove(entryI);
-					this.currentSize--;
-					return entryI.getValue();
-				}
-			}
-			
-			return null;
-		}
-		catch(NullPointerException e){
-			return null;
-		}
+        int hashCode = this.getHashCode(key);
+        List<Entry<K,V>> list = this.hashTable[hashCode];
+        if (list == null) {
+            return null;
+        }
+
+        Iterator<Entry<K,V>> iterator = list.iterator();
+
+        while(iterator.hasNext()){
+            Entry<K, V> entryI = iterator.next();
+            if(entryI.getKey().equals(key)){
+                this.hashTable[hashCode].remove(entryI);
+                this.currentSize--;
+                return entryI.getValue();
+            }
+        }
+
+        return null;
 	}
 
 
