@@ -49,7 +49,7 @@ public class HashMap<K, V> implements Map<K, V> {
     private int getNexPrime(int value) {
         for (int i : PRIMES) {
             if (i > value) {
-                return 0;
+                return i;
             }
         }
         return 0;
