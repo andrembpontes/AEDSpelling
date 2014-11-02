@@ -1,24 +1,15 @@
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 import aed.dataStructures.Iterator;
 import aed.dataStructures.LinkedList;
 import aed.dataStructures.List;
-import aed.spelling.InvalidLineNumberException;
-import aed.spelling.InvalidLineRangeException;
-import aed.spelling.InvalidWordException;
-import aed.spelling.Line;
-import aed.spelling.WordType;
+import aed.spelling.*;
 import aed.spelling.app.ISpelling;
-import aed.spelling.app.IWordOccurrence;
+import aed.spelling.app.IWordInText;
 import aed.spelling.app.Spelling;
 import aed.spelling.app.TextNotFoundException;
+
+import java.io.*;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 /**
  * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
@@ -203,13 +194,13 @@ public class Main {
 	private static void listError(ISpelling spelling, Scanner scan) {
 		String textId = scan.next();
 		
-		Iterator<IWordOccurrence> errors = spelling.textErrors(textId);
+		Iterator<? extends IWordInText> errors = spelling.textErrors(textId);
 		
 		if (!errors.hasNext())
 			OUT.printMsg(Output.LIST_ERRORS_FAIL);
 		else {
 			do {
-				IWordOccurrence error = errors.next();
+                IWordInText error = errors.next();
 				Iterator<Integer> linesN = error.linesNr();
 				OUT.println(error.getWord());
 				
@@ -290,7 +281,7 @@ public class Main {
 			wType = WordType.valueOf(scan.next());
 			freq = scan.nextInt();
 			
-			Iterator<IWordOccurrence> words = null;
+			Iterator<? extends IWordInText> words = null;
 			
 			switch (wType) {
 				case C:
@@ -305,7 +296,7 @@ public class Main {
 			}
 			
 			while (words.hasNext()) {
-				IWordOccurrence word = words.next();
+                IWordInText word = words.next();
 				if (word.getFrequency() == freq)
 					OUT.println(word.getWord());
 			}

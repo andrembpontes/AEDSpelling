@@ -1,13 +1,13 @@
 package aed.spelling.app;
 
-import java.io.Serializable;
-
 import aed.dataStructures.Iterator;
 import aed.dataStructures.List;
 import aed.spelling.InvalidLineNumberException;
 import aed.spelling.InvalidLineRangeException;
 import aed.spelling.InvalidWordException;
 import aed.spelling.Line;
+
+import java.io.Serializable;
 
 /**
  * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
@@ -56,7 +56,7 @@ public interface ISpelling extends Serializable {
 	 * @param id Id
 	 * @return An iterator of correct words off a given text
 	 */
-	Iterator<IWordOccurrence> textCorrects(String id);
+	Iterator<? extends IWordInText> textCorrects(String id);
 	
 	/**
 	 * Returns an iterator of wrong words off a given text
@@ -64,7 +64,7 @@ public interface ISpelling extends Serializable {
 	 * @param id Id
 	 * @return An iterator of wrong words off a given text
 	 */
-	Iterator<IWordOccurrence> textErrors(String id);
+	Iterator<? extends IWordInText> textErrors(String id);
 	
 	/**
 	 * Returns an iterator of lines off a given text
@@ -98,5 +98,5 @@ public interface ISpelling extends Serializable {
 	 * @param id Id
 	 * @return An iterator of words off a given text
 	 */
-	Iterator<IWordOccurrence> wordsOf(String id);
+	Iterator<? extends IWordInText> wordsOf(String id);
 }

@@ -94,7 +94,7 @@ public class AnalisysResults implements IAnalysisResults {
 			if (occurrence.getWord().equalsIgnoreCase(word))
 				return occurrence;
 		}
-		
+
 		return null;
 	}
 	

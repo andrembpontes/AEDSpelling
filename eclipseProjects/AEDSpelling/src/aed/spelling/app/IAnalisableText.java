@@ -1,11 +1,11 @@
 package aed.spelling.app;
 
-import java.io.Serializable;
-
 import aed.dataStructures.Iterator;
 import aed.spelling.InvalidLineNumberException;
 import aed.spelling.InvalidLineRangeException;
 import aed.spelling.Line;
+
+import java.io.Serializable;
 
 /**
  * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
@@ -18,14 +18,14 @@ public interface IAnalisableText extends Serializable {
 	 * 
 	 * @return Text word that are not in Dictionary
 	 */
-	Iterator<IWordOccurrence> correct();
+	Iterator<? extends IWordInText> correct();
 	
 	/**
 	 * Return text words that are not found in Dictionary
 	 * 
 	 * @return Text words that are not in Dictionary
 	 */
-	Iterator<IWordOccurrence> errors();
+	Iterator<? extends IWordInText> errors();
 	
 	/**
 	 * Calculate word frequency
@@ -67,5 +67,5 @@ public interface IAnalisableText extends Serializable {
 	 * 
 	 * @return Occurrences
 	 */
-	Iterator<IWordOccurrence> occurrences();
+	Iterator<? extends IWordInText> occurrences();
 }

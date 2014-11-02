@@ -1,8 +1,9 @@
 package aed.spelling.app;
 
+import aed.dataStructures.HashMap;
 import aed.dataStructures.Iterator;
-import aed.dataStructures.LinkedList;
 import aed.dataStructures.List;
+import aed.dataStructures.Map;
 import aed.spelling.InvalidLineNumberException;
 import aed.spelling.InvalidLineRangeException;
 import aed.spelling.InvalidWordException;
@@ -14,13 +15,13 @@ import aed.spelling.Line;
  */
 public class Spelling implements ISpelling {
 	
-	private static final long		serialVersionUID	= 1L;
+	private static final long serialVersionUID = 1L;
 	
-	private List<IAnalisableText>	texts;
-	private IDictionary				dictionary;
+	private Map<String, IAnalisableText> texts;
+	private IDictionary dictionary;
 	
 	public Spelling() {
-		this.texts = new LinkedList<IAnalisableText>();
+		this.texts = new HashMap<String, IAnalisableText>();
 		this.dictionary = new Dictionary();
 	}
 	
@@ -28,7 +29,7 @@ public class Spelling implements ISpelling {
 	public boolean addText(String id, List<String> text) {
 		if (this.searchText(id) != null)
 			return false;
-		this.texts.addLast(new AnalisableText(id, text, this.dictionary));
+		this.texts.insert(id, new AnalisableText(id, text, this.dictionary));
 		return true;
 	}
 	
@@ -41,18 +42,14 @@ public class Spelling implements ISpelling {
 		}
 		
 		if (anyAdded)
-			this.texts = new LinkedList<IAnalisableText>();
+			this.texts = new HashMap<String, IAnalisableText>();
 		return anyAdded;
 	}
 	
 	@Override
 	public boolean delText(String id) {
-		IAnalisableText text = this.searchText(id);
-		if (text != null) {
-			this.texts.remove(text);
-			return true;
-		}
-		return false;
+        return (this.texts.remove(id) != null);
+
 	}
 	
 	@Override
@@ -70,16 +67,11 @@ public class Spelling implements ISpelling {
 	 * @return The text with the specified id, null if the text is not found 
 	 */
 	private IAnalisableText searchText(String id) {
-		for (Iterator<IAnalisableText> iterator = this.texts.iterator(); iterator.hasNext();) {
-			IAnalisableText text = iterator.next();
-			if (text.getId().equals(id))
-				return text;
-		}
-		return null;
+        return this.texts.find(id);
 	}
 	
 	@Override
-	public Iterator<IWordOccurrence> textCorrects(String id) {
+	public Iterator<? extends IWordInText> textCorrects(String id) {
 		IAnalisableText text = this.searchText(id);
 		if (text == null)
 			throw new TextNotFoundException();
@@ -88,7 +80,7 @@ public class Spelling implements ISpelling {
 	}
 	
 	@Override
-	public Iterator<IWordOccurrence> textErrors(String id) {
+	public Iterator<? extends IWordInText> textErrors(String id) {
 		IAnalisableText text = this.searchText(id);
 		if (text == null)
 			throw new TextNotFoundException();
@@ -124,7 +116,7 @@ public class Spelling implements ISpelling {
 	}
 	
 	@Override
-	public Iterator<IWordOccurrence> wordsOf(String id) {
+	public Iterator<? extends IWordInText> wordsOf(String id) {
 		IAnalisableText text = this.searchText(id);
 		
 		if (text == null)

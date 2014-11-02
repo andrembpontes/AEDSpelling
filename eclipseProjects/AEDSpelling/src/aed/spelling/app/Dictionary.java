@@ -1,8 +1,7 @@
 package aed.spelling.app;
 
-import aed.dataStructures.Iterator;
-import aed.dataStructures.LinkedList;
-import aed.dataStructures.List;
+import aed.dataStructures.HashMap;
+import aed.dataStructures.Map;
 import aed.spelling.InvalidWordException;
 import aed.spelling.Word;
 
@@ -12,30 +11,25 @@ import aed.spelling.Word;
  */
 public class Dictionary implements IDictionary {
 	
-	private static final long	serialVersionUID	= 1L;
-	private List<Word>			words;
+	private static final long serialVersionUID = 1L;
+	private Map<String, Word> words;
 	
 	public Dictionary() {
-		this.words = new LinkedList<Word>();
+		this.words = new HashMap<String, Word>();
 	}
 	
 	@Override
 	public Word addWord(String word) throws InvalidWordException {
-		if (this.verifyWord(word))
-			return null;
 		Word newWord = new Word(word);
-		this.words.addLast(newWord);
-		return newWord;
+        if (!this.verifyWord(word)) {
+            return null;
+        }
+		return this.words.insert(word, newWord);
 	}
 	
 	@Override
 	public boolean verifyWord(String word) {
-		for (Iterator<Word> iterator = this.words.iterator(); iterator.hasNext();) {
-			String dictionaryWord = iterator.next().getWord();
-			if (dictionaryWord.equalsIgnoreCase(word))
-				return true;
-		}
-		return false;
+		return words.find(word) != null;
 	}
 	
 }
