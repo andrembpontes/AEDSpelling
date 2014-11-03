@@ -1,30 +1,45 @@
 package aed.dataStructures;
 
+import java.io.Serializable;
+
 /**
- * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
- * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ * @author Andre Pontes (42845)
  */
-public abstract class Collection {
-
-    protected int size = 0;
+public interface Collection <E> extends Serializable {
+    /**
+     * Returns number of collection elements
+     *
+     * @return Number of collection elements
+     */
+    int size();
 
     /**
-     * Verify is list is empty
+     * Verify if Collection is full
      *
-     * @return True if list is empty
+     * @return True if Collection is full, else False
      */
-    public boolean isEmpty() {
-        return this.size == 0;
-    }
+    boolean isFull();
 
     /**
-     * Returns list size
+     * Verify if Collection is empty
      *
-     * @return Size
+     * @return True if Collection is empty, else False
      */
-    public int size() {
-        return this.size;
-    }
+    boolean isEmpty();
 
+    /**
+     * Verifies if Collection contains given element
+     *
+     * @param element Element to find
+     * @return True if contains element, else False
+     */
+    boolean contains(E element);
+
+    /**
+     * Creates and returns a new iterator
+     *
+     * @return Iterator
+     */
+    Iterator<E> iterator();
 
 }

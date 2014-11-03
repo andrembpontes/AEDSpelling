@@ -7,12 +7,12 @@ import java.io.Serializable;
  * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
  * @param <E> Type of list elements
  */
-public class LinkedList<E>  extends Collection implements List<E> {
+public class LinkedList<E> extends AbstractList<E> implements List<E>{
 	
 	class Node implements Serializable {
-		
+
 		static final long	serialVersionUID	= 0L;
-		
+
 		/**
 		 * Stores value
 		 */
@@ -137,7 +137,6 @@ public class LinkedList<E>  extends Collection implements List<E> {
 	public LinkedList() {
 		this.first = null;
 		this.last = null;
-		this.size = 0;
 	}
 	
 	@Override
@@ -155,7 +154,7 @@ public class LinkedList<E>  extends Collection implements List<E> {
 			this.first.setPrevious(toAdd);
 		
 		this.first = toAdd;
-		this.size++;
+		super.size++;
 	}
 	
 	@Override
@@ -168,7 +167,7 @@ public class LinkedList<E>  extends Collection implements List<E> {
 			this.last.setNext(toAdd);
 		
 		this.last = toAdd;
-		this.size++;
+		super.size++;
 	}
 	
 	@Override
@@ -205,18 +204,14 @@ public class LinkedList<E>  extends Collection implements List<E> {
 	}
 	
 	@Override
-	public E get(int position) throws InvalidPositionException {
-		if (position < 0 || position >= this.size)
-			throw new InvalidPositionException();
-		
-		return this.getNode(position).getValue();
+	public E get(int index) throws InvalidPositionException {
+		super.validateIndex(index);
+		return this.getNode(index).getValue();
 	}
 	
 	@Override
 	public E getFirst() throws EmptyListException {
-		if (this.isEmpty())
-			throw new EmptyListException();
-		
+		super.validateNotEmpty();
 		return this.first.getValue();
 	}
 	
@@ -226,14 +221,12 @@ public class LinkedList<E>  extends Collection implements List<E> {
 	 * @return First node
 	 */
 	protected Node getFirstNode() {
-		return this.first;
+        return this.first;
 	}
 	
 	@Override
 	public E getLast() throws EmptyListException {
-		if (this.isEmpty())
-			throw new EmptyListException();
-		
+		validateNotEmpty();
 		return this.last.getValue();
 	}
 	
@@ -253,15 +246,15 @@ public class LinkedList<E>  extends Collection implements List<E> {
 	 * @return Node at given index
 	 */
 	protected Node getNode(int index) {
-		Node node;
-		if (index <= (this.size - 1) / 2) {
+        Node node;
+		if (index <= (super.size - 1) / 2) {
 			node = this.first;
 			for (int i = 0; i < index; i++)
 				node = node.getNext();
 		}
 		else {
 			node = this.last;
-			for (int i = this.size - 1; i > index; i--)
+			for (int i = super.size - 1; i > index; i--)
 				node = node.getPrevious();
 		}
 		return node;
@@ -269,12 +262,11 @@ public class LinkedList<E>  extends Collection implements List<E> {
 	
 	@Override
 	public void insert(int index, E element) throws InvalidPositionException {
-		if (index < 0 || index > this.size)
-			throw new InvalidPositionException();
-		
+		super.validateIndex(index);
+
 		if (index == 0)
 			this.addFirst(element);
-		else if (index == this.size)
+		else if (index == super.size)
 			this.addLast(element);
 		else {
 			Node prev = this.getNode(index - 1);
@@ -282,7 +274,7 @@ public class LinkedList<E>  extends Collection implements List<E> {
 			Node toInsert = new Node(element, prev, next);
 			prev.setNext(toInsert);
 			next.setPrevious(toInsert);
-			this.size++;
+			super.size++;
 		}
 	}
 
@@ -309,16 +301,15 @@ public class LinkedList<E>  extends Collection implements List<E> {
 	}
 	
 	@Override
-	public E remove(int position) throws InvalidPositionException {
-		if (position < 0 || position >= this.size)
-			throw new InvalidPositionException();
-		
-		if (position == 0)
+	public E remove(int index) throws InvalidPositionException {
+		super.validateIndex(index);
+
+		if (index == 0)
 			return this.removeFirst();
-		else if (position == this.size - 1)
+		else if (index == super.size - 1)
 			return this.removeLast();
 		else {
-			Node toRemove = this.getNode(position);
+			Node toRemove = this.getNode(index);
 			this.removeNode(toRemove);
 			return toRemove.getValue();
 		}
@@ -326,9 +317,8 @@ public class LinkedList<E>  extends Collection implements List<E> {
 	
 	@Override
 	public E removeFirst() throws EmptyListException {
-		if (this.isEmpty())
-			throw new EmptyListException();
-		
+		super.validateNotEmpty();
+
 		E element = this.first.getValue();
 		this.removeFirstNode();
 		return element;
@@ -343,14 +333,13 @@ public class LinkedList<E>  extends Collection implements List<E> {
 			this.last = null;
 		else
 			this.first.setPrevious(null);
-		this.size--;
+		super.size--;
 	}
 	
 	@Override
 	public E removeLast() throws EmptyListException {
-		if (this.isEmpty())
-			throw new EmptyListException();
-		
+		super.validateNotEmpty();
+
 		E element = this.last.getValue();
 		this.removeLastNode();
 		return element;
@@ -365,7 +354,7 @@ public class LinkedList<E>  extends Collection implements List<E> {
 			this.first = null;
 		else
 			this.last.setNext(null);
-		this.size--;
+		super.size--;
 	}
 	
 	/**
@@ -378,7 +367,6 @@ public class LinkedList<E>  extends Collection implements List<E> {
 		Node next = node.getNext();
 		prev.setNext(next);
 		next.setPrevious(prev);
-		this.size--;
+		super.size--;
 	}
-
 }

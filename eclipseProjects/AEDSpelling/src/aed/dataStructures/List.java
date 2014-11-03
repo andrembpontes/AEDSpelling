@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
  * @param <E>Type of list elements
  */
-public interface List<E> extends Serializable {
+public interface List<E> extends Collection<E> {
 	
 	/**
 	 * Inserts given element at list tail Same as addLast()
@@ -71,21 +71,7 @@ public interface List<E> extends Serializable {
 	 * @throws InvalidPositionException Invalid index
 	 */
 	void insert(int index, E element) throws InvalidPositionException;
-	
-	/**
-	 * Verify is list is empty
-	 * 
-	 * @return True if list is empty
-	 */
-	boolean isEmpty();
-	
-	/**
-	 * Creates and returns a new iterator
-	 * 
-	 * @return Iterator
-	 */
-	Iterator<E> iterator();
-	
+
 	/**
 	 * Remove given element
 	 * 
@@ -118,12 +104,4 @@ public interface List<E> extends Serializable {
 	 * @throws EmptyListException List is empty
 	 */
 	E removeLast() throws EmptyListException;
-	
-	/**
-	 * Returns list size
-	 * 
-	 * @return Size
-	 */
-	int size();
-	
 }

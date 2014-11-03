@@ -31,4 +31,9 @@ public class EntryClass<K, V> implements Entry<K, V>{
 		return this.value;
 	}
 
+    @Override
+    public int hashCode(){
+        return this.key.hashCode();
+    }
+
 }

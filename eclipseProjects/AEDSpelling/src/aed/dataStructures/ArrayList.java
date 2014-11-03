@@ -5,7 +5,7 @@ package aed.dataStructures;
  * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
  * @param <E> Type of Array Elements
  */
-public class ArrayList<E> extends Collection implements List<E> {
+public class ArrayList<E> extends AbstractList<E> implements List<E> {
 	
 	private static final long	serialVersionUID	= 1L;
 	
@@ -23,6 +23,7 @@ public class ArrayList<E> extends Collection implements List<E> {
 	 * Elements array
 	 */
 	private E[]					array;
+	
 
 	/**
 	 * Growth tax Everytime that array need more space, will grow with growthTax
@@ -41,7 +42,6 @@ public class ArrayList<E> extends Collection implements List<E> {
 	public ArrayList(int startSize, int growthTax) {
 		this.array = (E[]) new Object[startSize];
 		this.growthTax = growthTax;
-		this.size = 0;
 	}
 	
 	@Override
@@ -57,7 +57,7 @@ public class ArrayList<E> extends Collection implements List<E> {
 	@Override
 	public void addLast(E element) {
 		this.assureSizeToInsert();
-		this.array[this.size++] = element;
+		this.array[super.size++] = element;
 	}
 	
 	/**
@@ -88,25 +88,19 @@ public class ArrayList<E> extends Collection implements List<E> {
 	
 	@Override
 	public E get(int index) throws InvalidPositionException {
-		if (!this.isValidIndex(index))
-			throw new InvalidPositionException();
-		
+		super.validateIndex(index);
 		return this.array[index];
 	}
 	
 	@Override
 	public E getFirst() throws EmptyListException {
-		if (this.size() == 0)
-			throw new EmptyListException();
-		
+		super.validateNotEmpty();
 		return this.array[0];
 	}
 	
 	@Override
 	public E getLast() throws EmptyListException {
-		if (this.size() == 0)
-			throw new EmptyListException();
-		
+		super.validateNotEmpty();
 		return this.array[this.size() - 1];
 	}
 	
@@ -118,7 +112,7 @@ public class ArrayList<E> extends Collection implements List<E> {
 		@SuppressWarnings("unchecked")
 		E[] newArray = (E[]) new Object[this.array.length * this.growthTax];
 		
-		for (int i = 0; i < this.size; i++)
+		for (int i = 0; i < super.size; i++)
 			newArray[i] = this.array[i];
 		
 		this.array = newArray;
@@ -136,10 +130,9 @@ public class ArrayList<E> extends Collection implements List<E> {
 	
 	@Override
 	public void insert(int index, E element) throws InvalidPositionException {
-		if (!this.isValidIndex(index) && index != this.size)
-			throw new InvalidPositionException(index, this.size);
-		
-		if (index == this.size)
+		super.validateIndex(index);
+
+		if (index == super.size)
 			this.addLast(element);
 		else {
 			this.shiftDown(1, index);
@@ -147,16 +140,6 @@ public class ArrayList<E> extends Collection implements List<E> {
 		}
 	}
 
-	/**
-	 * Verify is given index is a valid one
-	 * 
-	 * @param index Index to verify
-	 * @return True if is a valid index. Else false.
-	 */
-	private boolean isValidIndex(int index) {
-		return index >= 0 && index < this.size;
-	}
-	
 	@Override
 	public Iterator<E> iterator() {
 		return new ArrayIterator<E>(this.array, this.size());
@@ -166,7 +149,7 @@ public class ArrayList<E> extends Collection implements List<E> {
 	public boolean remove(E element) {
 		int i = this.find(element);
 		
-		if (this.isValidIndex(i)) {
+		if (i >= 0) {
 			this.remove(i);
 			return true;
 		}
@@ -176,9 +159,7 @@ public class ArrayList<E> extends Collection implements List<E> {
 	
 	@Override
 	public E remove(int index) throws InvalidPositionException {
-		if (!this.isValidIndex(index))
-			throw new InvalidPositionException();
-		
+		super.validateIndex(index);
 		E removed = this.array[index];
 		this.shiftUp(1, index + 1);
 		return removed;
@@ -186,18 +167,14 @@ public class ArrayList<E> extends Collection implements List<E> {
 	
 	@Override
 	public E removeFirst() throws EmptyListException {
-		if (this.size() == 0)
-			throw new EmptyListException();
-		
-		return this.remove(0);
+		super.validateNotEmpty();
+        return this.remove(0);
 	}
 	
 	@Override
 	public E removeLast() throws EmptyListException {
-		if (this.size() == 0)
-			throw new EmptyListException();
-		
-		return this.remove(this.size - 1);
+		super.validateNotEmpty();
+		return this.remove(super.size - 1);
 	}
 	
 	/**
@@ -209,8 +186,8 @@ public class ArrayList<E> extends Collection implements List<E> {
 	private void shiftDown(int amount, int from) {
 		this.assureSizeToInsert(amount);
 		
-		this.size += amount;
-		int i = this.size - 1;
+		super.size += amount;
+		int i = super.size - 1;
 		
 		while (i >= from + amount)
 			this.array[i] = this.array[i-- - amount];
@@ -227,10 +204,9 @@ public class ArrayList<E> extends Collection implements List<E> {
 	 */
 	private void shiftUp(int amount, int from) {
 		int i = from - amount;
-		this.size -= amount;
+		super.size -= amount;
 		
-		while (i < this.size)
+		while (i < super.size)
 			this.array[i] = this.array[i++ + amount];
 	}
-	
 }

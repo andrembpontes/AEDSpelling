@@ -34,7 +34,7 @@ public class Main {
 		Printer printer = new Printer();
 		
 		// Verify if has to load stored data
-		ISpelling spelling = null;
+		ISpelling spelling;
 		if (args.length > 0 && args[0].equals(Main.CLEAN_ARG))
 			spelling = new Spelling();
 		else

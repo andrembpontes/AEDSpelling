@@ -18,12 +18,13 @@ public class HashMapIterator<K, V> implements Iterator<V> {
 
     private void initializeIterator(){
         this.currentItem = 0;
-        this.currentHashIndex = -1;
+        this.currentHashIndex = 0;
         this.getNextHashIndexIterator();
     }
 
     private boolean getNextHashIndexIterator(){
-        while(++this.currentHashIndex < this.hashTable.length && this.hashTable[this.currentHashIndex] == null);
+        while(this.currentHashIndex < this.hashTable.length && this.hashTable[this.currentHashIndex] == null)
+            this.currentHashIndex++;
 
         if(this.currentHashIndex < this.hashTable.length) {
             this.hashIndexIterator = this.hashTable[this.currentHashIndex].iterator();
