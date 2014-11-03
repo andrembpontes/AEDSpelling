@@ -24,7 +24,8 @@ public class Dictionary implements IDictionary {
         if (this.verifyWord(word)) {
             return null;
         }
-		return this.words.put(word, newWord);
+		this.words.put(word, newWord);
+        return newWord;
 	}
 	
 	@Override

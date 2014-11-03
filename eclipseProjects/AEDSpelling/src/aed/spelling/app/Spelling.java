@@ -27,8 +27,9 @@ public class Spelling implements ISpelling {
 	
 	@Override
 	public boolean addText(String id, List<String> text) {
-		if (this.searchText(id) != null)
+		if (this.texts.containsKey(id))
 			return false;
+
 		this.texts.put(id, new AnalisableText(id, text, this.dictionary));
 		return true;
 	}
@@ -43,7 +44,8 @@ public class Spelling implements ISpelling {
 		
 		if (anyAdded)
 			this.texts = new HashMap<String, IAnalisableText>();
-		return anyAdded;
+
+        return anyAdded;
 	}
 	
 	@Override

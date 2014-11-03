@@ -36,4 +36,14 @@ public class EntryClass<K, V> implements Entry<K, V>{
         return this.key.hashCode();
     }
 
+    @Override
+    public boolean equals(Object obj){
+        if(obj instanceof Entry){
+            Entry entry = (Entry) obj;
+            return entry.getValue().equals(this.value) && entry.getKey().equals(this.key);
+        }
+
+        return false;
+    }
+
 }
