@@ -104,4 +104,6 @@ public interface List<E> extends Collection<E> {
 	 * @throws EmptyListException List is empty
 	 */
 	E removeLast() throws EmptyListException;
+
+    //TODO implement append lists
 }
