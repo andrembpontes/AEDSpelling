@@ -29,7 +29,7 @@ public class Spelling implements ISpelling {
 	public boolean addText(String id, List<String> text) {
 		if (this.searchText(id) != null)
 			return false;
-		this.texts.insert(id, new AnalisableText(id, text, this.dictionary));
+		this.texts.put(id, new AnalisableText(id, text, this.dictionary));
 		return true;
 	}
 	
@@ -67,7 +67,7 @@ public class Spelling implements ISpelling {
 	 * @return The text with the specified id, null if the text is not found 
 	 */
 	private IAnalisableText searchText(String id) {
-        return this.texts.find(id);
+        return this.texts.get(id);
 	}
 	
 	@Override

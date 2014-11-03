@@ -24,12 +24,12 @@ public class Dictionary implements IDictionary {
         if (this.verifyWord(word)) {
             return null;
         }
-		return this.words.insert(word, newWord);
+		return this.words.put(word, newWord);
 	}
 	
 	@Override
 	public boolean verifyWord(String word) {
-		return words.find(word) != null;
+		return words.containsKey(word);
 	}
 	
 }

@@ -1,39 +1,27 @@
 package aed.dataStructures;
 
-import java.io.Serializable;
-
-
 /**
- * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
- * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ * @author am.pontes
+ *
+ * @param <K>
+ * @param <V>
  */
-public interface Map<K,V> extends Serializable
+public interface Map<K,V> extends Collection<Entry<K,V>>
 {                                                                   
-    /**
-     * Returs true iff the dictionary contains no entries.
-     */
-    boolean isEmpty( );
-
-    /**
-     * Returns the number of entries in the dictionary.
-     * @return
-     */
-    int size();
-
-    /**
+   /**
      * If there is an entry in the dictionary whose key is the specified key,
      * returns its value; otherwise, returns null.
      * @param key
      * @return
      */
-    V find( K key );                                      
+    V get( K key );
 
     /**
      * If there is an entry in the dictionary whose key is the specified key,
      * replaces its value by the specified value and returns the old value;
      * otherwise, inserts the entry (key, value) and returns null.
      */
-    V insert( K key, V value );
+    V put( K key, V value );
 
     /**
      * If there is an entry in the dictionary whose key is the specified key,
@@ -43,6 +31,28 @@ public interface Map<K,V> extends Serializable
      * @param key
      * @return
      */
-    V remove( K key );                                
+    V remove( K key );
+
+    /**
+     * Verifies if Map contains given key
+     *
+     * @param key Key to find
+     * @return True if contains key, else False
+     */
+    boolean containsKey(K key);
+
+    /**
+     * Returns a collection with map keys
+     *
+     * @return Collection with map keys
+     */
+    Collection<K> keys();
+
+    /**
+     * Returns a collection with map values
+     *
+     * @return Collection with map values
+     */
+    Collection<V> values();
 
 } 
