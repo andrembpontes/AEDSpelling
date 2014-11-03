@@ -21,8 +21,7 @@ public class HashMap<K, V> extends AbstractMap<K, V> {
 
     @Override
     public boolean contains(Entry<K, V> element) {
-        //TODO implement
-        return false;
+        return this.hashTable.contains(element);
     }
 
     @Override
@@ -32,7 +31,7 @@ public class HashMap<K, V> extends AbstractMap<K, V> {
 
     @Override
     public Iterator<Entry<K, V>> iterator() {
-        return null;
+        return this.hashTable.iterator();
     }
 
 	@Override
@@ -84,14 +83,24 @@ public class HashMap<K, V> extends AbstractMap<K, V> {
 
     @Override
     public Collection<K> keys() {
-        //TODO implement
-        return null;
+        List<K> keys = new LinkedList<K>();
+        Iterator<Entry<K, V>> iterator = this.iterator();
+
+        while(iterator.hasNext())
+            keys.add(iterator.next().getKey());
+
+        return keys;
     }
 
     @Override
     public Collection<V> values() {
-        //TODO implement
-        return null;
+        List<V> values = new LinkedList<V>();
+        Iterator<Entry<K, V>> iterator = this.iterator();
+
+        while(iterator.hasNext())
+            values.add(iterator.next().getValue());
+
+        return values;
     }
 
 

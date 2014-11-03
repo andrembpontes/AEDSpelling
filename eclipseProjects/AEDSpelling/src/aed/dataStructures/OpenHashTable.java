@@ -5,9 +5,8 @@ package aed.dataStructures;
  */
 public class OpenHashTable<E> extends AbstractCollection<E> implements HashTable<E>{
 
-    private static final int DEFAULT_HASH_TABLE_SIZE = 1000;
-
     private List<E>[] hashTable;
+    private int sizeLimit;
 
     private static final int[] PRIMES =
             {
@@ -23,12 +22,23 @@ public class OpenHashTable<E> extends AbstractCollection<E> implements HashTable
             };
 
     public OpenHashTable(){
-        this(DEFAULT_HASH_TABLE_SIZE);
+        this(DEFAULT_INITIAL_CAPACITY);
     }
 
     @SuppressWarnings("unchecked")
     public OpenHashTable(int initialCapacity) {
-        this.hashTable = (List<E>[]) new List<?>[this.getNexPrime(initialCapacity + 1)];
+        this.hashTable = (List<E>[]) new List<?>[this.getHashTableLenght(initialCapacity)];
+        this.sizeLimit = initialCapacity;
+    }
+
+    /**
+     * Calculates recommended length of hash table for a given capacity
+     *
+     * @param capacity Needed capacity
+     * @return Recommended length of hash table
+     */
+    private int getHashTableLenght(int capacity){
+        return this.getNexPrime((int) 1.1 * capacity);
     }
 
     /**
@@ -66,14 +76,12 @@ public class OpenHashTable<E> extends AbstractCollection<E> implements HashTable
 
     @Override
     public Iterator<E> iterator() {
-        //TODO implement
-        return null;
+        return new OpenHashTableIterator<E>(this.hashTable, this.size);
     }
 
     @Override
-    public int hashTableOccupationFactor() {
-        //TODO implement
-        return 0;
+    public int hashTableOccupationPercentage() {
+        return (int) (((this.size * 100) / this.hashTable.length) + 0.5);
     }
 
     @Override
@@ -83,6 +91,9 @@ public class OpenHashTable<E> extends AbstractCollection<E> implements HashTable
 
     @Override
     public E insert(E element) {
+        if(this.isFull())
+            this.rehash();
+
         int hashCode = this.getHashCode(element);
 
         if(this.hashTable[hashCode] == null)
@@ -128,5 +139,30 @@ public class OpenHashTable<E> extends AbstractCollection<E> implements HashTable
             return null;
 
         return indexZone;
+    }
+
+    @Override
+    public void rehash(int capacity){
+        OpenHashTable<E> newHashTable = new OpenHashTable<E>(capacity);
+
+        Iterator<E> iterator = this.iterator();
+
+        while(iterator.hasNext())
+            newHashTable.insert(iterator.next());
+
+        this.hashTable = newHashTable.hashTable;
+        this.sizeLimit = capacity;
+    }
+
+    /**
+     * Rehash hash table according to growth tax
+     */
+    private void rehash(){
+        this.rehash(this.sizeLimit * HashTable.GROWTH_TAX);
+    }
+
+    @Override
+    public boolean isFull(){
+        return this.size >= this.sizeLimit;
     }
 }

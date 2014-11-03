@@ -4,6 +4,10 @@ package aed.dataStructures;
  * @author Andre Pontes (42845)
  */
 public interface HashTable<E> extends Collection<E> {
+
+    static final int DEFAULT_INITIAL_CAPACITY = 100;
+    static final int GROWTH_TAX = 3;
+
     /**
      * Insert an element in hash table
      *
@@ -33,7 +37,7 @@ public interface HashTable<E> extends Collection<E> {
      *
      * @return Hash table occupation factor
      */
-    int hashTableOccupationFactor();
+    int hashTableOccupationPercentage();
 
     /**
      * Returns hash table size
@@ -41,4 +45,10 @@ public interface HashTable<E> extends Collection<E> {
      * @return Hash table size
      */
     int hashTableSize();
+
+    /**
+     * Creates a new hash table with new capacity and insert all elements again
+     * @param capacity New capacity
+     */
+    void rehash(int capacity);
 }
