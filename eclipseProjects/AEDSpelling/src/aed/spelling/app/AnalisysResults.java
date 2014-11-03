@@ -66,13 +66,15 @@ public class AnalisysResults implements IAnalysisResults {
 	}
 	
 	@Override
-	public Iterator<? extends IWordInText> correct() {
-		return this.corrects.iterator();
+    @SuppressWarnings("unchecked")
+	public Iterator<IWordInText> correct() {
+		return ((List<IWordInText>)(List<? extends IWordInText>)this.corrects).iterator();
 	}
 	
 	@Override
-	public Iterator<? extends IWordInText> errors() {
-		return this.errors.iterator();
+    @SuppressWarnings("unchecked")
+	public Iterator<IWordInText> errors() {
+		return ((List<IWordInText>)(List<? extends IWordInText>)this.errors).iterator();
 	}
 	
 	@Override
@@ -99,8 +101,9 @@ public class AnalisysResults implements IAnalysisResults {
 	}
 	
 	@Override
-	public Iterator<? extends IWordInText> occurrences() {
-		return this.occurrences.iterator();
+    @SuppressWarnings("unchecked")
+	public Iterator<IWordInText> occurrences() {
+		return ((List<IWordInText>)(List<? extends IWordInText>)this.occurrences).iterator();
 	}
 	
 }

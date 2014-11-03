@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
  * @param <E> Type of list elements
  */
-public class LinkedList<E> implements List<E> {
+public class LinkedList<E>  extends Collection implements List<E> {
 	
 	class Node implements Serializable {
 		
@@ -133,12 +133,7 @@ public class LinkedList<E> implements List<E> {
 	 * List tail
 	 */
 	private Node		last;
-	
-	/**
-	 * Number of elements
-	 */
-	private int			size;
-	
+
 	public LinkedList() {
 		this.first = null;
 		this.last = null;
@@ -290,12 +285,7 @@ public class LinkedList<E> implements List<E> {
 			this.size++;
 		}
 	}
-	
-	@Override
-	public boolean isEmpty() {
-		return this.size == 0;
-	}
-	
+
 	@Override
 	public Iterator<E> iterator() {
 		return new LinkedListIterator<E>(this);
@@ -390,10 +380,5 @@ public class LinkedList<E> implements List<E> {
 		next.setPrevious(prev);
 		this.size--;
 	}
-	
-	@Override
-	public int size() {
-		return this.size;
-	}
-	
+
 }

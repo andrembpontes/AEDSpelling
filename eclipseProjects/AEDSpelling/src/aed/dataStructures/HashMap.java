@@ -4,19 +4,16 @@
 package aed.dataStructures;
 
 /**
- * @author am.pontes
- *
+ * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
+ * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
  */
-public class HashMap<K, V> implements Map<K, V> {
-	/**
-	 * 
-	 */
+public class HashMap<K, V> extends Collection implements Map<K, V> {
+
 	private static final long serialVersionUID = 1L;
 
 	private static final int DEFAULT_HASH_TABLE_SIZE = 1000;
 	
 	private List<Entry<K,V>>[] hashTable;
-	private int currentSize;
 
     private static final int[] PRIMES =
             {
@@ -38,7 +35,7 @@ public class HashMap<K, V> implements Map<K, V> {
     @SuppressWarnings("unchecked")
     public HashMap(int initialCapacity) {
         this.hashTable = (List<Entry<K,V>>[]) new List<?>[this.getNexPrime(initialCapacity + 1)];
-        this.currentSize = 0;
+        this.size = 0;
     }
 
     /**
@@ -64,16 +61,6 @@ public class HashMap<K, V> implements Map<K, V> {
         int rawCode = key.hashCode();
         return (rawCode < 0 ? -rawCode : rawCode ) % this.hashTable.length;
     }
-
-	@Override
-	public boolean isEmpty() {
-		return this.currentSize == 0;
-	}
-
-	@Override
-	public int currentSize() {
-		return this.currentSize;
-	}
 
 	@Override
 	public V find(K key) {
@@ -102,7 +89,7 @@ public class HashMap<K, V> implements Map<K, V> {
 			this.createList(hashCode);
 		
 		this.hashTable[hashCode].add(new EntryClass<K,V>(key, value));
-		this.currentSize++;
+		this.size++;
 		return value;
 	}
 
@@ -128,7 +115,7 @@ public class HashMap<K, V> implements Map<K, V> {
             Entry<K, V> entryI = iterator.next();
             if(entryI.getKey().equals(key)){
                 this.hashTable[hashCode].remove(entryI);
-                this.currentSize--;
+                this.size--;
                 return entryI.getValue();
             }
         }

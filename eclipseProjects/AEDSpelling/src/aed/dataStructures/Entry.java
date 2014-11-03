@@ -2,6 +2,10 @@ package aed.dataStructures;
 
 import java.io.Serializable;
 
+/**
+ * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
+ * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ */
 public interface Entry<K,V> extends Serializable
 {
 

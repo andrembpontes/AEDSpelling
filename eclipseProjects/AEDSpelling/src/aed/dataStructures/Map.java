@@ -4,23 +4,21 @@ import java.io.Serializable;
 
 
 /**
- * @author am.pontes
- *
- * @param <K>
- * @param <V>
+ * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
+ * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
  */
 public interface Map<K,V> extends Serializable
 {                                                                   
     /**
      * Returs true iff the dictionary contains no entries.
      */
-    boolean isEmpty( );                                           
+    boolean isEmpty( );
 
     /**
      * Returns the number of entries in the dictionary.
      * @return
      */
-    int currentSize( );
+    int size();
 
     /**
      * If there is an entry in the dictionary whose key is the specified key,

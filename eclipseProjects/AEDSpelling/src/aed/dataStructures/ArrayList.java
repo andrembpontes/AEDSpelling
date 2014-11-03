@@ -5,7 +5,7 @@ package aed.dataStructures;
  * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
  * @param <E> Type of Array Elements
  */
-public class ArrayList<E> implements List<E> {
+public class ArrayList<E> extends Collection implements List<E> {
 	
 	private static final long	serialVersionUID	= 1L;
 	
@@ -23,12 +23,7 @@ public class ArrayList<E> implements List<E> {
 	 * Elements array
 	 */
 	private E[]					array;
-	
-	/**
-	 * Actual size
-	 */
-	private int					counter;
-	
+
 	/**
 	 * Growth tax Everytime that array need more space, will grow with growthTax
 	 */
@@ -46,7 +41,7 @@ public class ArrayList<E> implements List<E> {
 	public ArrayList(int startSize, int growthTax) {
 		this.array = (E[]) new Object[startSize];
 		this.growthTax = growthTax;
-		this.counter = 0;
+		this.size = 0;
 	}
 	
 	@Override
@@ -62,7 +57,7 @@ public class ArrayList<E> implements List<E> {
 	@Override
 	public void addLast(E element) {
 		this.assureSizeToInsert();
-		this.array[this.counter++] = element;
+		this.array[this.size++] = element;
 	}
 	
 	/**
@@ -123,7 +118,7 @@ public class ArrayList<E> implements List<E> {
 		@SuppressWarnings("unchecked")
 		E[] newArray = (E[]) new Object[this.array.length * this.growthTax];
 		
-		for (int i = 0; i < this.counter; i++)
+		for (int i = 0; i < this.size; i++)
 			newArray[i] = this.array[i];
 		
 		this.array = newArray;
@@ -141,22 +136,17 @@ public class ArrayList<E> implements List<E> {
 	
 	@Override
 	public void insert(int index, E element) throws InvalidPositionException {
-		if (!this.isValidIndex(index) && index != this.counter)
-			throw new InvalidPositionException(index, this.counter);
+		if (!this.isValidIndex(index) && index != this.size)
+			throw new InvalidPositionException(index, this.size);
 		
-		if (index == this.counter)
+		if (index == this.size)
 			this.addLast(element);
 		else {
 			this.shiftDown(1, index);
 			this.array[index] = element;
 		}
 	}
-	
-	@Override
-	public boolean isEmpty() {
-		return this.counter == 0;
-	}
-	
+
 	/**
 	 * Verify is given index is a valid one
 	 * 
@@ -164,7 +154,7 @@ public class ArrayList<E> implements List<E> {
 	 * @return True if is a valid index. Else false.
 	 */
 	private boolean isValidIndex(int index) {
-		return index >= 0 && index < this.counter;
+		return index >= 0 && index < this.size;
 	}
 	
 	@Override
@@ -207,7 +197,7 @@ public class ArrayList<E> implements List<E> {
 		if (this.size() == 0)
 			throw new EmptyListException();
 		
-		return this.remove(this.counter - 1);
+		return this.remove(this.size - 1);
 	}
 	
 	/**
@@ -219,8 +209,8 @@ public class ArrayList<E> implements List<E> {
 	private void shiftDown(int amount, int from) {
 		this.assureSizeToInsert(amount);
 		
-		this.counter += amount;
-		int i = this.counter - 1;
+		this.size += amount;
+		int i = this.size - 1;
 		
 		while (i >= from + amount)
 			this.array[i] = this.array[i-- - amount];
@@ -237,15 +227,10 @@ public class ArrayList<E> implements List<E> {
 	 */
 	private void shiftUp(int amount, int from) {
 		int i = from - amount;
-		this.counter -= amount;
+		this.size -= amount;
 		
-		while (i < this.counter)
+		while (i < this.size)
 			this.array[i] = this.array[i++ + amount];
-	}
-	
-	@Override
-	public int size() {
-		return this.counter;
 	}
 	
 }
