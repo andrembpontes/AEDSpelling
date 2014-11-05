@@ -73,7 +73,7 @@ public class Spelling implements ISpelling {
 	}
 	
 	@Override
-	public Iterator<? extends IWordInText> textCorrects(String id) {
+	public Iterator<IWordInText> textCorrects(String id) {
 		IAnalisableText text = this.searchText(id);
 		if (text == null)
 			throw new TextNotFoundException();
@@ -82,7 +82,7 @@ public class Spelling implements ISpelling {
 	}
 	
 	@Override
-	public Iterator<? extends IWordInText> textErrors(String id) {
+	public Iterator<IWordInText> textErrors(String id) {
 		IAnalisableText text = this.searchText(id);
 		if (text == null)
 			throw new TextNotFoundException();
@@ -118,7 +118,7 @@ public class Spelling implements ISpelling {
 	}
 	
 	@Override
-	public Iterator<? extends IWordInText> wordsOf(String id) {
+	public Iterator<IWordInText> wordsOf(String id) {
 		IAnalisableText text = this.searchText(id);
 		
 		if (text == null)

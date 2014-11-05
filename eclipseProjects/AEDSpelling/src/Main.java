@@ -194,7 +194,7 @@ public class Main {
 	private static void listError(ISpelling spelling, Scanner scan) {
 		String textId = scan.next();
 		
-		Iterator<? extends IWordInText> errors = spelling.textErrors(textId);
+		Iterator<IWordInText> errors = spelling.textErrors(textId);
 		
 		if (!errors.hasNext())
 			OUT.printMsg(Output.LIST_ERRORS_FAIL);
@@ -281,7 +281,7 @@ public class Main {
 			wType = WordType.valueOf(scan.next());
 			freq = scan.nextInt();
 			
-			Iterator<? extends IWordInText> words = null;
+			Iterator<IWordInText> words = null;
 			
 			switch (wType) {
 				case C:

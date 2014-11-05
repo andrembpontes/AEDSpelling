@@ -56,7 +56,7 @@ public interface ISpelling extends Serializable {
 	 * @param id Id
 	 * @return An iterator of correct words off a given text
 	 */
-	Iterator<? extends IWordInText> textCorrects(String id);
+	Iterator<IWordInText> textCorrects(String id);
 	
 	/**
 	 * Returns an iterator of wrong words off a given text
@@ -64,7 +64,7 @@ public interface ISpelling extends Serializable {
 	 * @param id Id
 	 * @return An iterator of wrong words off a given text
 	 */
-	Iterator<? extends IWordInText> textErrors(String id);
+	Iterator<IWordInText> textErrors(String id);
 	
 	/**
 	 * Returns an iterator of lines off a given text
@@ -98,5 +98,5 @@ public interface ISpelling extends Serializable {
 	 * @param id Id
 	 * @return An iterator of words off a given text
 	 */
-	Iterator<? extends IWordInText> wordsOf(String id);
+	Iterator<IWordInText> wordsOf(String id);
 }

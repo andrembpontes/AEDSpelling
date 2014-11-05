@@ -18,14 +18,14 @@ public interface IAnalisableText extends Serializable {
 	 * 
 	 * @return Text word that are not in Dictionary
 	 */
-	Iterator<? extends IWordInText> correct();
+	Iterator<IWordInText> correct();
 	
 	/**
 	 * Return text words that are not found in Dictionary
 	 * 
 	 * @return Text words that are not in Dictionary
 	 */
-	Iterator<? extends IWordInText> errors();
+	Iterator<IWordInText> errors();
 	
 	/**
 	 * Calculate word frequency
@@ -67,5 +67,5 @@ public interface IAnalisableText extends Serializable {
 	 * 
 	 * @return Occurrences
 	 */
-	Iterator<? extends IWordInText> occurrences();
+	Iterator<IWordInText> occurrences();
 }
