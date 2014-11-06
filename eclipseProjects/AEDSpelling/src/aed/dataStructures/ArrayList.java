@@ -5,7 +5,7 @@ package aed.dataStructures;
  * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
  * @param <E> Type of Array Elements
  */
-public class ArrayList<E> extends AbstractList<E> implements List<E> {
+public class ArrayList<E> extends AbstractList<E> implements InsertionList<E> {
 	
 	private static final long	serialVersionUID	= 1L;
 	
@@ -29,7 +29,12 @@ public class ArrayList<E> extends AbstractList<E> implements List<E> {
 	 * Growth tax Everytime that array need more space, will grow with growthTax
 	 */
 	private int					growthTax;
-	
+
+    /**
+     * List's starting size
+     */
+    private int                 startSize;
+
 	public ArrayList() {
 		this(ArrayList.DEFAULT_START_SIZE, ArrayList.DEFAULT_START_SIZE);
 	}
@@ -37,23 +42,23 @@ public class ArrayList<E> extends AbstractList<E> implements List<E> {
 	public ArrayList(int startSize) {
 		this(startSize, ArrayList.DEFAULT_GROWTH_TAX);
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	public ArrayList(int startSize, int growthTax) {
-		this.array = (E[]) new Object[startSize];
-		this.growthTax = growthTax;
+        this.startSize = startSize;
+        this.growthTax = growthTax;
+        this.clear();
 	}
 	
 	@Override
 	public void add(E element) {
 		this.addLast(element);
 	}
-	
+
 	@Override
 	public void addFirst(E element) {
 		this.insert(0, element);
 	}
-	
+
 	@Override
 	public void addLast(E element) {
 		this.assureSizeToInsert();
@@ -91,13 +96,13 @@ public class ArrayList<E> extends AbstractList<E> implements List<E> {
 		super.validateIndex(index);
 		return this.array[index];
 	}
-	
+
 	@Override
 	public E getFirst() throws EmptyListException {
 		super.validateNotEmpty();
 		return this.array[0];
 	}
-	
+
 	@Override
 	public E getLast() throws EmptyListException {
 		super.validateNotEmpty();
@@ -127,7 +132,7 @@ public class ArrayList<E> extends AbstractList<E> implements List<E> {
 	private boolean hasSizeToInsert(int n) {
 		return this.size() + n < this.array.length;
 	}
-	
+
 	@Override
 	public void insert(int index, E element) throws InvalidPositionException {
 		super.validateIndex(index);
@@ -164,13 +169,13 @@ public class ArrayList<E> extends AbstractList<E> implements List<E> {
 		this.shiftUp(1, index + 1);
 		return removed;
 	}
-	
+
 	@Override
 	public E removeFirst() throws EmptyListException {
 		super.validateNotEmpty();
         return this.remove(0);
 	}
-	
+
 	@Override
 	public E removeLast() throws EmptyListException {
 		super.validateNotEmpty();
@@ -209,4 +214,10 @@ public class ArrayList<E> extends AbstractList<E> implements List<E> {
 		while (i < super.size)
 			this.array[i] = this.array[i++ + amount];
 	}
+
+    @Override
+    public void clear() {
+        this.size = 0;
+        this.array = (E[]) new Object[this.startSize];
+    }
 }

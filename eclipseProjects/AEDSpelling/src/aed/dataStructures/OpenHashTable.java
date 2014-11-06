@@ -7,6 +7,7 @@ public class OpenHashTable<E> extends AbstractCollection<E> implements HashTable
 
     private List<E>[] hashTable;
     private int sizeLimit;
+    private int initialCapacity;
 
     private static final int[] PRIMES =
             {
@@ -25,10 +26,16 @@ public class OpenHashTable<E> extends AbstractCollection<E> implements HashTable
         this(DEFAULT_INITIAL_CAPACITY);
     }
 
-    @SuppressWarnings("unchecked")
     public OpenHashTable(int initialCapacity) {
-        this.hashTable = (List<E>[]) new List<?>[this.getHashTableLenght(initialCapacity)];
         this.sizeLimit = initialCapacity;
+        this.initialCapacity = initialCapacity;
+        clear();
+    }
+
+    @SuppressWarnings("unchecked")
+    public void clear() {
+        this.hashTable = (List<E>[]) new List<?>[this.getHashTableLenght(this.initialCapacity)];
+        this.size = 0;
     }
 
     /**

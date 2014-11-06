@@ -1,8 +1,8 @@
 package aed.spelling.app;
 
+import aed.dataStructures.InsertionList;
 import aed.dataStructures.Iterator;
 import aed.dataStructures.LinkedList;
-import aed.dataStructures.List;
 import aed.spelling.InvalidWordException;
 import aed.spelling.Word;
 
@@ -15,7 +15,7 @@ public class WordOccurrence extends Word implements IWordOccurrence {
 	private static final long	serialVersionUID	= 1L;
 	private int					frequency;
 	private boolean				isCorrect;
-	private List<Integer>		lineNumbers;
+	private InsertionList<Integer> lineNumbers;
 	
 	public WordOccurrence(String word, IDictionary dictionary) throws InvalidWordException {
 		super(word);

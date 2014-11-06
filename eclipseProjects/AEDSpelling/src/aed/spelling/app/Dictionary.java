@@ -20,11 +20,12 @@ public class Dictionary implements IDictionary {
 	
 	@Override
 	public Word addWord(String word) throws InvalidWordException {
-		Word newWord = new Word(word);
-        if (this.verifyWord(word)) {
+		String lowerWord = word.toLowerCase();
+        if (this.verifyWord(lowerWord))
             return null;
-        }
-		this.words.put(word, newWord);
+
+        Word newWord = new Word(lowerWord);
+        this.words.put(lowerWord, newWord);
         return newWord;
 	}
 	

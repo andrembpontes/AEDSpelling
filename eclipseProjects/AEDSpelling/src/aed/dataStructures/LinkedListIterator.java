@@ -12,19 +12,19 @@ class LinkedListIterator<E> implements TwoWayIterator<E> {
 	/**
 	 * LinkedList of current iteration
 	 */
-	private LinkedList<E> list;
+	protected AbstractLinkedList<E> list;
 
 	/**
 	 * Next node in current iteration
 	 */
-	private LinkedList<E>.Node next;
+	protected Node<E> next;
 
 	/**
 	 * Previous node in current iteration
 	 */
-	private LinkedList<E>.Node previous;
+	protected Node<E> previous;
 
-	public LinkedListIterator(LinkedList<E> list) {
+	public LinkedListIterator(AbstractLinkedList<E> list) {
 		this.list = list;
 		this.next = list.getFirstNode();
 		this.previous = null;
@@ -73,7 +73,7 @@ class LinkedListIterator<E> implements TwoWayIterator<E> {
 	 *            Node with value to return
 	 * @return Node value
 	 */
-	private E returnNode(LinkedList<E>.Node node) {
+	private E returnNode(Node<E> node) {
 		E toReturn = node.getValue();
 		this.previous = node.getPrevious();
 		this.next = node.getNext();

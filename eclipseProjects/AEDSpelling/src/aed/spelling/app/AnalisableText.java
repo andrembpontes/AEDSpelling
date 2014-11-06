@@ -34,7 +34,7 @@ public class AnalisableText extends Text implements IAnalisableText {
 		if (this.analysisResults == null)
 			this.analise();
 	}
-	
+
 	@Override
 	public Iterator<IWordInText> correct() {
 		this.checkAnalisys();

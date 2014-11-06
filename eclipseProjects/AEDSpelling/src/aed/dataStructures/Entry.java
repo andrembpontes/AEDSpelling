@@ -6,13 +6,43 @@ import java.io.Serializable;
  * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
  * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
  */
-public interface Entry<K,V> extends Serializable
-{
 
-    // Returns the key in the entry.
-    K getKey( );
+class Entry<K, V> implements Serializable{
 
-    // Returns the value in the entry.
-    V getValue( );
+	private static final long serialVersionUID = 1L;
+
+	protected K key;
+	protected V value;
+	
+	public Entry(K key, V value){
+		this.key = key;
+		this.value = value;
+	}
+
+	public K getKey() {
+		return this.key;
+	}
+
+	public V getValue() {
+		return this.value;
+	}
+
+    public int hashCode(){
+        return this.key.hashCode();
+    }
+
+    public boolean equals(Object obj){
+        if(obj instanceof Entry){
+            Entry entry = (Entry) obj;
+            return entry.getValue().equals(this.value) && entry.getKey().equals(this.key);
+        }
+
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 
 }

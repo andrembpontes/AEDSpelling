@@ -1,8 +1,8 @@
 package aed.spelling.app;
 
-import java.io.Serializable;
-
 import aed.dataStructures.Iterator;
+
+import java.io.Serializable;
 
 /**
  * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
@@ -15,14 +15,14 @@ public interface IAnalysisResults extends Serializable {
 	 * 
 	 * @return An iterator for the correct found
 	 */
-	Iterator<? extends IWordInText> correct();
+	Iterator<IWordInText> correct();
 	
 	/**
 	 * Returns an iterator for the errors found
 	 * 
 	 * @return An iterator for the errors found
 	 */
-	Iterator<? extends IWordInText> errors();
+	Iterator<IWordInText> errors();
 	
 	/**
 	 * Returns the frequency of a word
@@ -37,5 +37,5 @@ public interface IAnalysisResults extends Serializable {
 	 * 
 	 * @return An iterator of occurrences of a word
 	 */
-	Iterator<? extends IWordInText> occurrences();
+	Iterator<IWordInText> occurrences();
 }

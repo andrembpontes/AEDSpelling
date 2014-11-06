@@ -42,4 +42,8 @@ public interface Collection <E> extends Serializable {
      */
     Iterator<E> iterator();
 
+    /**
+     * Removes all elements of the collection
+     */
+    void clear();
 }

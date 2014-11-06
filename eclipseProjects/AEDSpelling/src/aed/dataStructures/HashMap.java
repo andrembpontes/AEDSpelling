@@ -16,7 +16,13 @@ public class HashMap<K, V> extends AbstractMap<K, V> {
     private HashTable<Entry<K, V>> hashTable;
 
     public HashMap(){
+        this.clear();
+    }
+
+    @Override
+    public void clear() {
         this.hashTable = new OpenHashTable<Entry<K, V>>();
+        this.size = 0;
     }
 
     @Override
@@ -58,7 +64,7 @@ public class HashMap<K, V> extends AbstractMap<K, V> {
         if(this.containsKey(key))
             oldValue = this.remove(key);
 
-        this.hashTable.insert(new EntryClass<K, V>(key, value));
+        this.hashTable.insert(new Entry<K, V>(key, value));
 
         return oldValue;
     }

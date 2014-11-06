@@ -1,5 +1,6 @@
 package aed.spelling.app;
 
+import aed.dataStructures.InsertionList;
 import aed.dataStructures.Iterator;
 import aed.dataStructures.LinkedList;
 import aed.dataStructures.List;
@@ -14,7 +15,7 @@ public class AnalisysResults implements IAnalysisResults {
 	private static final long	serialVersionUID	= 1L;
 	private IAnalisableText		analisableText;
 	private IDictionary			dictionary;
-	private List<IWordOccurrence>	errors, corrects, occurrences;
+	private InsertionList<IWordOccurrence> errors, corrects, occurrences;
 	
 	public AnalisysResults(IAnalisableText analisableText, IDictionary dictionary) {
 		this.analisableText = analisableText;
