@@ -1,8 +1,8 @@
 package aed.spelling.app;
 
-import aed.dataStructures.Iterator;
-
 import java.io.Serializable;
+
+import aed.dataStructures.Iterator;
 
 /**
  * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>

@@ -5,7 +5,11 @@ package aed.dataStructures;
  */
 public class OpenHashTable<E> extends AbstractCollection<E> implements HashTable<E>{
 
-    private List<E>[] hashTable;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private List<E>[] hashTable;
     private int sizeLimit;
     private int initialCapacity;
 
@@ -32,7 +36,8 @@ public class OpenHashTable<E> extends AbstractCollection<E> implements HashTable
         clear();
     }
 
-    @SuppressWarnings("unchecked")
+    @Override
+	@SuppressWarnings("unchecked")
     public void clear() {
         this.hashTable = (List<E>[]) new List<?>[this.getHashTableLenght(this.initialCapacity)];
         this.size = 0;

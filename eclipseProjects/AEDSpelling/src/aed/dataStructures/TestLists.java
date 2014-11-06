@@ -1,11 +1,11 @@
 package aed.dataStructures;
 
+import java.lang.reflect.Array;
+import java.util.Random;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.lang.reflect.Array;
-import java.util.Random;
 
 /**
  * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>

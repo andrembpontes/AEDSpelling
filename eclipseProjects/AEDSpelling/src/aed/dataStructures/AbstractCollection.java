@@ -5,7 +5,11 @@ package aed.dataStructures;
  */
 public abstract class AbstractCollection<E> implements Collection<E> {
 
-    protected int size;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected int size;
 
     public AbstractCollection(){
         this.size = 0;

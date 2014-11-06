@@ -1,15 +1,24 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 import aed.dataStructures.Iterator;
 import aed.dataStructures.LinkedList;
 import aed.dataStructures.List;
-import aed.spelling.*;
+import aed.spelling.InvalidLineNumberException;
+import aed.spelling.InvalidLineRangeException;
+import aed.spelling.InvalidWordException;
+import aed.spelling.Line;
+import aed.spelling.WordType;
 import aed.spelling.app.ISpelling;
 import aed.spelling.app.IWordInText;
 import aed.spelling.app.Spelling;
 import aed.spelling.app.TextNotFoundException;
-
-import java.io.*;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 /**
  * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>

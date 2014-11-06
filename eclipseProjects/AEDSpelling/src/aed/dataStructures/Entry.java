@@ -27,11 +27,13 @@ class Entry<K, V> implements Serializable{
 		return this.value;
 	}
 
-    public int hashCode(){
+    @Override
+	public int hashCode(){
         return this.key.hashCode();
     }
 
-    public boolean equals(Object obj){
+    @Override
+	public boolean equals(Object obj){
         if(obj instanceof Entry){
             Entry entry = (Entry) obj;
             return entry.getValue().equals(this.value) && entry.getKey().equals(this.key);

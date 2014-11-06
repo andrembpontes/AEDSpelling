@@ -3,7 +3,12 @@ package aed.dataStructures;
 
 public class OrderedLinkedList<E extends Comparable<E>> extends LinkedList<E> implements List<E> {
 
-    public OrderedLinkedList() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public OrderedLinkedList() {
         clear();
     }
 

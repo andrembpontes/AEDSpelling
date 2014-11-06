@@ -5,7 +5,11 @@ package aed.dataStructures;
  */
 public class OrderedLinkedMap<K extends Comparable<K>, V> implements Map<K, V> {
 
-    private OrderedLinkedList<EntryComparableByKey<K, V>> list;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private OrderedLinkedList<EntryComparableByKey<K, V>> list;
 
     public OrderedLinkedMap() {
         list = new OrderedLinkedList<EntryComparableByKey<K, V>>();

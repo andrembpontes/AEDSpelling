@@ -5,7 +5,11 @@ package aed.dataStructures;
  */
 public class OpenHashTableIterator<E> implements Iterator<E> {
 
-    Collection<E>[] hashTable;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	Collection<E>[] hashTable;
     Iterator<E> indexIterator;                  //Iterator for iterate by different elements in same index
     int size, current, currentHashIndex;
 

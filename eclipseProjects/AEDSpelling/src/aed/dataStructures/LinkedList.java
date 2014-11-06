@@ -5,7 +5,12 @@ package aed.dataStructures;
  */
 public class LinkedList<E> extends AbstractLinkedList<E> implements InsertionList<E>{
 
-    @Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Override
     public void addFirst(E element) {
         Node<E> toAdd = new Node<E>(element, null, this.first);
 

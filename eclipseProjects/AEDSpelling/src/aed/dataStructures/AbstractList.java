@@ -5,7 +5,12 @@ package aed.dataStructures;
  */
 public abstract class AbstractList<E> extends AbstractCollection<E> implements List<E> {
 
-    private boolean isValidIndex(int index){
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private boolean isValidIndex(int index){
         return index >= 0 && index < this.size();
     }
 

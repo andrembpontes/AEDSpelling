@@ -6,7 +6,11 @@ package aed.dataStructures;
  */
 public class HashMapIterator<E> implements Iterator<E> {
 
-    private List<E>[] hashTable;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private List<E>[] hashTable;
     private Iterator<E> hashIndexIterator;
     private int size, currentHashIndex, currentItem;
 

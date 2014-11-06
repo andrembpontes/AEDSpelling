@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 class Node<E> implements Serializable {
 
-    //static final long	serialVersionUID	= 0L;
+    static final long	serialVersionUID	= 0L;
 
     /**
      * Stores value

@@ -1,11 +1,11 @@
 package aed.spelling.app;
 
+import java.io.Serializable;
+
 import aed.dataStructures.Iterator;
 import aed.spelling.InvalidLineNumberException;
 import aed.spelling.InvalidLineRangeException;
 import aed.spelling.Line;
-
-import java.io.Serializable;
 
 /**
  * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>

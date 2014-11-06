@@ -5,11 +5,17 @@ package aed.dataStructures;
  */
 public class EntryComparableByKey<K extends Comparable<K>, V> extends Entry<K, V> implements Comparable<EntryComparableByKey<K,V>> {
 
-    public EntryComparableByKey(K key, V value) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public EntryComparableByKey(K key, V value) {
         super(key, value);
     }
 
-    public int compareTo(EntryComparableByKey<K, V> entry) {
+    @Override
+	public int compareTo(EntryComparableByKey<K, V> entry) {
         return super.getKey().compareTo(entry.getKey());
     }
 }
