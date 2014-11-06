@@ -66,6 +66,7 @@ public class HashMap<K, V> extends AbstractMap<K, V> {
 
         this.hashTable.insert(new Entry<K, V>(key, value));
 
+        super.size++;
         return oldValue;
     }
 
@@ -79,10 +80,12 @@ public class HashMap<K, V> extends AbstractMap<K, V> {
 
         while(iterator.hasNext()){
             Entry<K, V> entryI = iterator.next();
-            if(entryI.getKey().equals(key))
+            if(entryI.getKey().equals(key)){
+            	super.size--;
                 return this.hashTable.remove(entryI).getValue();
+            }
         }
-
+        
         return null;
     }
 

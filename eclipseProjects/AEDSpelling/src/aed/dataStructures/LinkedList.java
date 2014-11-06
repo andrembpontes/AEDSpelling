@@ -77,7 +77,7 @@ public class LinkedList<E> extends AbstractLinkedList<E> implements InsertionLis
         else {
             Node<E> prev = this.getNode(index - 1);
             Node<E> next = prev.getNext();
-            Node<E> toInsert = new Node<E>(element, prev, next);
+            Node<E> toInsert = new Node(element, prev, next);
             prev.setNext(toInsert);
             next.setPrevious(toInsert);
             super.size++;

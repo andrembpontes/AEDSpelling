@@ -1,12 +1,6 @@
 package aed.spelling.app;
 
-import aed.dataStructures.Collection;
-import aed.dataStructures.HashMap;
-import aed.dataStructures.InsertionList;
-import aed.dataStructures.Iterator;
-import aed.dataStructures.LinkedList;
-import aed.dataStructures.List;
-import aed.dataStructures.Map;
+import aed.dataStructures.*;
 import aed.spelling.Line;
 
 /**
@@ -18,8 +12,7 @@ public class AnalisysResults implements IAnalysisResults {
 	private static final long	serialVersionUID	= 1L;
 	private IAnalisableText		analisableText;
 	private IDictionary			dictionary;
-	private InsertionList<IWordOccurrence> errors, corrects;
-	private Map<String, IWordOccurrence> occurrences;
+	private InsertionList<IWordOccurrence> errors, corrects, occurrences;
 	
 	public AnalisysResults(IAnalisableText analisableText, IDictionary dictionary) {
 		this.analisableText = analisableText;
@@ -39,7 +32,7 @@ public class AnalisysResults implements IAnalysisResults {
 		if (occurrence == null) {
 			occurrence = new WordOccurrence(word, this.dictionary);
 			
-			this.occurrences.put(word.toLowerCase(), occurrence);
+			this.occurrences.addLast(occurrence);
 			
 			if (occurrence.isCorrect())
 				this.corrects.addLast(occurrence);
@@ -53,7 +46,7 @@ public class AnalisysResults implements IAnalysisResults {
 	 * Analyzes a text
 	 */
 	private void analise() {
-		this.occurrences = new HashMap<String, IWordOccurrence>();
+		this.occurrences = new LinkedList<IWordOccurrence>();
 		this.errors = new LinkedList<IWordOccurrence>();
 		this.corrects = new LinkedList<IWordOccurrence>();
 		
@@ -96,13 +89,19 @@ public class AnalisysResults implements IAnalysisResults {
 	 * @return An iterator of the occurrences of a specified word
 	 */
 	private IWordOccurrence getWordOccurrence(String word) {
-		return this.occurrences.get(word.toLowerCase());
+		for (Iterator<IWordOccurrence> iterator = this.occurrences.iterator(); iterator.hasNext();) {
+			IWordOccurrence occurrence = iterator.next();
+			if (occurrence.getWord().equalsIgnoreCase(word))
+				return occurrence;
+		}
+
+		return null;
 	}
 	
 	@Override
     @SuppressWarnings("unchecked")
 	public Iterator<IWordInText> occurrences() {
-		return ((Collection<IWordInText>)(Collection<? extends IWordInText>)this.occurrences.values()).iterator();
+		return ((List<IWordInText>)(List<? extends IWordInText>)this.occurrences).iterator();
 	}
 	
 }

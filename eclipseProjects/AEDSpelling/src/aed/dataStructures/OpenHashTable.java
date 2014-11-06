@@ -1,5 +1,7 @@
 package aed.dataStructures;
 
+import java.lang.reflect.Array;
+
 /**
  * @author Andre Pontes (42845)
  */
@@ -37,9 +39,8 @@ public class OpenHashTable<E> extends AbstractCollection<E> implements HashTable
     }
 
     @Override
-	@SuppressWarnings("unchecked")
-    public void clear() {
-        this.hashTable = (List<E>[]) new List<?>[this.getHashTableLenght(this.initialCapacity)];
+	public void clear() {
+        this.hashTable = (List<E>[]) new List[this.getHashTableLenght(this.initialCapacity)];
         this.size = 0;
     }
 
