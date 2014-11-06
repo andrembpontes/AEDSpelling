@@ -6,7 +6,7 @@ package aed.dataStructures;
  * @param <K>
  * @param <V>
  */
-public interface Map<K extends Comparable<K>,V> extends Collection<Entry<K,V>>
+public interface Map<K,V> extends Collection<Entry<K,V>>
 {
 
     //TODO:
