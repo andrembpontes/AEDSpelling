@@ -3,6 +3,7 @@ package aed.dataStructures;
 /**
  * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
  * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ * @param <E> Element
  */
 public class HashMapIterator<E> implements Iterator<E> {
 
@@ -20,6 +21,9 @@ public class HashMapIterator<E> implements Iterator<E> {
         this.initializeIterator();
     }
 
+    /**
+     * Initializes the iterator
+     */
     private void initializeIterator(){
         this.currentItem = 0;
         this.currentHashIndex = 0;

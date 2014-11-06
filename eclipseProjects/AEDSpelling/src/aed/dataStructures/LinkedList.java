@@ -1,13 +1,12 @@
 package aed.dataStructures;
 
 /**
- * Created by gbfm on 11/6/14.
+ * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
+ * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ * @param <E> Type of List Elements
  */
 public class LinkedList<E> extends AbstractLinkedList<E> implements InsertionList<E>{
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Override

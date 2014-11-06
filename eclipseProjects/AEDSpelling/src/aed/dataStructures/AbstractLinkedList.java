@@ -185,7 +185,7 @@ public abstract class AbstractLinkedList<E> extends AbstractList<E> implements L
      */
     public void append(LinkedList<E> list) {
         this.last.setNext(list.first);
-        list.last.setPrevious(this.first);
+        list.first.setPrevious(this.first);
         this.size += list.size();
         list.clear();
     }

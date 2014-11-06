@@ -109,7 +109,6 @@ public class ArrayList<E> extends AbstractList<E> implements InsertionList<E> {
 		return this.array[this.size() - 1];
 	}
 	
-	// TODO improve with specified minimum growth
 	/**
 	 * Make array grow to increase size
 	 */

@@ -1,11 +1,13 @@
 package aed.dataStructures;
 
 
+/**
+ * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
+ * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ * @param <E> Type of List Elements
+ */
 public class OrderedLinkedList<E extends Comparable<E>> extends LinkedList<E> implements List<E> {
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public OrderedLinkedList() {

@@ -1,13 +1,12 @@
 package aed.dataStructures;
 
 /**
- * @author Andre Pontes (42845)
+ * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
+ * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ * @param <E> Elements
  */
 public class OpenHashTableIterator<E> implements Iterator<E> {
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	Collection<E>[] hashTable;
     Iterator<E> indexIterator;                  //Iterator for iterate by different elements in same index
@@ -18,12 +17,19 @@ public class OpenHashTableIterator<E> implements Iterator<E> {
         this.size = size;
     }
 
+    /**
+     * Initializes the iterator
+     */
     private void initializeIterator(){
         this.current = 0;
         this.currentHashIndex = 0;
         this.getNextIndexIterator();
     }
 
+    /**
+     * Calculates the next hash index
+     * @return True if there is a next hash index false if not
+     */
     private boolean getNextIndexIterator(){
         while(this.currentHashIndex < this.hashTable.length && this.hashTable[this.currentHashIndex] == null)
             this.currentHashIndex++;

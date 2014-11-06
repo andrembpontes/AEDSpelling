@@ -1,15 +1,12 @@
 package aed.dataStructures;
 
-import java.lang.reflect.Array;
-
 /**
- * @author Andre Pontes (42845)
+ * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
+ * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ * @param <E> Type of HashTable Elements
  */
 public class OpenHashTable<E> extends AbstractCollection<E> implements HashTable<E>{
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private List<E>[] hashTable;
     private int sizeLimit;
