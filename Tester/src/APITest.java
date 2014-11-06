@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import org.junit.Test;
@@ -26,6 +27,7 @@ public class APITest {
 		
 		boolean diffs = false;
 		File[] inputs = new File(TEST_INPUT_DIR).listFiles();
+		Arrays.sort(inputs);
 		
 		for(File input : inputs){
 			String outputFileName = input.getName().replace(CH_INPUT, CH_OUTPUT);
@@ -79,7 +81,7 @@ public class APITest {
 		}
 		
 		if(diffs)
-			fail("jajão!");
+			fail("jajï¿½o!");
 				
 	}
 	

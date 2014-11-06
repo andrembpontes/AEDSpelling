@@ -63,7 +63,7 @@ public class OpenHashTable<E> extends AbstractCollection<E> implements HashTable
     }
 
     /**
-     * Calculates the an element's hashcode
+     * Calculates the an elements hashcode
      * @param element element
      * @return the hashcode
      */

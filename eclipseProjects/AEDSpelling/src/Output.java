@@ -12,7 +12,7 @@ public enum Output {
 	WORD_FOUND("Palavra correta."),
 	WORD_NOT_FOUND("Erro ortografico."),
 	ADD_TEXT_SUCCESS("Texto adicionado com sucesso."),
-	ADD_TEXT_FAILED("Identificador de texto ja existente."),
+	ADD_TEXT_FAILED("Identificador de texto existente."),
 	REMOVE_TEXT_SUCCESS("Remocao de texto com sucesso."),
 	INVALID_LINE_INTERVAL("Intervalo de numero de linhas mal definido."),
 	EXCERPT_NOT_FOUND("Troco inexistente."),

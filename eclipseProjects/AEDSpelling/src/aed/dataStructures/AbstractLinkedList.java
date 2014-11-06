@@ -28,7 +28,7 @@ public abstract class AbstractLinkedList<E> extends AbstractList<E> implements L
 	public int find(E element) {
 		int i = 0;
 		
-		Node node = this.first;
+		Node<E> node = this.first;
 		
 		while (node != null && !node.getValue().equals(element)) {
 			node = node.getNext();

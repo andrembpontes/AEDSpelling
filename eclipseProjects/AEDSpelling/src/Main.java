@@ -1,6 +1,6 @@
-import aed.dataStructures.InsertionList;
 import aed.dataStructures.Iterator;
 import aed.dataStructures.LinkedList;
+import aed.dataStructures.List;
 import aed.spelling.*;
 import aed.spelling.app.ISpelling;
 import aed.spelling.app.IWordInText;
@@ -23,10 +23,11 @@ public class Main {
 	
 	public static final String	DATA_STORE_FILE	= "store.data";
 	
+	public static final String	LINE_BREAK		= "\n";
+	
 	public static final String	CLEAN_ARG		= "CLEAN";
 	
 	public static void main(String... args) {
-		
 		// Initialise ins / outs
 		Scanner scan = new Scanner(Main.IN);
 		Printer printer = new Printer();
@@ -90,6 +91,8 @@ public class Main {
 		
 		Main.storeData(spelling, Main.DATA_STORE_FILE);
 		scan.close();
+		
+
 	}
 	
 	/**
@@ -97,16 +100,17 @@ public class Main {
 	 * 
 	 * @param spelling Instance to add the text to
 	 * @param scan Input scanner
+	 * @return Output string
 	 */
 	private static void addText(ISpelling spelling, Scanner scan) {
 		String textId = Main.processInput(scan.next());
 		
 		int numberOfLines = scan.nextInt();
 		scan.nextLine();
-		InsertionList<String> textLines = new LinkedList<String>();
+		List<String> textLines = new LinkedList<String>();
 		
 		for (int i = 0; i < numberOfLines; i++)
-			textLines.addLast(scan.nextLine());
+			textLines.add(scan.nextLine());
 		
 		boolean wasAdded = spelling.addText(textId, textLines);
 		
@@ -124,9 +128,9 @@ public class Main {
 		int numberOfWords = scan.nextInt();
 		scan.nextLine();
 		
-		InsertionList<String> newWords = new LinkedList<String>();
+		List<String> newWords = new LinkedList<String>();
 		for (int i = 0; i < numberOfWords; i++)
-			newWords.addLast(Main.processInput(scan.nextLine()));
+			newWords.add(Main.processInput(scan.nextLine()));
 		
 		try {
 			OUT.printMsg(spelling.addWords(newWords) ? Output.ADD_WORDS_SUCCESS : Output.ADD_WORDS_FAILED);
@@ -158,6 +162,7 @@ public class Main {
 	 * 
 	 * @param spelling Instance to get the word and text from
 	 * @param scan Input scanner
+	 * @return Output string
 	 */
 	private static void getWordFrequency(ISpelling spelling, Scanner scan) {
 		String textId = Main.processInput(scan.next());
@@ -185,6 +190,7 @@ public class Main {
 	 * 
 	 * @param spelling Instance to get the text from
 	 * @param scan Input scanner
+	 * @return Output string
 	 */
 	private static void listError(ISpelling spelling, Scanner scan) {
 		String textId = scan.next();
@@ -211,6 +217,7 @@ public class Main {
 	 * List text lines
 	 * 
 	 * @param iterator Iterator of text lines
+	 * @return Text excerpt
 	 */
 	private static void listLines(Iterator<Line> iterator) {
 		while (iterator.hasNext())
@@ -222,6 +229,7 @@ public class Main {
 	 * 
 	 * @param spelling Instance to get the text from
 	 * @param scan Input scanner
+	 * @return Output string
 	 */
 	private static void listText(ISpelling spelling, Scanner scan) {
 		String textId = Main.processInput(scan.nextLine());
@@ -235,6 +243,7 @@ public class Main {
 	 * 
 	 * @param spelling Instance to get the text from
 	 * @param scan Input scanner
+	 * @return Output string
 	 */
 	private static void listTextExcerpt(ISpelling spelling, Scanner scan) {
 		String textId = Main.processInput(scan.next());
@@ -262,6 +271,7 @@ public class Main {
 	 * 
 	 * @param spelling Instance to get the text from
 	 * @param scan Input scanner
+	 * @return Output string
 	 */
 	private static void listWordFrequency(ISpelling spelling, Scanner scan) {
 		String textId = scan.next();
@@ -335,6 +345,7 @@ public class Main {
 	 * 
 	 * @param spelling Instance to remove the text from
 	 * @param scan Input scanner
+	 * @return Output string
 	 */
 	private static void removeText(ISpelling spelling, Scanner scan) {
 		String textId = Main.processInput(scan.nextLine());
@@ -350,6 +361,7 @@ public class Main {
 	 * 
 	 * @param spelling Instance containing the dictionary to search in
 	 * @param scan Input scanner
+	 * @return Output string
 	 */
 	private static void searchWordInDictionary(ISpelling spelling, Scanner scan) {
 		String word = Main.processInput(scan.nextLine());

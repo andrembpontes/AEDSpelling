@@ -1,0 +1,58 @@
+Atualizacao do dicionario com sucesso.
+
+Erro ortografico.
+
+Palavra correta.
+
+Texto adicionado com sucesso.
+
+Texto adicionado com sucesso.
+
+Identificador de texto existente.
+
+Texto adicionado com sucesso.
+
+Texto inexistente.
+
+ola
+
+Texto inexistente.
+
+ola
+
+computer science programming algorithms
+algorithms information
+java language algorithms
+
+complexity
+
+ciencia ciencia algorithms
+
+
+complexity
+
+Intervalo de numero de linhas mal definido.
+
+computer science programming algorithms
+algorithms information
+
+ola
+1
+
+language
+3
+
+ciencia
+1
+2
+
+java ocorre 0 vezes no texto referido.
+
+ciencia ocorre 3 vezes no texto referido.
+
+xpto ocorre 0 vezes no texto referido.
+
+science ocorre 1 vezes no texto referido.
+
+Identificador de texto existente.
+

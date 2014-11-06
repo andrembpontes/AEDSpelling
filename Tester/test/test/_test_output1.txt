@@ -1,0 +1,67 @@
+Erro ortografico.
+
+Texto adicionado com sucesso.
+
+interface
+1
+
+Atualizacao do dicionario com sucesso.
+
+Texto inexistente.
+
+Texto adicionado com sucesso.
+
+Java java java java java java java java java java
+Java java java java java java java java java
+Java java java java java java java java java
+Java java java java java java java      java java
+Java java      
+
+Texto inexistente.
+
+Palavra correta.
+
+Erro ortografico.
+
+Java java java java java java java java java
+Java java java java java java java java java
+Java java java java java java java      java java
+
+Java java java java java java java java java
+Java java java java java java java      java java
+Java java      
+
+Troco inexistente.
+
+Intervalo de numero de linhas mal definido.
+
+Texto inexistente.
+
+Inexistencia de erros ortograficos no texto.
+
+Texto inexistente.
+
+Java ocorre 39 vezes no texto referido.
+
+ocaml ocorre 0 vezes no texto referido.
+
+Texto inexistente.
+
+Remocao de texto com sucesso.
+
+Texto adicionado com sucesso.
+
+ocaml
+4
+
+java ocorre 85 vezes no texto referido.
+
+ocaml ocorre 1 vezes no texto referido.
+
+Remocao de texto com sucesso.
+
+Texto adicionado com sucesso.
+
+ocaml
+1
+

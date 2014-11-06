@@ -1,0 +1,69 @@
+AD 10
+computer
+science
+programming
+Algorithms
+Information
+processing
+complexity
+languages
+java
+python
+
+PC naoestala
+
+PC algorithms
+
+AT texto1 5
+computer science programming algorithms
+algorithms information
+java language algorithms
+
+complexity
+
+AT text56 1
+ola
+
+AT text56 1
+hi
+
+AT 3text 2
+Information Information science ciencia
+ciencia ciencia algorithms
+
+RT text5
+
+LT text56
+
+RT text5
+
+LT text56
+
+LT texto1
+
+LR 3text 2 0
+
+LR texto1 4 0
+
+LR texto1 2 1
+
+LR texto1 1 2
+
+LE text56
+
+LE texto1
+
+LE 3text
+
+FP 3text java
+
+FP 3text ciencia
+
+FP 3text xpto
+
+FP 3text science
+
+AT 3text 2
+Information Information science ciencia
+ciencia ciencia algorithms
+

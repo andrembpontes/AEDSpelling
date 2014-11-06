@@ -31,7 +31,7 @@ public class ArrayList<E> extends AbstractList<E> implements InsertionList<E> {
 	private int					growthTax;
 
     /**
-     * List's starting size
+     * Lists starting size
      */
     private int                 startSize;
 
@@ -215,7 +215,8 @@ public class ArrayList<E> extends AbstractList<E> implements InsertionList<E> {
 			this.array[i] = this.array[i++ + amount];
 	}
 
-    @Override
+	@Override
+    @SuppressWarnings("unchecked")
     public void clear() {
         this.size = 0;
         this.array = (E[]) new Object[this.startSize];

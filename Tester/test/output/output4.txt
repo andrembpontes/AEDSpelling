@@ -1,0 +1,64 @@
+ola
+
+computer science programming algorithms
+algorithms information
+java language algorithms
+
+complexity
+
+ciencia ciencia algorithms
+
+
+complexity
+
+Intervalo de numero de linhas mal definido.
+
+computer science programming algorithms
+algorithms information
+
+ola
+1
+
+language
+3
+
+ciencia
+1
+2
+
+java ocorre 0 vezes no texto referido.
+
+ciencia ocorre 0 vezes no texto referido.
+
+xpto ocorre 0 vezes no texto referido.
+
+Texto inexistente.
+
+Lista de palavras nao contem palavras novas.
+
+ola
+
+Atualizacao do dicionario com sucesso.
+
+Texto inexistente.
+
+Texto adicionado com sucesso.
+
+Texto adicionado com sucesso.
+
+Identificador de texto existente.
+
+Texto adicionado com sucesso.
+
+ola
+1
+
+language
+3
+
+Inexistencia de erros ortograficos no texto.
+
+java ocorre 0 vezes no texto referido.
+
+ciencia ocorre 0 vezes no texto referido.
+

@@ -31,7 +31,7 @@ public class Dictionary implements IDictionary {
 	
 	@Override
 	public boolean verifyWord(String word) {
-		return words.containsKey(word);
+		return words.containsKey(word.toLowerCase());
 	}
 	
 }

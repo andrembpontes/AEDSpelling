@@ -1,0 +1,82 @@
+LT text56
+
+LT texto1
+
+LR 3text 2 0
+
+LR texto1 4 0
+
+LR texto1 2 1
+
+LR texto1 1 2
+
+LE text56
+
+LE texto1
+
+LE 3text
+
+FP 3text java
+
+FP text56 ciencia
+
+FP text56 xpto
+
+FP text1 algorithms
+
+AD 10
+computer
+science
+programming
+Algorithms
+Information
+processing
+complexity
+languages
+java
+python
+
+LT text56
+
+AD 11
+computer
+science
+programming
+Algorithms
+Information
+processing
+complexity
+languages
+java
+python
+ciencia
+
+LT text56
+
+AT texto1 5
+computer science programming algorithms
+algorithms information
+java language algorithms
+
+complexity
+
+AT text56 1
+ola
+
+AT text56 1
+hi
+
+AT 3text 2
+Information Information science ciencia
+ciencia ciencia algorithms
+
+LE text56
+
+LE texto1
+
+LE 3text
+
+FP 3text java
+
+FP text56 ciencia
+

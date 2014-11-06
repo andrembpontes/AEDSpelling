@@ -1,7 +1,7 @@
 package aed.dataStructures;
 
 
-public class OrderedLinkedList<E extends Comparable> extends LinkedList<E> implements List<E> {
+public class OrderedLinkedList<E extends Comparable<E>> extends LinkedList<E> implements List<E> {
 
     public OrderedLinkedList() {
         clear();
