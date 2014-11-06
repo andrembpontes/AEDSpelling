@@ -1,20 +1,19 @@
 package aed.dataStructures;
 
 /**
- * @author am.pontes
- *
- * @param <K>
- * @param <V>
+ * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
+ * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ * @param <K> Key
+ * @param <V> Value
  */
 public interface Map<K,V> extends Collection<Entry<K,V>>
 {
 
-    //TODO:
    /**
      * If there is an entry in the dictionary whose key is the specified key,
      * returns its value; otherwise, returns null.
-     * @param key
-     * @return
+     * @param key Key to search for
+     * @return Value corresponding to the key
      */
     V get( K key );
 
@@ -30,8 +29,8 @@ public interface Map<K,V> extends Collection<Entry<K,V>>
      * removes it from the dictionary and returns its value;
      * otherwise, returns null.
      * 
-     * @param key
-     * @return
+     * @param key Key to remove
+     * @return Value of the entry removed
      */
     V remove( K key );
 

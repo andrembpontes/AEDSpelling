@@ -1,11 +1,11 @@
 package aed.spelling;
 
-import java.io.Serializable;
-
 import aed.dataStructures.ArrayIterator;
 import aed.dataStructures.ArrayList;
 import aed.dataStructures.Iterator;
 import aed.dataStructures.List;
+
+import java.io.Serializable;
 
 /**
  * Represents a text identified by its id
@@ -22,7 +22,7 @@ public class Text implements Serializable {
 	 * Create a text
 	 *
 	 * @param id Id
-	 * @param lines Lines list
+	 * @param textLines Lines list
 	 */
 	public Text(String id, List<String> textLines) {
 		this.id = id;
@@ -74,7 +74,6 @@ public class Text implements Serializable {
 	 * 
 	 * @param firstLine first line of the text
 	 * @return An iterator of lines
-	 * @throws InvalidLineRangeException
 	 */
 	public Iterator<Line> lines(int firstLine) throws InvalidLineNumberException {
 		int firstIndex = firstLine - 1;
