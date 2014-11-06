@@ -6,8 +6,10 @@ package aed.dataStructures;
  * @param <K>
  * @param <V>
  */
-public interface Map<K,V> extends Collection<Entry<K,V>>
-{                                                                   
+public interface Map<K extends Comparable<K>,V> extends Collection<Entry<K,V>>
+{
+
+    //TODO:
    /**
      * If there is an entry in the dictionary whose key is the specified key,
      * returns its value; otherwise, returns null.
@@ -54,5 +56,4 @@ public interface Map<K,V> extends Collection<Entry<K,V>>
      * @return Collection with map values
      */
     Collection<V> values();
-
-} 
+}

@@ -1,11 +1,11 @@
 package aed.dataStructures;
 
-import java.lang.reflect.Array;
-import java.util.Random;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.lang.reflect.Array;
+import java.util.Random;
 
 /**
  * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
@@ -15,14 +15,14 @@ public class TestLists {
 
 	public static final int	testPopulation	= 10000;	// Integer.MAX_VALUE;
 														
-	private List<String>	arrayList, linkedList;
+	private InsertionList<String>	arrayList, linkedList;
 	
 	@Test
 	public void hardIntegrity() {
 		java.util.List<String> javaList = new java.util.LinkedList<String>();
 		
 		@SuppressWarnings("unchecked")
-		List<String>[] lists = (List<String>[]) Array.newInstance(List.class, 2);
+		InsertionList<String>[] lists = (InsertionList<String>[]) Array.newInstance(InsertionList.class, 2);
 		lists[0] = this.linkedList;
 		lists[1] = this.arrayList;
 		
@@ -76,7 +76,7 @@ public class TestLists {
 		}
 	}
 	
-	public void randomPopulateLists(List<String>[] lists, java.util.List<String>[] javaLists, int elementsNumber) {
+	public void randomPopulateLists(InsertionList<String>[] lists, java.util.List<String>[] javaLists, int elementsNumber) {
 		Random rand = new Random();
 		int i;
 		for (i = 0; i < elementsNumber - 1; i++) {
@@ -91,7 +91,7 @@ public class TestLists {
 			for (java.util.List<String> javaList : javaLists)
 				javaList.add(insertAt, str);
 			
-			for (List<String> list : lists)
+			for (InsertionList<String> list : lists)
 				list.insert(insertAt, str);
 			
 			for (List<String> list : lists)
@@ -120,7 +120,7 @@ public class TestLists {
 			Assert.assertEquals(this.linkedList.size(), i);
 			Assert.assertEquals(this.arrayList.size(), i);
 			
-			String str = new String(Integer.toString(i));
+			String str = Integer.toString(i);
 			
 			this.linkedList.add(str);
 			this.arrayList.add(str);
