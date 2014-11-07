@@ -13,7 +13,7 @@ import aed.spelling.Line;
  * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
  * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
  */
-public class AnalisysResults implements IAnalysisResults {
+class AnalisysResults implements IAnalysisResults {
 	
 	private static final long	serialVersionUID	= 1L;
 	private IAnalisableText		analisableText;

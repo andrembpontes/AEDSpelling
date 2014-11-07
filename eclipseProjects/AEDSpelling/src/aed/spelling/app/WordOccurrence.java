@@ -10,7 +10,7 @@ import aed.spelling.Word;
  * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
  * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
  */
-public class WordOccurrence extends Word implements IWordOccurrence {
+class WordOccurrence extends Word implements IWordOccurrence {
 	
 	private static final long	serialVersionUID	= 1L;
 	private int					frequency;
