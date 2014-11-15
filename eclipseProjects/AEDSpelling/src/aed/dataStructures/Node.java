@@ -9,13 +9,6 @@ import java.io.Serializable;
  */
 class Node<E> implements Serializable {
 
-    static final long	serialVersionUID	= 0L;
-
-    /**
-     * Stores value
-     */
-    private E			value;
-
     /**
      * Pointer to previous node
      */
@@ -25,6 +18,11 @@ class Node<E> implements Serializable {
      * Pointer to next node
      */
     private Node<E>		next;
+
+    /**
+     * Stores value
+     */
+    private E			value;
 
     /**
      * Creates a node without previous or next node
@@ -43,6 +41,24 @@ class Node<E> implements Serializable {
      */
     public Node(E value, Node<E> previous) {
         this(value, previous, null);
+    }
+
+    /**
+     * Return node value
+     *
+     * @return Value
+     */
+    public E getValue() {
+        return this.value;
+    }
+
+    /**
+     * Set node value
+     *
+     * @param value Node value
+     */
+    public void setValue(E value) {
+        this.value = value;
     }
 
     /**
@@ -77,15 +93,6 @@ class Node<E> implements Serializable {
     }
 
     /**
-     * Return node value
-     *
-     * @return Value
-     */
-    public E getValue() {
-        return this.value;
-    }
-
-    /**
      * Set next node and return old next node
      *
      * @param next Pointer to next node
@@ -107,15 +114,6 @@ class Node<E> implements Serializable {
         Node<E> oldPrevious = this.previous;
         this.previous = previous;
         return oldPrevious;
-    }
-
-    /**
-     * Set node value
-     *
-     * @param value Node value
-     */
-    public void setValue(E value) {
-        this.value = value;
     }
 
 }

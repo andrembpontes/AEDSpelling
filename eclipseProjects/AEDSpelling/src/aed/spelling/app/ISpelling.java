@@ -1,13 +1,13 @@
 package aed.spelling.app;
 
-import java.io.Serializable;
-
+import aed.dataStructures.InvalidIndexException;
+import aed.dataStructures.InvalidIndexRangeException;
 import aed.dataStructures.Iterator;
 import aed.dataStructures.List;
-import aed.spelling.InvalidLineNumberException;
-import aed.spelling.InvalidLineRangeException;
 import aed.spelling.InvalidWordException;
 import aed.spelling.Line;
+
+import java.io.Serializable;
 
 /**
  * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
@@ -82,7 +82,7 @@ public interface ISpelling extends Serializable {
 	 * @param lastLine Last included line
 	 * @return An iterator of lines off a given text enumerated between boundaries
 	 */
-	Iterator<Line> textLines(String id, int firstLine, int lastLine) throws InvalidLineNumberException, InvalidLineRangeException;
+	Iterator<Line> textLines(String id, int firstLine, int lastLine) throws InvalidIndexException, InvalidIndexRangeException;
 	
 	/**
 	 * Verifies if a word exists in the dictionary

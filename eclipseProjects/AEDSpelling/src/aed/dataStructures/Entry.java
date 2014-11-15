@@ -11,8 +11,8 @@ class Entry<K, V> implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	protected K key;
-	protected V value;
+	private K key;
+	private V value;
 	
 	public Entry(K key, V value){
 		this.key = key;
@@ -34,6 +34,14 @@ class Entry<K, V> implements Serializable{
 	public V getValue() {
 		return this.value;
 	}
+
+    public void setKey(K key) {
+        this.key = key;
+    }
+
+    public void setValue(V value) {
+        this.value = value;
+    }
 
     @Override
 	public int hashCode(){

@@ -26,13 +26,13 @@ class LinkedListIterator<E> implements TwoWayIterator<E> {
 
 	public LinkedListIterator(AbstractLinkedList<E> list) {
 		this.list = list;
-		this.next = list.getFirstNode();
-		this.previous = null;
+        this.reset();
 	}
 
 	@Override
-	public E first() {
-		return this.returnNode(this.list.getFirstNode());
+	public void reset() {
+        this.next = list.getFirstNode();
+        this.previous = null;
 	}
 
 	@Override

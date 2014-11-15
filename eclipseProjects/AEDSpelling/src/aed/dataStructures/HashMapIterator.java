@@ -43,9 +43,8 @@ public class HashMapIterator<E> implements Iterator<E> {
     }
 
     @Override
-    public E first() {
+    public void reset() {
         this.initializeIterator();
-        return this.next();
     }
 
     @Override
@@ -54,7 +53,7 @@ public class HashMapIterator<E> implements Iterator<E> {
     }
 
     @Override
-    public E next() throws NoSuchElementException {
+    public E next() throws NoSuchElementException{
         if(!this.hashIndexIterator.hasNext())
             this.getNextHashIndexIterator();
 

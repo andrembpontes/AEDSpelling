@@ -1,9 +1,6 @@
 package aed.spelling;
 
-import aed.dataStructures.ArrayIterator;
-import aed.dataStructures.ArrayList;
-import aed.dataStructures.Iterator;
-import aed.dataStructures.List;
+import aed.dataStructures.*;
 
 import java.io.Serializable;
 
@@ -48,17 +45,15 @@ public class Text implements Serializable {
 	 * @param lastLine last line of the text
 	 * @return An iterator of lines
 	 */
-	private Iterator<Line> getLinesIterator(int firstLine, int lastLine) {
-		
-		Line[] selectedLines = new Line[lastLine - firstLine + 1];
-		
-		int count = 0;
-		for (int i = firstLine; i <= lastLine; i++)
-			selectedLines[count++] = this.lines.get(i);
-		
-		return new ArrayIterator<Line>(selectedLines, count);
-		
-	}
+	private Iterator<Line> getLinesIterator(int firstLine, int lastLine) throws InvalidLineNumberException, InvalidLineRangeException {
+        try {
+            return new ArrayListIterator<Line>(this.lines, firstLine - 1, lastLine - 1);
+        } catch (InvalidIndexException e) {
+            throw new InvalidLineNumberException();
+        } catch (InvalidIndexRangeException e) {
+            throw new InvalidLineRangeException();
+        }
+    }
 	
 	/**
 	 * Return lines
@@ -75,31 +70,17 @@ public class Text implements Serializable {
 	 * @param firstLine first line of the text
 	 * @return An iterator of lines
 	 */
-	public Iterator<Line> lines(int firstLine) throws InvalidLineNumberException {
-		int firstIndex = firstLine - 1;
-		
-		if (firstIndex < 0)
-			throw new InvalidLineNumberException();
-		
-		return this.getLinesIterator(firstIndex, this.lines.size() - 1);
+	public Iterator<Line> lines(int firstLine) throws InvalidLineNumberException, InvalidLineRangeException {
+		return this.getLinesIterator(firstLine, this.lines.size());
 	}
 	
 	/**
 	 * @param firstLine first line of the text
 	 * @param lastLine last line of the text
 	 * @return An iterator of lines
-	 * @throws InvalidLineRangeException
+	 * @throws aed.dataStructures.InvalidIndexRangeException
 	 */
 	public Iterator<Line> lines(int firstLine, int lastLine) throws InvalidLineNumberException, InvalidLineRangeException {
-		int firstIndex = firstLine - 1;
-		int lastIndex = lastLine - 1;
-		
-		if (!(firstIndex >= 0 && lastIndex < this.lines.size()))
-			throw new InvalidLineNumberException();
-		
-		if (lastIndex - firstIndex < 0)
-			throw new InvalidLineRangeException();
-		
-		return this.getLinesIterator(firstIndex, lastIndex);
+		return this.getLinesIterator(firstLine, lastLine);
 	}
 }

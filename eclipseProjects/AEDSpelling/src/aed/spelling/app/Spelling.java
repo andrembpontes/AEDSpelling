@@ -1,11 +1,6 @@
 package aed.spelling.app;
 
-import aed.dataStructures.HashMap;
-import aed.dataStructures.Iterator;
-import aed.dataStructures.List;
-import aed.dataStructures.Map;
-import aed.spelling.InvalidLineNumberException;
-import aed.spelling.InvalidLineRangeException;
+import aed.dataStructures.*;
 import aed.spelling.InvalidWordException;
 import aed.spelling.Line;
 
@@ -101,7 +96,7 @@ public class Spelling implements ISpelling {
 	}
 	
 	@Override
-	public Iterator<Line> textLines(String id, int firstLine, int lastLine) throws InvalidLineNumberException, InvalidLineRangeException {
+	public Iterator<Line> textLines(String id, int firstLine, int lastLine) throws InvalidIndexException, InvalidIndexRangeException {
 		IAnalisableText text = this.searchText(id);
 		if (text == null)
 			throw new TextNotFoundException();

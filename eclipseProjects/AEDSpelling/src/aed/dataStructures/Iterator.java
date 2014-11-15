@@ -10,11 +10,9 @@ import java.io.Serializable;
 public interface Iterator<E> extends Serializable {
 	
 	/**
-	 * Restarts iteration and return first element
-	 * 
-	 * @return First element
+	 * Resets the iterator
 	 */
-	E first();
+	void reset();
 	
 	/**
 	 * Verify if has next element in iteration

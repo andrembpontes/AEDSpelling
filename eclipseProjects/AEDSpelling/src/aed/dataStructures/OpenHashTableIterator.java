@@ -43,9 +43,8 @@ public class OpenHashTableIterator<E> implements Iterator<E> {
     }
 
     @Override
-    public E first() {
+    public void reset() {
         this.initializeIterator();
-        return this.next();
     }
 
     @Override
