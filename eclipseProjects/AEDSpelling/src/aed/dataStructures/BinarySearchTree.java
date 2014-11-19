@@ -62,7 +62,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
             } else if (comparisonResult > 0) {
                 if (path != null) path.setRightPath(node);
                 node = node.getRightNode();
-            } else if (comparisonResult == 0) {
+            } else {
                 return node;
             }
         }
@@ -88,12 +88,11 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
         return this.getLeafBySide(Side.LEFT).getValue();
     }
 
-
     public V getMaximum() throws EmptyTreeException{
         return this.getLeafBySide(Side.RIGHT).getValue();
     }
 
-    protected TreeNode<K, V> getLeafBySide(TreeNode<K, V> base, Side side, Path path) throws EmptyTreeException{
+    protected TreeNode<K, V> getLeafBySide(TreeNode<K, V> base, Side side, Path<TreeNode<K, V>> path) throws EmptyTreeException{
         TreeNode<K, V> node = base;
 
         if (super.isEmpty()) {
@@ -103,7 +102,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
         while (true) {
             TreeNode<K, V> nextNode = this.getChildNode(node, side);
             if (nextNode == null) {
-                return nextNode;
+                return node;
             }
 
             if (path != null) path.setLeftPath(node);
