@@ -1,4 +1,6 @@
-package aed.dataStructures;
+package aed.dataStructures.tree;
+
+import aed.dataStructures.EntryComparableByKey;
 
 /**
  * Created by gbfm on 11/14/14.

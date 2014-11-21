@@ -1,4 +1,4 @@
-package aed.dataStructures;
+package aed.dataStructures.tree;
 
 /**
  * Created by gbfm on 11/19/14.

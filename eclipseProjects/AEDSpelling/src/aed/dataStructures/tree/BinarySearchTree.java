@@ -1,40 +1,8 @@
-package aed.dataStructures;
+package aed.dataStructures.tree;
+
+import aed.dataStructures.*;
 
 public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K, V> {
-
-    protected enum Side {LEFT, RIGHT}
-
-    protected class Path<E> {
-        private Side side;
-        private E parent;
-
-        protected Path(E parent, Side side) {
-            this.parent = parent;
-            this.side = side;
-        }
-
-        protected Path() {
-            this(null, null);
-        }
-
-        protected E getParent() {
-            return this.parent;
-        }
-
-        public Side getDirection() {
-            return this.side;
-        }
-
-        public void setLeftPath(E parent) {
-            this.parent = parent;
-            this.side = Side.LEFT;
-        }
-
-        public void setRightPath(E parent) {
-            this.parent = parent;
-            this.side = Side.RIGHT;
-        }
-    }
 
     protected TreeNode<K, V> root;
 
@@ -50,7 +18,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
         return node != null ? node.getValue() : null;
     }
 
-    protected TreeNode<K, V> findNode(K key, Path<TreeNode<K, V>> path) {
+    protected TreeNode<K, V> findNode(K key, PathStep<K,V> path) {
         TreeNode<K, V> node = this.root;
         int comparisonResult;
 
@@ -84,7 +52,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
         return null;
     }
 
-    public V getMinimum() throws EmptyTreeException{
+    public V getMinimum() throws EmptyTreeException {
         return this.getLeafBySide(Side.LEFT).getValue();
     }
 
@@ -92,7 +60,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
         return this.getLeafBySide(Side.RIGHT).getValue();
     }
 
-    protected TreeNode<K, V> getLeafBySide(TreeNode<K, V> base, Side side, Path<TreeNode<K, V>> path) throws EmptyTreeException{
+    protected TreeNode<K, V> getLeafBySide(TreeNode<K, V> base, Side side, PathStep<K, V> path) throws EmptyTreeException{
         TreeNode<K, V> node = base;
 
         if (super.isEmpty()) {
@@ -120,11 +88,11 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
 
     @Override
     public V put(K key, V value) {
-        Path<TreeNode<K, V>> lastStep = new Path<TreeNode<K, V>>();
+        PathStep<K, V> lastStep = new PathStep<K, V>();
         TreeNode<K,V> node = this.findNode(key, lastStep);
         if (node == null) {
             TreeNode<K,V> newLeaf = new TreeNode<K, V>(key, value);
-            this.joinTrees(newLeaf, lastStep.getParent(), lastStep.getDirection());
+            this.joinTrees(newLeaf, lastStep.getParent(), lastStep.getSide());
             super.size++;
             return null;
         } else {
@@ -151,7 +119,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
 
     @Override
     public V remove(K key) {
-        Path<TreeNode<K, V>> lastStep = new Path<TreeNode<K,V>>();
+        PathStep<K, V> lastStep = new PathStep<K, V>();
         TreeNode<K,V> node = this.findNode(key, lastStep);
         if ( node == null ) {
             return null;
@@ -164,10 +132,10 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
             this.joinTrees(node.getLeftNode(), null, null);
         } else {
             lastStep.setRightPath(node);
-            TreeNode<K, V> minNode = this.getLeafBySide(node.getRightNode(), lastStep.getDirection());
+            TreeNode<K, V> minNode = this.getLeafBySide(node.getRightNode(), lastStep.getSide());
             node.setKey(minNode.getKey());
             node.setValue(minNode.getValue());
-            this.joinTrees(minNode.getLeftNode(), lastStep.getParent(), lastStep.getDirection());
+            this.joinTrees(minNode.getLeftNode(), lastStep.getParent(), lastStep.getSide());
         }
         super.size--;
         return result;

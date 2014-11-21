@@ -1,4 +1,9 @@
-package aed.dataStructures;
+package aed.dataStructures.tree;
+
+import aed.dataStructures.Collection;
+import aed.dataStructures.Entry;
+import aed.dataStructures.Iterator;
+import aed.dataStructures.Map;
 
 /**
  * Created by gbfm on 11/21/14.

@@ -62,7 +62,7 @@ class AnalisysResults implements IAnalysisResults {
 		while (lines.hasNext()) {
 			Line line = lines.next();
 			
-			String[] words = line.getLine().split("\\s+");
+			String[] words = line.getLine().split("\\W+");
 			
 			for (String word : words)
 				if (!word.isEmpty())

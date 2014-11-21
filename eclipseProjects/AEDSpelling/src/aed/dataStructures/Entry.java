@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @param <K> Key
  * @param <V> Value
  */
-class Entry<K, V> implements Serializable{
+public class Entry<K, V> implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
