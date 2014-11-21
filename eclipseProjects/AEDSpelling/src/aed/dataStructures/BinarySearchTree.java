@@ -1,10 +1,8 @@
 package aed.dataStructures;
 
-public class BinarySearchTree<E extends Comparable<E>> implements Tree<E> {
+public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K, V> {
 
-    private enum Side {LEFT, RIGHT}
-
-    private int size;
+    protected enum Side {LEFT, RIGHT}
 
     protected class Path<E> {
         private Side side;
@@ -14,6 +12,7 @@ public class BinarySearchTree<E extends Comparable<E>> implements Tree<E> {
             this.parent = parent;
             this.side = side;
         }
+
         protected Path() {
             this(null, null);
         }
@@ -37,12 +36,12 @@ public class BinarySearchTree<E extends Comparable<E>> implements Tree<E> {
         }
     }
 
-    protected TreeNode<E> root;
+    protected TreeNode<K, V> root;
 
     public BinarySearchTree( )
     {
         root = null;
-        this.size = 0;
+        super.size = 0;
     }
 
     @Override
@@ -160,15 +159,15 @@ public class BinarySearchTree<E extends Comparable<E>> implements Tree<E> {
 
         V result = node.getValue();
         if (node.getLeftNode() == null) {
-            this.joinTrees(node.getRightNode(), lastStep.getParent(), lastStep.getDirection());
+            this.joinTrees(node.getRightNode(), null, null);
         } else if (node.getRightNode() == null) {
-            this.joinTrees(node.getLeftNode(), lastStep.getParent(), lastStep.getDirection());
+            this.joinTrees(node.getLeftNode(), null, null);
         } else {
             lastStep.setRightPath(node);
             TreeNode<K, V> minNode = this.getLeafBySide(node.getRightNode(), lastStep.getDirection());
             node.setKey(minNode.getKey());
             node.setValue(minNode.getValue());
-            this.joinTrees(minNode.getRightNode(), lastStep.getParent(), lastStep.getDirection());
+            this.joinTrees(minNode.getLeftNode(), lastStep.getParent(), lastStep.getDirection());
         }
         super.size--;
         return result;
@@ -191,22 +190,7 @@ public class BinarySearchTree<E extends Comparable<E>> implements Tree<E> {
     }
 
     @Override
-    public int size() {
-        return 0;
-    }
-
-    @Override
     public boolean isFull() {
-        return false;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return false;
-    }
-
-    @Override
-    public boolean contains(E element) {
         return false;
     }
 
