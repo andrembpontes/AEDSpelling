@@ -1,8 +1,10 @@
 package aed.dataStructures;
 
-public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K, V> {
+public class BinarySearchTree<E extends Comparable<E>> implements Tree<E> {
 
-    protected enum Side {LEFT, RIGHT}
+    private enum Side {LEFT, RIGHT}
+
+    private int size;
 
     protected class Path<E> {
         private Side side;
@@ -12,7 +14,6 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
             this.parent = parent;
             this.side = side;
         }
-
         protected Path() {
             this(null, null);
         }
@@ -36,12 +37,12 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
         }
     }
 
-    protected TreeNode<K, V> root;
+    protected TreeNode<E> root;
 
     public BinarySearchTree( )
     {
         root = null;
-        super.size = 0;
+        this.size = 0;
     }
 
     @Override
@@ -159,15 +160,15 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
 
         V result = node.getValue();
         if (node.getLeftNode() == null) {
-            this.joinTrees(node.getRightNode(), null, null);
+            this.joinTrees(node.getRightNode(), lastStep.getParent(), lastStep.getDirection());
         } else if (node.getRightNode() == null) {
-            this.joinTrees(node.getLeftNode(), null, null);
+            this.joinTrees(node.getLeftNode(), lastStep.getParent(), lastStep.getDirection());
         } else {
             lastStep.setRightPath(node);
             TreeNode<K, V> minNode = this.getLeafBySide(node.getRightNode(), lastStep.getDirection());
             node.setKey(minNode.getKey());
             node.setValue(minNode.getValue());
-            this.joinTrees(minNode.getLeftNode(), lastStep.getParent(), lastStep.getDirection());
+            this.joinTrees(minNode.getRightNode(), lastStep.getParent(), lastStep.getDirection());
         }
         super.size--;
         return result;
@@ -190,7 +191,22 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
     }
 
     @Override
+    public int size() {
+        return 0;
+    }
+
+    @Override
     public boolean isFull() {
+        return false;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
+    public boolean contains(E element) {
         return false;
     }
 
