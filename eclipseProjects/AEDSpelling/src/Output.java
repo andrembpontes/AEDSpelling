@@ -18,7 +18,8 @@ public enum Output {
 	EXCERPT_NOT_FOUND("Troco inexistente."),
 	LIST_ERRORS_SUCCESS("%s ocorre %s vezes no texto referido."),
 	LIST_ERRORS_FAIL("Inexistencia de erros ortograficos no texto."),
-	TEXT_NOT_FOUND("Texto inexistente.");
+	TEXT_NOT_FOUND("Texto inexistente."),
+	NO_WORD_WITH_FREQUENCY("Inexistencia de palavras com a frequencia pedida.");
 	
 	private static final String	PLACEHOLDER	= "%s";
 	private String				string;

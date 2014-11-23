@@ -295,11 +295,15 @@ public class Main {
 					words = spelling.wordsOf(textId);
 					break;
 			}
-			
-			while (words.hasNext()) {
-                IWordInText word = words.next();
-				if (word.getFrequency() == freq)
-					OUT.println(word.getWord());
+			 
+			if (!words.hasNext()) {
+				OUT.printMsg(Output.NO_WORD_WITH_FREQUENCY);
+			} else {
+				do {
+					IWordInText word = words.next();
+					if (word.getFrequency() == freq)
+							OUT.println(word.getWord());
+				} while (!words.hasNext());
 			}
 			
 		}
