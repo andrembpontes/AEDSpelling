@@ -44,8 +44,8 @@ public class TreeIterator<K extends Comparable<K>, V> implements Iterator<Entry<
         if(!this.hasNext()) throw new NoSuchElementException();
         PathStep<K, V> current = this.path.removeLast();
 
-        if(current.getSide().equals(Side.LEFT) && this.size - this.current > 1) {
-            TreeNode<K, V> next = this.path.getLast().getParent().getRightNode();
+        if(this.size - this.current > 1) {
+            TreeNode<K, V> next = current.getParent().getRightNode();
 
             if (next != null) {
                 this.path.addLast(new PathStep<K, V>(next, Side.RIGHT));
@@ -55,6 +55,7 @@ public class TreeIterator<K extends Comparable<K>, V> implements Iterator<Entry<
                 }
             }
         }
+
         this.current++;
         return current.getParent().getEntry();
     }
