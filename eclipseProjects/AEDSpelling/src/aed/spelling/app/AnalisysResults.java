@@ -62,7 +62,7 @@ class AnalisysResults implements IAnalysisResults {
 			
 			for (String word : words)
 				if (!word.isEmpty())
-					this.addOccurrence(word, line.getNr());
+					this.addOccurrence(word.toLowerCase(), line.getNr());
 		}
 	}
 	

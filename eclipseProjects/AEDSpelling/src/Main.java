@@ -296,16 +296,21 @@ public class Main {
 					break;
 			}
 			 
-			if (!words.hasNext()) {
-				OUT.printMsg(Output.NO_WORD_WITH_FREQUENCY);
-			} else {
-				do {
-					IWordInText word = words.next();
-					if (word.getFrequency() == freq)
-							OUT.println(word.getWord());
-				} while (!words.hasNext());
+
+			int printed = 0;
+			while (words.hasNext()){
+				IWordInText word = words.next();
+				if (word.getFrequency() == freq) {
+					OUT.println(word.getWord());
+					printed++;
+				}
 			}
-			
+
+			if (printed == 0){
+				OUT.printMsg(Output.NO_WORD_WITH_FREQUENCY);
+			}
+
+
 		}
 		catch (IllegalArgumentException e) {
 			scan.nextLine();
