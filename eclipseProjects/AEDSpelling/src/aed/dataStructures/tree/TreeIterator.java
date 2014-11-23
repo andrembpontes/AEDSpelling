@@ -48,6 +48,7 @@ public class TreeIterator<K extends Comparable<K>, V> implements Iterator<Entry<
             TreeNode<K, V> next = this.path.getLast().getParent().getRightNode();
 
             if (next != null) {
+                this.path.addLast(new PathStep<K, V>(next, Side.RIGHT));
                 while (next.getLeftNode() != null) {
                     next = next.getLeftNode();
                     this.path.addLast(new PathStep<K, V>(next, Side.LEFT));

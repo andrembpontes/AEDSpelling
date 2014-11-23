@@ -25,11 +25,11 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
         while (node != null) {
             comparisonResult = node.getKey().compareTo(key);
             if (comparisonResult < 0) {
-                if (path != null) path.setLeftPath(node);
-                node = node.getLeftNode();
-            } else if (comparisonResult > 0) {
                 if (path != null) path.setRightPath(node);
                 node = node.getRightNode();
+            } else if (comparisonResult > 0) {
+                if (path != null) path.setLeftPath(node);
+                node = node.getLeftNode();
             } else {
                 return node;
             }
@@ -102,16 +102,16 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
         }
     }
 
-    protected void joinTrees(TreeNode<K, V> firstNode, TreeNode<K, V> secondNode, Side side) {
-        if (secondNode == null) {
-            root = firstNode;
+    protected void joinTrees(TreeNode<K, V> childNode, TreeNode<K, V> parentNode, Side side) {
+        if (parentNode == null) {
+            root = childNode;
         } else {
             switch (side) {
                 case RIGHT:
-                    secondNode.setRightNode(firstNode);
+                    parentNode.setRightNode(childNode);
                     break;
                 case LEFT:
-                    secondNode.setLeftNode(firstNode);
+                    parentNode.setLeftNode(childNode);
                     break;
             }
         }
