@@ -6,7 +6,7 @@ package aed.dataStructures;
  * @param <K> Key
  * @param <V> Value
  */
-public class EntryComparableByKey<K extends Comparable<K>, V> extends Entry<K, V> implements Comparable<EntryComparableByKey<K,V>> {
+public class EntryComparableByKey<K extends Comparable<K>, V> extends EntryClass<K, V> implements Comparable<EntryComparableByKey<K,V>>, Entry<K, V>{
 
 	private static final long serialVersionUID = 1L;
 

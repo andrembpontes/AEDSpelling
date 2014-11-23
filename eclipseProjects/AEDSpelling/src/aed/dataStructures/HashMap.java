@@ -66,7 +66,7 @@ public class HashMap<K, V> extends AbstractMap<K, V> {
         if(this.containsKey(key))
             oldValue = this.remove(key);
 
-        this.hashTable.insert(new Entry<K, V>(key, value));
+        this.hashTable.insert(new EntryClass<K, V>(key, value));
 
         super.size++;
         return oldValue;
