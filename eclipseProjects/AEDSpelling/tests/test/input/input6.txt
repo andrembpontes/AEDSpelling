@@ -1,0 +1,27 @@
+LF text_001 P 2
+
+LE text_001
+
+FP text_001 dog
+
+AT text_002 11
+The dog was blamed
+Arrested and chained
+The cat was mourned
+buried and boxed
+
+The event was soon forgot
+For the fish was never caught
+As his decision was wise
+To plan the cats demise
+By blackmailing the dog
+With photos of him and the hog
+
+LE text_002
+
+LF text_002 P 4
+
+LF text_002 E 1
+
+FP text_002 cat
+

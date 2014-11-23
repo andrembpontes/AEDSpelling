@@ -1,0 +1,56 @@
+AT text_001 4
+A cat runs on the road
+A car runs over the cat
+The road is now closed
+Because the cat is dead
+
+LR text_001 1 4
+
+LE text_001
+
+LF text_001 E 2
+
+LF text_001 P 4
+
+LF text_001 C 4
+
+FP text_001 the
+
+AD 13
+a
+because
+car
+cat
+closed
+dead
+is
+now
+on
+over
+road
+runs
+the
+
+LE text_001
+
+AT text_001 9
+A cat runs on the road
+A car runs over the cat
+The road is now closed
+Because the cat is dead
+
+The car crushed the cat
+He is now bloody and flat
+Strangest accident Clear sky No fog
+Although the driver was a dog
+
+LE text_001
+
+LF text_001 P 1
+
+LR text_001 6 9
+
+FP text_001 the
+
+FP text_001 cat
+
