@@ -1,12 +1,9 @@
 package aed.spelling.app;
 
 import aed.dataStructures.Collection;
-import aed.dataStructures.HashMap;
-import aed.dataStructures.InsertionList;
 import aed.dataStructures.Iterator;
-import aed.dataStructures.LinkedList;
-import aed.dataStructures.List;
 import aed.dataStructures.Map;
+import aed.dataStructures.tree.BinarySearchTree;
 import aed.spelling.Line;
 
 /**
@@ -18,8 +15,7 @@ class AnalisysResults implements IAnalysisResults {
 	private static final long	serialVersionUID	= 1L;
 	private IAnalisableText		analisableText;
 	private IDictionary			dictionary;
-	private InsertionList<IWordOccurrence> errors, corrects;
-	private Map<String, IWordOccurrence> occurrences;
+	private Map<String, IWordOccurrence> errors, corrects,  occurrences;
 	
 	public AnalisysResults(IAnalisableText analisableText, IDictionary dictionary) {
 		this.analisableText = analisableText;
@@ -42,9 +38,9 @@ class AnalisysResults implements IAnalysisResults {
 			this.occurrences.put(word.toLowerCase(), occurrence);
 			
 			if (occurrence.isCorrect())
-				this.corrects.addLast(occurrence);
+				this.corrects.put(word, occurrence);
 			else
-				this.errors.addLast(occurrence);
+				this.errors.put(word, occurrence);
 		}
 		occurrence.incrementFrequency(lineNumber);
 	}
@@ -53,9 +49,9 @@ class AnalisysResults implements IAnalysisResults {
 	 * Analyzes a text
 	 */
 	private void analise() {
-		this.occurrences = new HashMap<String, IWordOccurrence>();
-		this.errors = new LinkedList<IWordOccurrence>();
-		this.corrects = new LinkedList<IWordOccurrence>();
+		this.occurrences = new BinarySearchTree<String, IWordOccurrence>();
+		this.errors = new BinarySearchTree<String, IWordOccurrence>();
+		this.corrects = new BinarySearchTree<String, IWordOccurrence>();
 		
 		Iterator<Line> lines = this.analisableText.lines();
 		
@@ -73,13 +69,13 @@ class AnalisysResults implements IAnalysisResults {
 	@Override
     @SuppressWarnings("unchecked")
 	public Iterator<IWordInText> correct() {
-		return ((List<IWordInText>)(List<? extends IWordInText>)this.corrects).iterator();
+		return  ((Collection<IWordInText>)(Collection<? extends IWordInText>)this.corrects.values()).iterator();
 	}
 	
 	@Override
     @SuppressWarnings("unchecked")
 	public Iterator<IWordInText> errors() {
-		return ((List<IWordInText>)(List<? extends IWordInText>)this.errors).iterator();
+		return ((Collection<IWordInText>)(Collection<? extends IWordInText>)this.errors.values()).iterator();
 	}
 	
 	@Override

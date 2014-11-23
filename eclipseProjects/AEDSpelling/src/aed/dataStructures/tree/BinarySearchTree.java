@@ -149,12 +149,24 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
 
     @Override
     public Collection<K> keys() {
-        return null;
+        List<K> keys = new LinkedList<K>();
+        Iterator<Entry<K, V>> iterator = this.iterator();
+
+        while(iterator.hasNext())
+            keys.add(iterator.next().getKey());
+
+        return keys;
     }
 
     @Override
     public Collection<V> values() {
-        return null;
+        List<V> values = new LinkedList<V>();
+        Iterator<Entry<K, V>> iterator = this.iterator();
+
+        while(iterator.hasNext())
+            values.add(iterator.next().getValue());
+
+        return values;
     }
 
     @Override
@@ -169,7 +181,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
 
     @Override
     public Iterator<Entry<K, V>> iterator() {
-        return null;
+        return new TreeIterator<K, V>(this.root, this.size);
     }
 
     @Override

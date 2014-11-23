@@ -1,15 +1,12 @@
 package aed.dataStructures.tree;
 
 
-import aed.dataStructures.InsertionList;
-import aed.dataStructures.Iterator;
-import aed.dataStructures.LinkedList;
-import aed.dataStructures.NoSuchElementException;
+import aed.dataStructures.*;
 
 /**
  * Created by Andre on 21/11/2014.
  */
-public class TreeIterator<K extends Comparable<K>, V> implements Iterator<TreeNode<K, V>> {
+public class TreeIterator<K extends Comparable<K>, V> implements Iterator<Entry<K, V>> {
 
     private TreeNode<K, V> root;
     private InsertionList<PathStep<K, V>> path;
@@ -44,7 +41,7 @@ public class TreeIterator<K extends Comparable<K>, V> implements Iterator<TreeNo
     }
 
     @Override
-    public TreeNode<K, V> next() throws NoSuchElementException {
+    public Entry<K, V> next() throws NoSuchElementException {
         if(!this.hasNext()) throw new NoSuchElementException();
         PathStep<K, V> current = this.path.removeLast();
 
@@ -59,6 +56,6 @@ public class TreeIterator<K extends Comparable<K>, V> implements Iterator<TreeNo
             }
         }
         this.current++;
-        return current.getParent();
+        return current.getParent().getEntry();
     }
 }

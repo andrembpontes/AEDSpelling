@@ -69,6 +69,14 @@ public class TreeNode<K extends Comparable<K>, V> {
         return rightNode;
     }
 
+    protected EntryComparableByKey<K, V> getEntry() {
+        return this.entry;
+    }
+
+    protected void setEntry(EntryComparableByKey<K, V> entry) {
+        this.entry = entry;
+    }
+
     /**
      * Set a new left node
      * @param leftNode new left node
