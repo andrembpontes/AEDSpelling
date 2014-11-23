@@ -14,19 +14,18 @@ public class TreeIterator<K extends Comparable<K>, V> implements Iterator<Entry<
     private int size;
 
     public TreeIterator(TreeNode<K, V> root, int size){
-        if(root == null)
-            throw new NoSuchElementException();
-
         this.root = root;
         this.current = 0;
         this.size = size;
-        this.reset();
+
+        if(size > 0)
+            this.reset();
     }
 
     @Override
     public void reset() {
         this.path = new LinkedList<PathStep<K, V>>();
-        this.path.addFirst(new PathStep<K, V>(this.root, null));
+        this.path.addFirst(new PathStep<K, V>(this.root, Side.LEFT));
 
         TreeNode<K, V> current = this.path.getFirst().getParent();
         while(current.getLeftNode() != null) {
@@ -45,7 +44,7 @@ public class TreeIterator<K extends Comparable<K>, V> implements Iterator<Entry<
         if(!this.hasNext()) throw new NoSuchElementException();
         PathStep<K, V> current = this.path.removeLast();
 
-        if(current.getSide().equals(Side.LEFT)) {
+        if(current.getSide().equals(Side.LEFT) && this.size - this.current > 1) {
             TreeNode<K, V> next = this.path.getLast().getParent().getRightNode();
 
             if (next != null) {

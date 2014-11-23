@@ -1,12 +1,14 @@
-Texto inexistente.
+ocaml java java java java
+java java java java java
 
 Erro ortografico.
 
-Erro ortografico.
+Palavra correta.
 
-Texto inexistente.
+java ocorre 24 vezes no texto referido.
 
-Texto inexistente.
+python ocorre 0 vezes no texto referido.
 
-Texto inexistente.
+ocaml
+1
 

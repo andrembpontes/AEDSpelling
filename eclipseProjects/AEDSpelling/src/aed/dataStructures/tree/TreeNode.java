@@ -2,10 +2,12 @@ package aed.dataStructures.tree;
 
 import aed.dataStructures.EntryComparableByKey;
 
+import java.io.Serializable;
+
 /**
  * Created by gbfm on 11/14/14.
  */
-public class TreeNode<K extends Comparable<K>, V> {
+public class TreeNode<K extends Comparable<K>, V> implements Serializable{
 
     private EntryComparableByKey<K, V> entry;
     private TreeNode<K, V> leftNode;
