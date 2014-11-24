@@ -1,11 +1,14 @@
 package aed.dataStructures.tree;
 
 /**
- * Created by gbfm on 11/19/14.
+ * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
+ * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ * @param <K> Key
+ * @param <V> Value
  */
 public class AVLTreeNode<K extends Comparable<K>, V> extends TreeNode<K, V> {
 
-    public enum Balance {Equal, Left, Right};
+    public enum Balance {Equal, Left, Right}
 
     private Balance nodeBalance;
 
@@ -20,12 +23,18 @@ public class AVLTreeNode<K extends Comparable<K>, V> extends TreeNode<K, V> {
         this(key, value, Balance.Equal, null, null);
     }
 
-
+    /**
+     * Returns the node's balance
+     * @return The node's balance
+     */
     public Balance getBalance() {
         return this.nodeBalance;
     }
 
-
+    /**
+     * Set a new balance to the node
+     * @param newBalance new balance to the node
+     */
     public void setBalance(Balance newBalance) {
         this.nodeBalance = newBalance;
     }

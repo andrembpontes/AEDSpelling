@@ -1,6 +1,3 @@
-/**
- * 
- */
 package aed.dataStructures;
 
 /**
