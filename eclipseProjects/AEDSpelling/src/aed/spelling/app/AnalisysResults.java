@@ -1,6 +1,7 @@
 package aed.spelling.app;
 
 import aed.dataStructures.Collection;
+import aed.dataStructures.HashMap;
 import aed.dataStructures.Iterator;
 import aed.dataStructures.Map;
 import aed.dataStructures.tree.BinarySearchTree;
@@ -52,7 +53,7 @@ class AnalisysResults implements IAnalysisResults {
 	 * Analyzes a text
 	 */
 	private void analise() {
-		this.occurrences = new BinarySearchTree<String, IWordOccurrence>();
+		this.occurrences = new HashMap<String, IWordOccurrence>();
         this.orderedOccurrences = new BinarySearchTree<String, IWordOccurrence>();
 		this.errors = new BinarySearchTree<String, IWordOccurrence>();
 		this.corrects = new BinarySearchTree<String, IWordOccurrence>();
