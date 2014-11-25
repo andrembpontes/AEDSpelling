@@ -18,7 +18,7 @@ public class AVLTreeNode<K extends Comparable<K>, V> extends TreeNode<K, V> {
 
     public AVLTreeNode(K key, V value)
     {
-        this(key, value, AVLNodeBalance.Equal, null, null);
+        this(key, value, AVLNodeBalance.EQUAL, null, null);
     }
 
     /**
