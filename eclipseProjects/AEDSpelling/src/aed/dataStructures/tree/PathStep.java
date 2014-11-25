@@ -1,16 +1,11 @@
 package aed.dataStructures.tree;
 
-/**
- * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
- * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
- * @param <K> Key
- * @param <V> Value
- */
-class PathStep<K extends Comparable<K>, V> {
-    private Side side;
-    private TreeNode<K, V> parent;
 
-    protected PathStep(TreeNode<K, V> parent, Side side) {
+class PathStep<E> {
+    private Side side;
+    private E parent;
+
+    protected PathStep(E parent, Side side) {
         this.parent = parent;
         this.side = side;
     }
@@ -23,7 +18,7 @@ class PathStep<K extends Comparable<K>, V> {
      * Returns the last visited node
      * @return The last visited node
      */
-    protected TreeNode<K, V> getParent() {
+    protected E getParent() {
         return this.parent;
     }
 
@@ -39,7 +34,7 @@ class PathStep<K extends Comparable<K>, V> {
      * Set a new path coming from the left side
      * @param parent New last element
      */
-    protected void setLeftPath(TreeNode<K, V> parent) {
+    protected void setLeftPath(E parent) {
         this.parent = parent;
         this.side = Side.LEFT;
     }
@@ -48,7 +43,7 @@ class PathStep<K extends Comparable<K>, V> {
      * Set a new path coming from the left side
      * @param parent New last element
      */
-    protected void setRightPath(TreeNode<K, V> parent) {
+    protected void setRightPath(E parent) {
         this.parent = parent;
         this.side = Side.RIGHT;
     }

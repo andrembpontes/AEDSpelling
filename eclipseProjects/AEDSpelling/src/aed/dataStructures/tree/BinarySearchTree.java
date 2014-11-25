@@ -30,12 +30,13 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
      * @param path Path variable to fill
      * @return The node with a given key
      */
-    protected TreeNode<K, V> findNode(K key, Path<K,V> path) {
+    protected TreeNode<K, V> findNode(K key, Path<TreeNode<K, V>> path) {
+        path.addRightStep(null);
+
         TreeNode<K, V> node = this.root;
-        int comparisonResult;
 
         while (node != null) {
-            comparisonResult = node.getKey().compareTo(key);
+            int comparisonResult = node.getKey().compareTo(key);
             if (comparisonResult < 0) {
                 if (path != null) path.addRightStep(node);
                 node = node.getRightNode();
@@ -102,7 +103,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
      * @return The leaf most to the right or to the left based on a root node and a specified side
      * @throws EmptyTreeException
      */
-    protected TreeNode<K, V> getLeafBySide(TreeNode<K, V> base, Side side, PathStep<K, V> path) throws EmptyTreeException{
+    protected TreeNode<K, V> getLeafBySide(TreeNode<K, V> base, Side side, PathStep<TreeNode<K, V>> path) throws EmptyTreeException{
         TreeNode<K, V> node = base;
 
         if (super.isEmpty()) {
@@ -143,7 +144,9 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
         return this.getLeafBySide(base, side, null);
     }
 
-    protected V insert(K key, V value, Path<K, V> path) {
+    @Override
+    public V put(K key, V value) {
+        Path<TreeNode<K, V>> path = new Path<TreeNode<K, V>>();
         TreeNode<K,V> node = this.findNode(key, path);
         if (node == null) {
             TreeNode<K,V> newLeaf = new TreeNode<K, V>(key, value);
@@ -155,12 +158,6 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
             node.setValue(value);
             return result;
         }
-    }
-
-    @Override
-    public V put(K key, V value) {
-        Path<K, V> path = new Path<K, V>();
-        return this.insert(key, value, path);
     }
 
     /**
@@ -186,11 +183,11 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
 
     @Override
     public V remove(K key) {
-        Path<K, V> path = new Path<K, V>();
+        Path<TreeNode<K, V>> path = new Path<TreeNode<K, V>>();
         return this.delete(key, path);
     }
 
-    protected V delete(K key, Path<K, V> path) {
+    protected V delete(K key, Path<TreeNode<K, V>> path) {
         TreeNode<K,V> node = this.findNode(key, path);
         if ( node == null ) {
             return null;
