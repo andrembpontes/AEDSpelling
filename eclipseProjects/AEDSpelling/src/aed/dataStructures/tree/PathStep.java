@@ -31,7 +31,7 @@ class PathStep<K extends Comparable<K>, V> {
      * Returns the side of the last descent
      * @return The side of the last descent
      */
-    public Side getSide() {
+    protected Side getSide() {
         return this.side;
     }
 
@@ -39,7 +39,7 @@ class PathStep<K extends Comparable<K>, V> {
      * Set a new path coming from the left side
      * @param parent New last element
      */
-    public void setLeftPath(TreeNode<K, V> parent) {
+    protected void setLeftPath(TreeNode<K, V> parent) {
         this.parent = parent;
         this.side = Side.LEFT;
     }
@@ -48,7 +48,7 @@ class PathStep<K extends Comparable<K>, V> {
      * Set a new path coming from the left side
      * @param parent New last element
      */
-    public void setRightPath(TreeNode<K, V> parent) {
+    protected void setRightPath(TreeNode<K, V> parent) {
         this.parent = parent;
         this.side = Side.RIGHT;
     }

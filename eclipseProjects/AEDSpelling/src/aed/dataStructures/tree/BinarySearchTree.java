@@ -30,17 +30,17 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
      * @param path Path variable to fill
      * @return The node with a given key
      */
-    protected TreeNode<K, V> findNode(K key, PathStep<K,V> path) {
+    protected TreeNode<K, V> findNode(K key, Path<K,V> path) {
         TreeNode<K, V> node = this.root;
         int comparisonResult;
 
         while (node != null) {
             comparisonResult = node.getKey().compareTo(key);
             if (comparisonResult < 0) {
-                if (path != null) path.setRightPath(node);
+                if (path != null) path.addRightStep(node);
                 node = node.getRightNode();
             } else if (comparisonResult > 0) {
-                if (path != null) path.setLeftPath(node);
+                if (path != null) path.addLeftStep(node);
                 node = node.getLeftNode();
             } else {
                 return node;
@@ -143,11 +143,11 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
         return this.getLeafBySide(base, side, null);
     }
 
-    protected V insert(K key, V value, PathStep<K, V> lastStep) {
-        TreeNode<K,V> node = this.findNode(key, lastStep);
+    protected V insert(K key, V value, Path<K, V> path) {
+        TreeNode<K,V> node = this.findNode(key, path);
         if (node == null) {
             TreeNode<K,V> newLeaf = new TreeNode<K, V>(key, value);
-            this.joinTrees(newLeaf, lastStep.getParent(), lastStep.getSide());
+            this.joinTrees(newLeaf, path.getLastParent(), path.getLastSide());
             super.size++;
             return null;
         } else {
@@ -159,7 +159,8 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
 
     @Override
     public V put(K key, V value) {
-        return this.insert(key, value, null);
+        Path<K, V> path = new Path<K, V>();
+        return this.insert(key, value, path);
     }
 
     /**
@@ -185,8 +186,12 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
 
     @Override
     public V remove(K key) {
-        PathStep<K, V> lastStep = new PathStep<K, V>();
-        TreeNode<K,V> node = this.findNode(key, lastStep);
+        Path<K, V> path = new Path<K, V>();
+        return this.delete(key, path);
+    }
+
+    protected V delete(K key, Path<K, V> path) {
+        TreeNode<K,V> node = this.findNode(key, path);
         if ( node == null ) {
             return null;
         }
@@ -197,15 +202,14 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
         } else if (node.getRightNode() == null) {
             this.joinTrees(node.getLeftNode(), null, null);
         } else {
-            lastStep.setRightPath(node);
-            TreeNode<K, V> minNode = this.getLeafBySide(node.getRightNode(), lastStep.getSide());
+            path.addRightStep(node);
+            TreeNode<K, V> minNode = this.getLeafBySide(node.getRightNode(), path.getLastSide());
             node.setKey(minNode.getKey());
             node.setValue(minNode.getValue());
-            this.joinTrees(minNode.getLeftNode(), lastStep.getParent(), lastStep.getSide());
+            this.joinTrees(minNode.getLeftNode(), path.getLastParent(), path.getLastSide());
         }
         super.size--;
         return result;
-
     }
 
     @Override
