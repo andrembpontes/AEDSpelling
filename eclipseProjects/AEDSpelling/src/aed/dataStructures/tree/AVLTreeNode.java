@@ -8,26 +8,24 @@ package aed.dataStructures.tree;
  */
 public class AVLTreeNode<K extends Comparable<K>, V> extends TreeNode<K, V> {
 
-    public enum Balance {Equal, Left, Right}
-
-    private Balance nodeBalance;
+    private AVLNodeBalance nodeBalance;
 
 
-    public AVLTreeNode( K key, V value, Balance nodeBalance, AVLTreeNode<K,V> left, AVLTreeNode<K,V> right ) {
+    public AVLTreeNode( K key, V value, AVLNodeBalance nodeBalance, AVLTreeNode<K,V> left, AVLTreeNode<K,V> right ) {
         super(key, value, left, right);
         this.nodeBalance = nodeBalance;
     }
 
     public AVLTreeNode(K key, V value)
     {
-        this(key, value, Balance.Equal, null, null);
+        this(key, value, AVLNodeBalance.Equal, null, null);
     }
 
     /**
      * Returns the node's balance
      * @return The node's balance
      */
-    public Balance getBalance() {
+    public AVLNodeBalance getBalance() {
         return this.nodeBalance;
     }
 
@@ -35,7 +33,7 @@ public class AVLTreeNode<K extends Comparable<K>, V> extends TreeNode<K, V> {
      * Set a new balance to the node
      * @param newBalance new balance to the node
      */
-    public void setBalance(Balance newBalance) {
+    public void setBalance(AVLNodeBalance newBalance) {
         this.nodeBalance = newBalance;
     }
 

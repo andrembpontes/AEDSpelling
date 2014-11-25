@@ -143,9 +143,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
         return this.getLeafBySide(base, side, null);
     }
 
-    @Override
-    public V put(K key, V value) {
-        PathStep<K, V> lastStep = new PathStep<K, V>();
+    protected V insert(K key, V value, PathStep<K, V> lastStep) {
         TreeNode<K,V> node = this.findNode(key, lastStep);
         if (node == null) {
             TreeNode<K,V> newLeaf = new TreeNode<K, V>(key, value);
@@ -157,6 +155,11 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
             node.setValue(value);
             return result;
         }
+    }
+
+    @Override
+    public V put(K key, V value) {
+        return this.insert(key, value, null);
     }
 
     /**
