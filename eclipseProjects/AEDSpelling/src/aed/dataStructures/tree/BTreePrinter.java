@@ -32,8 +32,8 @@ class BTreePrinter {
         List<AVLTreeNode > newNodes = new ArrayList<AVLTreeNode >();
         for (AVLTreeNode  node : nodes) {
             if (node != null) {
-                //System.out.print(node.getBalance().toString().charAt(0));
-                System.out.print(node.getValue());
+                System.out.print(node.getBalance().toString().charAt(0));
+                //System.out.print(node.getValue());
                 newNodes.add((AVLTreeNode<K,V>)node.getLeftNode());
                 newNodes.add((AVLTreeNode<K,V>)node.getRightNode());
             } else {

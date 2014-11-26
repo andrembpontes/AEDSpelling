@@ -12,7 +12,7 @@ import static junit.framework.TestCase.assertEquals;
 public class AVLTreeTest {
 
 
-    //@Test
+    @Test
     public void avlTreeShouldKeepStructureAfterInsertion() {
 
         int NUMBER_OF_INSERTS = 1000;
@@ -25,6 +25,8 @@ public class AVLTreeTest {
         tree = new AVLTree<Integer, Integer>();
         //tree = new BinarySearchTree<Integer, Integer>();
 
+        System.out.println("########## Insertion Test ##########");
+
         for (int i = 0; i < NUMBER_OF_INSERTS; i++) {
             int value = randomGenerator.nextInt(MAX_INSERTION_VALUE);
             tree.put(value, value);
@@ -33,6 +35,8 @@ public class AVLTreeTest {
 
         System.out.println("Final tree size: " + tree.size());
         System.out.println("Your tree is balanced");
+        System.out.println("####################################");
+        System.out.println();
     }
 
 
@@ -43,21 +47,23 @@ public class AVLTreeTest {
     @Test
     public void avlTreeShouldKeepStructureAfterInsertionAndThenRemoval() {
 
-        int MAX_INSERTION_VALUE = 10;
-        int NUMBER_OF_INSERTIONS = 10;
-        int NUMBER_OF_REMOVALS = 10;
+        int MAX_INSERTION_VALUE = 100;
+        int NUMBER_OF_INSERTIONS = 20000;
+        int NUMBER_OF_REMOVALS = 2000;
 
-        Random randomGenerator = new Random(1);
+        Random randomGenerator = new Random(2222);
         BinarySearchTree<Integer, Integer> tree;
 
 
         tree = new AVLTree<Integer, Integer>();
         //tree = new BinarySearchTree<Integer, Integer>();
 
+        System.out.println("########## Removal After Insertion Test ##########");
+
         for (int i = 0; i < NUMBER_OF_INSERTIONS; i++) {
             int value = randomGenerator.nextInt(MAX_INSERTION_VALUE);
             tree.put(value, value);
-            //testNodeBalance(tree.root);
+            testNodeBalance(tree.root);
         }
 
         System.out.println("Your tree is balanced after insertion... starting removal");
@@ -65,12 +71,12 @@ public class AVLTreeTest {
         for (int i = 0; i < NUMBER_OF_REMOVALS; i++) {
             int value = randomGenerator.nextInt(MAX_INSERTION_VALUE);
             tree.remove(value);
-            //testNodeBalance(tree.root);
+            testNodeBalance(tree.root);
         }
-
         System.out.println("Final tree size: " + tree.size());
         System.out.println("Your tree is balanced");
-
+        System.out.println("##################################################");
+        System.out.println();
     }
 
 
@@ -78,7 +84,7 @@ public class AVLTreeTest {
 
 
 
-    //@Test
+    @Test
     public void avlTreeShouldKeepStructureAfterRemovalAndInsertion() {
 
         int MAX_INSERTION_VALUE = 100;
@@ -95,6 +101,8 @@ public class AVLTreeTest {
 
         int totalNumberOfHitRemovals = 0;
         int totalNumberOfInsertedNodes = 0;
+
+        System.out.println("########## Simultaneous Removal and Insertion Test ##########");
 
         for (int i = 0; i < NUMBER_OF_REPETITIONS; i++) {
             boolean insert = randomGenerator.nextBoolean(); //if true insert, if false remove
@@ -118,6 +126,8 @@ public class AVLTreeTest {
         System.out.println("Total number of inserted nodes: " + totalNumberOfInsertedNodes);
         System.out.println("Total number of hit removals: " + totalNumberOfHitRemovals);
         System.out.println("Your tree is balanced");
+        System.out.println("#############################################################");
+        System.out.println();
 
     }
 

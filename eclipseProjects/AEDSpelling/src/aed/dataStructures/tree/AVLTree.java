@@ -33,18 +33,11 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
         Path<TreeNode<K, V>> path = new Path<TreeNode<K, V>>();
         int currentSize = super.size();
 
-        System.out.println("############## PRE DELETION ##############");
-        BTreePrinter.printNode((AVLTreeNode<K, V>)root);
-
         V result = super.delete(key, path);
 
         if (super.size() < currentSize) {
             this.reorganizeRemoval(path);
-            System.out.println("DELETED");
         }
-
-        System.out.println("############## POST DELETION ##############");
-        BTreePrinter.printNode((AVLTreeNode<K, V>)root);
 
         return result;
     }
@@ -61,7 +54,7 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
                 case LEFT:
                     switch (parent.getBalance()) {
                         case LEFT:
-                            this.rebalaceLeft(parent, path);
+                            this.rebalaceInsertionLeft(parent, path);
                             grew = false;
                             break;
                         case EQUAL:
@@ -83,7 +76,7 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
                             parent.setBalance(AVLNodeBalance.RIGHT);
                             break;
                         case RIGHT:
-                            this.rebalanceRight(parent, path);
+                            this.rebalanceInsertionRight(parent, path);
                             grew = false;
                             break;
                     }
@@ -109,30 +102,32 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
                     switch (parent.getBalance()) {
                         case LEFT:
                             parent.setBalance(AVLNodeBalance.EQUAL);
-                            shrinked = false;
                             break;
                         case EQUAL:
                             parent.setBalance(AVLNodeBalance.RIGHT);
                             break;
                         case RIGHT:
-                            this.rebalanceRight(parent, path);
-                            shrinked = false;
+                            this.rebalanceRemovalRight(parent, path);
                             break;
+                    }
+                    if (parent.getBalance() == AVLNodeBalance.RIGHT) {
+                        shrinked = false;
                     }
                     break;
                 case RIGHT:
                     switch (parent.getBalance()) {
                         case LEFT:
-                            this.rebalaceLeft(parent, path);
-                            shrinked = false;
+                            this.rebalaceRemovalLeft(parent, path);
                             break;
                         case EQUAL:
                             parent.setBalance(AVLNodeBalance.LEFT);
                             break;
                         case RIGHT:
                             parent.setBalance(AVLNodeBalance.EQUAL);
-                            shrinked = false;
                             break;
+                    }
+                    if (parent.getBalance() == AVLNodeBalance.LEFT) {
+                        shrinked = false;
                     }
                     break;
             }
@@ -143,7 +138,7 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
         }
     }
 
-    protected void rebalaceLeft(AVLTreeNode<K,V> node, Path<TreeNode<K, V>> path) {
+    protected void rebalaceInsertionLeft(AVLTreeNode<K,V> node, Path<TreeNode<K, V>> path) {
         AVLTreeNode<K,V> child = (AVLTreeNode<K,V>) node.getLeftNode();
         switch (child.getBalance() ) {
             case LEFT:
@@ -157,7 +152,7 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
         }
     }
 
-    protected void rebalanceRight(AVLTreeNode<K,V> node, Path<TreeNode<K, V>> path )
+    protected void rebalanceInsertionRight(AVLTreeNode<K,V> node, Path<TreeNode<K, V>> path )
     {
         AVLTreeNode<K,V> rightChild = (AVLTreeNode<K,V>) node.getRightNode();
         switch ( rightChild.getBalance() )
@@ -167,6 +162,38 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
                 break;
             // case 'E':
             //     Impossible.
+            case RIGHT:
+                this.rotate(node, path, Side.RIGHT, false);
+                break;
+        }
+    }
+
+    protected void rebalaceRemovalLeft(AVLTreeNode<K,V> node, Path<TreeNode<K, V>> path) {
+        AVLTreeNode<K,V> child = (AVLTreeNode<K,V>) node.getLeftNode();
+        switch (child.getBalance() ) {
+            case LEFT:
+                this.rotate(node, path, Side.LEFT, false);
+                break;
+            case EQUAL:
+                this.rotate(node, path, Side.LEFT, false);
+                break;
+            case RIGHT:
+                this.rotate(node, path, Side.LEFT, true);
+                break;
+        }
+    }
+
+    protected void rebalanceRemovalRight(AVLTreeNode<K,V> node, Path<TreeNode<K, V>> path )
+    {
+        AVLTreeNode<K,V> rightChild = (AVLTreeNode<K,V>) node.getRightNode();
+        switch ( rightChild.getBalance() )
+        {
+            case LEFT:
+                this.rotate(node, path, Side.RIGHT, true);
+                break;
+            case EQUAL:
+                this.rotate(node, path, Side.RIGHT, false);
+                break;
             case RIGHT:
                 this.rotate(node, path, Side.RIGHT, false);
                 break;
