@@ -144,10 +144,10 @@ public class ArrayList<E> extends AbstractList<E> implements InsertionList<E> {
 		}
 	}
 
-	@Override
-	public Iterator<E> iterator() {
-		return new ArrayIterator<E>(this.array, this.size());
-	}
+    @Override
+    public Iterator<E> iterator() {
+        return new ArrayIterator<E>(this.array, this.size());
+    }
 	
 	@Override
 	public boolean remove(E element) {

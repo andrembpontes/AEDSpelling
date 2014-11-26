@@ -10,19 +10,19 @@ import java.io.Serializable;
  * @param <K> Key
  * @param <V> Value
  */
-public class TreeNode<K extends Comparable<K>, V> implements Serializable{
+class TreeNode<K extends Comparable<K>, V> implements Serializable{
 
     private EntryComparableByKey<K, V> entry;
     private TreeNode<K, V> leftNode;
     private TreeNode<K, V> rightNode;
 
-    public TreeNode(K key, V value, TreeNode<K, V> leftNode, TreeNode<K, V> rightNode) {
+    protected TreeNode(K key, V value, TreeNode<K, V> leftNode, TreeNode<K, V> rightNode) {
         this.entry = new EntryComparableByKey<K, V>(key, value);
         this.leftNode = leftNode;
         this.rightNode = rightNode;
     }
 
-    public TreeNode(K key, V value) {
+    protected TreeNode(K key, V value) {
         this(key, value, null, null);
     }
 
@@ -30,7 +30,7 @@ public class TreeNode<K extends Comparable<K>, V> implements Serializable{
      * Returns the key of the node
      * @return the key of the node
      */
-    public K getKey() {
+    protected K getKey() {
         return entry.getKey();
     }
 
@@ -38,7 +38,7 @@ public class TreeNode<K extends Comparable<K>, V> implements Serializable{
      * Set a new key for the node
      * @param key new key
      */
-    public void setKey(K key) {
+    protected void setKey(K key) {
         entry.setKey(key);
     }
 
@@ -46,7 +46,7 @@ public class TreeNode<K extends Comparable<K>, V> implements Serializable{
      * Returns the value of the node
      * @return the value of the node
      */
-    public V getValue() {
+    protected V getValue() {
         return entry.getValue();
     }
 
@@ -54,7 +54,7 @@ public class TreeNode<K extends Comparable<K>, V> implements Serializable{
      * Set a new value for the node
      * @param value new value
      */
-    public void setValue(V value) {
+    protected void setValue(V value) {
         entry.setValue(value);
     }
 
@@ -62,7 +62,7 @@ public class TreeNode<K extends Comparable<K>, V> implements Serializable{
      * Returns the left node
      * @return the left node
      */
-    public TreeNode<K, V> getLeftNode() {
+    protected TreeNode<K, V> getLeftNode() {
         return leftNode;
     }
 
@@ -70,7 +70,7 @@ public class TreeNode<K extends Comparable<K>, V> implements Serializable{
      * Returns the right node
      * @return the right node
      */
-    public TreeNode<K, V> getRightNode() {
+    protected TreeNode<K, V> getRightNode() {
         return rightNode;
     }
 
@@ -78,7 +78,7 @@ public class TreeNode<K extends Comparable<K>, V> implements Serializable{
      * Returns the entry of the node
      * @return The entry
      */
-    public EntryComparableByKey<K, V> getEntry() {
+    protected EntryComparableByKey<K, V> getEntry() {
         return this.entry;
     }
 
@@ -86,7 +86,7 @@ public class TreeNode<K extends Comparable<K>, V> implements Serializable{
      * Sets a new entry in the node
      * @param entry New entry
      */
-    public void setEntry(EntryComparableByKey<K, V> entry) {
+    protected void setEntry(EntryComparableByKey<K, V> entry) {
         this.entry = entry;
     }
 
@@ -94,7 +94,7 @@ public class TreeNode<K extends Comparable<K>, V> implements Serializable{
      * Set a new left node
      * @param leftNode new left node
      */
-    public void setLeftNode(TreeNode<K, V> leftNode) {
+    protected void setLeftNode(TreeNode<K, V> leftNode) {
         this.leftNode = leftNode;
     }
 
@@ -102,7 +102,7 @@ public class TreeNode<K extends Comparable<K>, V> implements Serializable{
      * Set a new right node
      * @param rightNode new right node
      */
-    public void setRightNode(TreeNode<K, V> rightNode) {
+    protected void setRightNode(TreeNode<K, V> rightNode) {
         this.rightNode = rightNode;
     }
 
@@ -110,7 +110,7 @@ public class TreeNode<K extends Comparable<K>, V> implements Serializable{
      * Return true if the node is a leaf, false if not
      * @return true if the node is a leaf, false if not
      */
-    public boolean isLeaf() {
+    protected boolean isLeaf() {
         return (this.rightNode == null && this.leftNode == null);
     }
 }

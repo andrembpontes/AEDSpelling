@@ -1,6 +1,6 @@
 package aed.dataStructures.tree;
 
-public enum Side {
+enum Side {
     LEFT,
     RIGHT
 }

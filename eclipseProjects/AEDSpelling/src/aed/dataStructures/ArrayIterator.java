@@ -5,14 +5,14 @@ package aed.dataStructures;
  * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
  * @param <E> Type of array elements
  */
-public class ArrayIterator<E> implements Iterator<E> {
+class ArrayIterator<E> implements Iterator<E> {
 	
 	private static final long	serialVersionUID	= 1L;
 	
 	private E[]					array;
 	private int					nElements, current;
 
-	public ArrayIterator(E[] array, int nElements) {
+	protected ArrayIterator(E[] array, int nElements) {
 		this.nElements = nElements;
 		this.array = array;
 		this.reset();

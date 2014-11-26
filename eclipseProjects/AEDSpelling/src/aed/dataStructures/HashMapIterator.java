@@ -5,7 +5,7 @@ package aed.dataStructures;
  * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
  * @param <E> Element
  */
-public class HashMapIterator<E> implements Iterator<E> {
+class HashMapIterator<E> implements Iterator<E> {
 
     /**
 	 * 
@@ -15,7 +15,7 @@ public class HashMapIterator<E> implements Iterator<E> {
     private Iterator<E> hashIndexIterator;
     private int size, currentHashIndex, currentItem;
 
-    public HashMapIterator(List<E>[] hashTable, int size){
+    protected HashMapIterator(List<E>[] hashTable, int size){
         this.hashTable = hashTable;
         this.size = size;
         this.initializeIterator();

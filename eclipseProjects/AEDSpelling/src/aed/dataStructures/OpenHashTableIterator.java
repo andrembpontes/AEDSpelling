@@ -5,14 +5,14 @@ package aed.dataStructures;
  * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
  * @param <E> Elements
  */
-public class OpenHashTableIterator<E> implements Iterator<E> {
+class OpenHashTableIterator<E> implements Iterator<E> {
 
 	private static final long serialVersionUID = 1L;
 	Collection<E>[] hashTable;
     Iterator<E> indexIterator;                  //Iterator for iterate by different elements in same index
     int size, current, currentHashIndex;
 
-    public OpenHashTableIterator(Collection<E>[] hashTable, int size){
+    protected OpenHashTableIterator(Collection<E>[] hashTable, int size){
         this.hashTable = hashTable;
         this.size = size;
         this.reset();

@@ -61,4 +61,5 @@ public interface InsertionList<E> extends List<E> {
      * @throws InvalidPositionException Invalid index
      */
     void insert(int index, E element) throws InvalidPositionException;
+
 }

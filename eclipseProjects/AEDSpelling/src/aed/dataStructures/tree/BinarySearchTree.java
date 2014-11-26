@@ -12,8 +12,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
 
     protected TreeNode<K, V> root;
 
-    public BinarySearchTree( )
-    {
+    public BinarySearchTree( ) {
         root = null;
         super.size = 0;
     }

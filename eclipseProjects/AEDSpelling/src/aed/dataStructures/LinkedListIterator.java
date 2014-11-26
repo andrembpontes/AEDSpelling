@@ -24,7 +24,7 @@ class LinkedListIterator<E> implements TwoWayIterator<E> {
 	 */
 	protected Node<E> previous;
 
-	public LinkedListIterator(AbstractLinkedList<E> list) {
+    protected LinkedListIterator(AbstractLinkedList<E> list) {
 		this.list = list;
         this.reset();
 	}

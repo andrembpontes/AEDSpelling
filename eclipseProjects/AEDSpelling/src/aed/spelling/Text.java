@@ -46,13 +46,7 @@ public class Text implements Serializable {
 	 * @return An iterator of lines
 	 */
 	private Iterator<Line> getLinesIterator(int firstLine, int lastLine) throws InvalidLineNumberException, InvalidLineRangeException {
-        try {
-            return new ArrayListIterator<Line>(this.lines, firstLine - 1, lastLine - 1);
-        } catch (InvalidIndexException e) {
-            throw new InvalidLineNumberException();
-        } catch (InvalidIndexRangeException e) {
-            throw new InvalidLineRangeException();
-        }
+        return new LinesIterator<Line>(this.lines, firstLine - 1, lastLine - 1);
     }
 	
 	/**

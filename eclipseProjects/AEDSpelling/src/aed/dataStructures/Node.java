@@ -29,7 +29,7 @@ class Node<E> implements Serializable {
      *
      * @param value Node value
      */
-    public Node(E value) {
+    protected Node(E value) {
         this(value, null, null);
     }
 
@@ -39,7 +39,7 @@ class Node<E> implements Serializable {
      * @param value Node value
      * @param previous pointer to previous node
      */
-    public Node(E value, Node<E> previous) {
+    protected Node(E value, Node<E> previous) {
         this(value, previous, null);
     }
 

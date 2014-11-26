@@ -9,14 +9,14 @@ import aed.dataStructures.*;
  * @param <K> Key
  * @param <V> Value
  */
-public class TreeIterator<K extends Comparable<K>, V> implements Iterator<Entry<K, V>> {
+class TreeIterator<K extends Comparable<K>, V> implements Iterator<Entry<K, V>> {
 
     private TreeNode<K, V> root;
     private InsertionList<PathStep<TreeNode<K, V>>> path;
     private int current;
     private int size;
 
-    public TreeIterator(TreeNode<K, V> root, int size){
+    protected TreeIterator(TreeNode<K, V> root, int size){
         this.root = root;
         this.current = 0;
         this.size = size;
