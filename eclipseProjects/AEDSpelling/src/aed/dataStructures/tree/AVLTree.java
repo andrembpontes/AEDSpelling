@@ -23,7 +23,6 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
         } else {
             V result = node.getValue();
             node.setValue(value);
-            BTreePrinter.printNode( (AVLTreeNode<K,V>)super.root);
             return result;
         }
 
@@ -34,11 +33,19 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
         Path<TreeNode<K, V>> path = new Path<TreeNode<K, V>>();
         int currentSize = super.size();
 
+        System.out.println("############## PRE DELETION ##############");
+        BTreePrinter.printNode((AVLTreeNode<K, V>)root);
+
         V result = super.delete(key, path);
 
         if (super.size() < currentSize) {
             this.reorganizeRemoval(path);
+            System.out.println("DELETED");
         }
+
+        System.out.println("############## POST DELETION ##############");
+        BTreePrinter.printNode((AVLTreeNode<K, V>)root);
+
         return result;
     }
 
@@ -97,7 +104,7 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
         Side stepSide = step.getSide();
 
         while ( shrinked && parent != null) {
-            switch (path.getLastSide()) {
+            switch (stepSide) {
                 case LEFT:
                     switch (parent.getBalance()) {
                         case LEFT:
@@ -116,7 +123,7 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
                 case RIGHT:
                     switch (parent.getBalance()) {
                         case LEFT:
-                            this.rebalanceRight(parent, path);
+                            this.rebalaceLeft(parent, path);
                             shrinked = false;
                             break;
                         case EQUAL:
@@ -129,8 +136,10 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
                     }
                     break;
             }
-            path.removeLastStep();
-            parent = (AVLTreeNode<K,V>) path.getLastParent();
+
+            step = path.removeLastStep();
+            parent = (AVLTreeNode<K,V>) step.getParent();
+            stepSide = step.getSide();
         }
     }
 

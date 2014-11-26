@@ -103,7 +103,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
      * @return The leaf most to the right or to the left based on a root node and a specified side
      * @throws EmptyTreeException
      */
-    protected TreeNode<K, V> getLeafBySide(TreeNode<K, V> base, Side side, PathStep<TreeNode<K, V>> path) throws EmptyTreeException{
+    protected TreeNode<K, V> getLeafBySide(TreeNode<K, V> base, Side side, Path<TreeNode<K, V>> path) throws EmptyTreeException{
         TreeNode<K, V> node = base;
 
         if (super.isEmpty()) {
@@ -116,7 +116,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
                 return node;
             }
 
-            if (path != null) path.setLeftPath(node);
+            if (path != null) path.addStep(node, side);
             node = nextNode;
         }
     }
@@ -195,15 +195,15 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
 
         V result = node.getValue();
         if (node.getLeftNode() == null) {
-            this.joinTrees(node.getRightNode(), null, null);
+            this.joinTrees(node.getRightNode(), path.getLastParent(), path.getLastSide());
         } else if (node.getRightNode() == null) {
-            this.joinTrees(node.getLeftNode(), null, null);
+            this.joinTrees(node.getLeftNode(), path.getLastParent(), path.getLastSide());
         } else {
             path.addRightStep(node);
-            TreeNode<K, V> minNode = this.getLeafBySide(node.getRightNode(), path.getLastSide());
+            TreeNode<K, V> minNode = this.getLeafBySide(node.getRightNode(), Side.LEFT, path);
             node.setKey(minNode.getKey());
             node.setValue(minNode.getValue());
-            this.joinTrees(minNode.getLeftNode(), path.getLastParent(), path.getLastSide());
+            this.joinTrees(minNode.getRightNode(), path.getLastParent(), path.getLastSide());
         }
         super.size--;
         return result;

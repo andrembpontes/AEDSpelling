@@ -12,13 +12,13 @@ import java.util.List;
 
 class BTreePrinter {
 
-    public static <K extends Comparable<K>, V> void printNode(AVLTreeNode<K, V> root) {
+    public static void printNode(AVLTreeNode root) {
         int maxLevel = BTreePrinter.maxLevel(root);
 
         printNodeInternal(Collections.singletonList(root), 1, maxLevel);
     }
 
-    private static  <K extends Comparable<K>, V>  void printNodeInternal(List<AVLTreeNode<K, V>> nodes, int level, int maxLevel) {
+    private static  <K extends Comparable<K>, V>  void printNodeInternal(List<AVLTreeNode> nodes, int level, int maxLevel) {
         if (nodes.isEmpty() || BTreePrinter.isAllElementsNull(nodes))
             return;
 
@@ -29,10 +29,11 @@ class BTreePrinter {
 
         BTreePrinter.printWhitespaces(firstSpaces);
 
-        List<AVLTreeNode<K, V> > newNodes = new ArrayList<AVLTreeNode<K, V> >();
-        for (AVLTreeNode<K, V>  node : nodes) {
+        List<AVLTreeNode > newNodes = new ArrayList<AVLTreeNode >();
+        for (AVLTreeNode  node : nodes) {
             if (node != null) {
-                System.out.print(node.getBalance());
+                //System.out.print(node.getBalance().toString().charAt(0));
+                System.out.print(node.getValue());
                 newNodes.add((AVLTreeNode<K,V>)node.getLeftNode());
                 newNodes.add((AVLTreeNode<K,V>)node.getRightNode());
             } else {
@@ -79,7 +80,7 @@ class BTreePrinter {
             System.out.print(" ");
     }
 
-    private static  <K extends Comparable<K>, V>  int maxLevel(AVLTreeNode<K, V> node) {
+    private static  <K extends Comparable<K>, V>  int maxLevel(AVLTreeNode node) {
         if (node == null)
             return 0;
 

@@ -29,6 +29,10 @@ class Path<E> {
         this.path.add(new PathStep<E>(parent, Side.RIGHT));
     }
 
+    protected void addStep(E parent, Side side) {
+        this.path.add(new PathStep<E>(parent, side));
+    }
+
     /**
      * Returns the last visited node
      * @return The last visited node

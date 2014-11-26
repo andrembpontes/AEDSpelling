@@ -4,6 +4,7 @@ import aed.dataStructures.Collection;
 import aed.dataStructures.HashMap;
 import aed.dataStructures.Iterator;
 import aed.dataStructures.Map;
+import aed.dataStructures.tree.AVLTree;
 import aed.dataStructures.tree.BinarySearchTree;
 import aed.spelling.Line;
 
@@ -54,9 +55,9 @@ class AnalisysResults implements IAnalysisResults {
 	 */
 	private void analise() {
 		this.occurrences = new HashMap<String, IWordOccurrence>();
-        this.orderedOccurrences = new BinarySearchTree<String, IWordOccurrence>();
-		this.errors = new BinarySearchTree<String, IWordOccurrence>();
-		this.corrects = new BinarySearchTree<String, IWordOccurrence>();
+        this.orderedOccurrences = new AVLTree<String, IWordOccurrence>();
+		this.errors = new AVLTree<String, IWordOccurrence>();
+		this.corrects = new AVLTree<String, IWordOccurrence>();
 		
 		Iterator<Line> lines = this.analisableText.lines();
 		
