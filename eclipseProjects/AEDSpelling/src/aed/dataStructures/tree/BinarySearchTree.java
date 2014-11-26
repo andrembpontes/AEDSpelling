@@ -226,7 +226,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
     }
 
     @Override
-    public Collection<V> values() {
+    public Collection<V> values()  {
         List<V> values = new LinkedList<V>();
         Iterator<Entry<K, V>> iterator = this.iterator();
 
