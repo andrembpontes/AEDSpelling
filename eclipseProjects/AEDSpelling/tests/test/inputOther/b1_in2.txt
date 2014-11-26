@@ -1,0 +1,106 @@
+LE text_001
+
+LF text_001 E 1
+
+LF text_001 E 2
+
+LF text_001 E 3
+
+LF text_001 E 4
+
+LF text_001 E 5
+
+LF text_001 E 6
+
+LF text_001 E 7
+
+LF text_001 E 8
+
+LF text_001 E 9
+
+LF text_001 E 10
+
+LF text_001 C 1
+
+LF text_001 C 2
+
+LF text_001 C 3
+
+LF text_001 C 4
+
+LF text_001 C 5
+
+LF text_001 C 6
+
+LF text_001 C 7
+
+LF text_001 C 8
+
+LF text_001 C 9
+
+LF text_001 C 10
+
+LF text_001 P 1
+
+LF text_001 P 2
+
+LF text_001 P 3
+
+LF text_001 P 4
+
+LF text_001 P 5
+
+LF text_001 P 6
+
+LF text_001 P 7
+
+LF text_001 P 8
+
+LF text_001 P 9
+
+LF text_001 P 10
+
+LF text_001 P 100
+
+LF text_001 C 100
+
+LF text_001 E 100
+
+AD 12
+a
+because
+cat
+closed
+dead
+is
+now
+on
+over
+road
+runs
+the
+
+AT text_001 9
+A cat runs on the road
+A car runs over the cat
+The road is now closed
+Because the cat is dead
+
+The car crushed the cat
+He is now bloody and flat
+Strangest accident Clear sky No fog
+Although the driver was a dog
+
+AT text_002 11
+The dog was blamed
+Arrested and chained
+The cat was mourned
+buried and boxed
+
+The event was soon forgot
+For the fish was never caught
+As his decision was wise
+To plan the cats demise
+By blackmailing the dog
+With photos of him and the hog
+

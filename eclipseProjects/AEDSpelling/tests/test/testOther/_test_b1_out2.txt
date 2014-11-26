@@ -1,0 +1,123 @@
+a
+1
+because
+3
+4
+5
+closed
+2
+dead
+3
+4
+5
+dog
+1
+3
+4
+5
+is
+2
+3
+4
+5
+now
+2
+on
+1
+road
+1
+2
+runs
+1
+the
+1
+2
+3
+4
+5
+
+a
+closed
+now
+on
+runs
+
+road
+
+because
+dead
+
+dog
+is
+
+the
+
+Inexistencia de palavras com a frequencia pedida.
+
+Inexistencia de palavras com a frequencia pedida.
+
+Inexistencia de palavras com a frequencia pedida.
+
+Inexistencia de palavras com a frequencia pedida.
+
+Inexistencia de palavras com a frequencia pedida.
+
+java
+
+Inexistencia de palavras com a frequencia pedida.
+
+Inexistencia de palavras com a frequencia pedida.
+
+Inexistencia de palavras com a frequencia pedida.
+
+Inexistencia de palavras com a frequencia pedida.
+
+Inexistencia de palavras com a frequencia pedida.
+
+Inexistencia de palavras com a frequencia pedida.
+
+Inexistencia de palavras com a frequencia pedida.
+
+Inexistencia de palavras com a frequencia pedida.
+
+Inexistencia de palavras com a frequencia pedida.
+
+a
+closed
+java
+now
+on
+runs
+
+road
+
+because
+dead
+
+dog
+is
+
+the
+
+Inexistencia de palavras com a frequencia pedida.
+
+Inexistencia de palavras com a frequencia pedida.
+
+Inexistencia de palavras com a frequencia pedida.
+
+Inexistencia de palavras com a frequencia pedida.
+
+Inexistencia de palavras com a frequencia pedida.
+
+Inexistencia de palavras com a frequencia pedida.
+
+Inexistencia de palavras com a frequencia pedida.
+
+Inexistencia de palavras com a frequencia pedida.
+
+Atualizacao do dicionario com sucesso.
+
+Texto adicionado com sucesso.
+
+Texto adicionado com sucesso.
+

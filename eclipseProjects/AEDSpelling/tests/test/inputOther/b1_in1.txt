@@ -1,0 +1,20 @@
+AD 11
+computer
+science
+programming
+Algorithms
+Information
+processing
+complexity
+languages
+java
+python
+ciencia
+
+AT text_001 5
+A dog runs on the java road
+The road is now closed
+Because the dog is dead
+Because the dog is dead
+Because the dog is dead
+
