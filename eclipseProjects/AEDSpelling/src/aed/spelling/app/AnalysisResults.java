@@ -59,7 +59,7 @@ class AnalysisResults implements IAnalysisResults {
 	public AnalysisResults(IAnalysableText analisableText, IDictionary dictionary) {
 		this.analisableText = analisableText;
 		this.dictionary = dictionary;
-		
+
 		this.analise();
 	}
 	
@@ -144,20 +144,17 @@ class AnalysisResults implements IAnalysisResults {
 	
 	@Override
 	public Iterator<IWordInText> correct(int frequency) {
-		//TODO improve with values iterator
-		return this.getFrequencyMap(this.frequenciesCorrectMap, frequency).values().iterator();
+		return this.getFrequencyMap(this.frequenciesCorrectMap, frequency).valuesIterator();
 	}
 	
 	@Override
 	public Iterator<IWordInText> errors(int frequency) {
-		//TODO improve with values iterator
-		return this.getFrequencyMap(this.frequenciesErrorMap, frequency).values().iterator();
+		return this.getFrequencyMap(this.frequenciesErrorMap, frequency).valuesIterator();
 	}
 
 	@Override
 	public Iterator<IWordInText> errors() {
-		//TODO improve with values iterator
-		return this.errorTree.values().iterator();
+		return this.errorTree.valuesIterator();
 	}
 	
 	@Override
@@ -170,8 +167,7 @@ class AnalysisResults implements IAnalysisResults {
 
 	@Override
 	public Iterator<IWordInText> occurrences(int frequency) {
-		//TODO improve with values iterator
-		return this.getFrequencyMap(this.frequenciesWordMap, frequency).values().iterator();
+		return this.getFrequencyMap(this.frequenciesWordMap, frequency).valuesIterator();
 	}
 	
 }
