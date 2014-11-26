@@ -1,15 +1,11 @@
 package aed.dataStructures.tree;
 
-import java.util.Comparator;
 
-/**
- * Created by Andre on 21/11/2014.
- */
-class PathStep<K extends Comparable<K>, V> {
+class PathStep<E> {
     private Side side;
-    private TreeNode<K, V> parent;
+    private E parent;
 
-    protected PathStep(TreeNode<K, V> parent, Side side) {
+    protected PathStep(E parent, Side side) {
         this.parent = parent;
         this.side = side;
     }
@@ -18,20 +14,36 @@ class PathStep<K extends Comparable<K>, V> {
         this(null, null);
     }
 
-    protected TreeNode<K, V> getParent() {
+    /**
+     * Returns the last visited node
+     * @return The last visited node
+     */
+    protected E getParent() {
         return this.parent;
     }
 
-    public Side getSide() {
+    /**
+     * Returns the side of the last descent
+     * @return The side of the last descent
+     */
+    protected Side getSide() {
         return this.side;
     }
 
-    public void setLeftPath(TreeNode<K, V> parent) {
+    /**
+     * Set a new path coming from the left side
+     * @param parent New last element
+     */
+    protected void setLeftPath(E parent) {
         this.parent = parent;
         this.side = Side.LEFT;
     }
 
-    public void setRightPath(TreeNode<K, V> parent) {
+    /**
+     * Set a new path coming from the left side
+     * @param parent New last element
+     */
+    protected void setRightPath(E parent) {
         this.parent = parent;
         this.side = Side.RIGHT;
     }

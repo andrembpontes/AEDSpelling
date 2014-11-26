@@ -5,7 +5,10 @@ import aed.dataStructures.EntryComparableByKey;
 import java.io.Serializable;
 
 /**
- * Created by gbfm on 11/14/14.
+ * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
+ * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ * @param <K> Key
+ * @param <V> Value
  */
 public class TreeNode<K extends Comparable<K>, V> implements Serializable{
 
@@ -71,11 +74,19 @@ public class TreeNode<K extends Comparable<K>, V> implements Serializable{
         return rightNode;
     }
 
-    protected EntryComparableByKey<K, V> getEntry() {
+    /**
+     * Returns the entry of the node
+     * @return The entry
+     */
+    public EntryComparableByKey<K, V> getEntry() {
         return this.entry;
     }
 
-    protected void setEntry(EntryComparableByKey<K, V> entry) {
+    /**
+     * Sets a new entry in the node
+     * @param entry New entry
+     */
+    public void setEntry(EntryComparableByKey<K, V> entry) {
         this.entry = entry;
     }
 

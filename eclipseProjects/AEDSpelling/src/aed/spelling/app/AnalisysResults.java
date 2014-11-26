@@ -1,6 +1,7 @@
 package aed.spelling.app;
 
 import aed.dataStructures.Collection;
+import aed.dataStructures.HashMap;
 import aed.dataStructures.Iterator;
 import aed.dataStructures.Map;
 import aed.dataStructures.tree.BinarySearchTree;
@@ -15,7 +16,7 @@ class AnalisysResults implements IAnalysisResults {
 	private static final long	serialVersionUID	= 1L;
 	private IAnalisableText		analisableText;
 	private IDictionary			dictionary;
-	private Map<String, IWordOccurrence> errors, corrects,  occurrences;
+	private Map<String, IWordOccurrence> errors, corrects,  occurrences, orderedOccurrences;
 	
 	public AnalisysResults(IAnalisableText analisableText, IDictionary dictionary) {
 		this.analisableText = analisableText;
@@ -33,14 +34,17 @@ class AnalisysResults implements IAnalysisResults {
 		IWordOccurrence occurrence = this.getWordOccurrence(word);
 		
 		if (occurrence == null) {
-			occurrence = new WordOccurrence(word, this.dictionary);
-			
-			this.occurrences.put(word.toLowerCase(), occurrence);
+            String key = word.toLowerCase();
+
+			occurrence = new WordOccurrence(key, this.dictionary);
+
+			this.occurrences.put(key, occurrence);
+            this.orderedOccurrences.put(key, occurrence);
 			
 			if (occurrence.isCorrect())
-				this.corrects.put(word, occurrence);
+				this.corrects.put(key, occurrence);
 			else
-				this.errors.put(word, occurrence);
+				this.errors.put(key, occurrence);
 		}
 		occurrence.incrementFrequency(lineNumber);
 	}
@@ -49,7 +53,8 @@ class AnalisysResults implements IAnalysisResults {
 	 * Analyzes a text
 	 */
 	private void analise() {
-		this.occurrences = new BinarySearchTree<String, IWordOccurrence>();
+		this.occurrences = new HashMap<String, IWordOccurrence>();
+        this.orderedOccurrences = new BinarySearchTree<String, IWordOccurrence>();
 		this.errors = new BinarySearchTree<String, IWordOccurrence>();
 		this.corrects = new BinarySearchTree<String, IWordOccurrence>();
 		
@@ -98,7 +103,7 @@ class AnalisysResults implements IAnalysisResults {
 	@Override
     @SuppressWarnings("unchecked")
 	public Iterator<IWordInText> occurrences() {
-		return ((Collection<IWordInText>)(Collection<? extends IWordInText>)this.occurrences.values()).iterator();
+		return ((Collection<IWordInText>)(Collection<? extends IWordInText>)this.orderedOccurrences.values()).iterator();
 	}
 	
 }

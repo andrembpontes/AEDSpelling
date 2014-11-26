@@ -2,6 +2,12 @@ package aed.dataStructures.tree;
 
 import aed.dataStructures.*;
 
+/**
+ * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
+ * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ * @param <K> Key
+ * @param <V> Value
+ */
 public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K, V> {
 
     protected TreeNode<K, V> root;
@@ -18,17 +24,24 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
         return node != null ? node.getValue() : null;
     }
 
-    protected TreeNode<K, V> findNode(K key, PathStep<K,V> path) {
+    /**
+     * Returns the node with a given key and fills the path variable with the corresponding information
+     * @param key Key to search for
+     * @param path Path variable to fill
+     * @return The node with a given key
+     */
+    protected TreeNode<K, V> findNode(K key, Path<TreeNode<K, V>> path) {
+        path.addRightStep(null);
+
         TreeNode<K, V> node = this.root;
-        int comparisonResult;
 
         while (node != null) {
-            comparisonResult = node.getKey().compareTo(key);
+            int comparisonResult = node.getKey().compareTo(key);
             if (comparisonResult < 0) {
-                if (path != null) path.setRightPath(node);
+                if (path != null) path.addRightStep(node);
                 node = node.getRightNode();
             } else if (comparisonResult > 0) {
-                if (path != null) path.setLeftPath(node);
+                if (path != null) path.addLeftStep(node);
                 node = node.getLeftNode();
             } else {
                 return node;
@@ -38,10 +51,21 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
         return null;
     }
 
+    /**
+     * Returns the node with a given key
+     * @param key Key to search for
+     * @return The node with a given key
+     */
     protected TreeNode<K, V> findNode(K key) {
         return this.findNode(key, null);
     }
 
+    /**
+     * Returns the left or right child of a node depending the specified side
+     * @param node Parent Node
+     * @param side Specified side
+     * @return Child node based on size
+     */
     protected TreeNode<K, V> getChildNode(TreeNode<K, V> node, Side side) {
         switch (side) {
             case LEFT:
@@ -52,15 +76,34 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
         return null;
     }
 
+    /**
+     * Returns the smallest member of the tree
+     * @return The smallest member of the tree
+     * @throws EmptyTreeException
+     */
     public V getMinimum() throws EmptyTreeException {
         return this.getLeafBySide(Side.LEFT).getValue();
     }
 
+    /**
+     * Returns the bigger entry of the tree
+     * @return The bigger entry of the tree
+     * @throws EmptyTreeException
+     */
     public V getMaximum() throws EmptyTreeException{
         return this.getLeafBySide(Side.RIGHT).getValue();
     }
 
-    protected TreeNode<K, V> getLeafBySide(TreeNode<K, V> base, Side side, PathStep<K, V> path) throws EmptyTreeException{
+    /**
+     * Returns the leaf most to the right or to the left based on a root node and a specified side and fills the path variable with the corresponding information
+     *
+     * @param base Base node
+     * @param side Specified side
+     * @param path Path variable to fill
+     * @return The leaf most to the right or to the left based on a root node and a specified side
+     * @throws EmptyTreeException
+     */
+    protected TreeNode<K, V> getLeafBySide(TreeNode<K, V> base, Side side, PathStep<TreeNode<K, V>> path) throws EmptyTreeException{
         TreeNode<K, V> node = base;
 
         if (super.isEmpty()) {
@@ -78,21 +121,36 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
         }
     }
 
+    /**
+     * Returns the leaf most to the right or to the left of the tree based on a specified side
+     *
+     * @param side Specified side
+     * @return The leaf most to the right or to the left of the tree based on a specified side
+     * @throws EmptyTreeException
+     */
     protected TreeNode<K, V> getLeafBySide(Side side) throws EmptyTreeException{
         return this.getLeafBySide(this.root, side, null);
     }
 
+    /**
+     * Returns the leaf most to the right or to the left based on a root node and a specified side
+     *
+     * @param base Base node
+     * @param side Specified side
+     * @return The leaf most to the right or to the left based on a root node and a specified side
+     * @throws EmptyTreeException
+     */
     protected TreeNode<K, V> getLeafBySide(TreeNode<K, V> base, Side side) throws EmptyTreeException{
         return this.getLeafBySide(base, side, null);
     }
 
     @Override
     public V put(K key, V value) {
-        PathStep<K, V> lastStep = new PathStep<K, V>();
-        TreeNode<K,V> node = this.findNode(key, lastStep);
+        Path<TreeNode<K, V>> path = new Path<TreeNode<K, V>>();
+        TreeNode<K,V> node = this.findNode(key, path);
         if (node == null) {
             TreeNode<K,V> newLeaf = new TreeNode<K, V>(key, value);
-            this.joinTrees(newLeaf, lastStep.getParent(), lastStep.getSide());
+            this.joinTrees(newLeaf, path.getLastParent(), path.getLastSide());
             super.size++;
             return null;
         } else {
@@ -102,6 +160,12 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
         }
     }
 
+    /**
+     * Joins two trees
+     * @param childNode Child node
+     * @param parentNode Parent node
+     * @param side Side of the parent node to join child node to
+     */
     protected void joinTrees(TreeNode<K, V> childNode, TreeNode<K, V> parentNode, Side side) {
         if (parentNode == null) {
             root = childNode;
@@ -119,8 +183,12 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
 
     @Override
     public V remove(K key) {
-        PathStep<K, V> lastStep = new PathStep<K, V>();
-        TreeNode<K,V> node = this.findNode(key, lastStep);
+        Path<TreeNode<K, V>> path = new Path<TreeNode<K, V>>();
+        return this.delete(key, path);
+    }
+
+    protected V delete(K key, Path<TreeNode<K, V>> path) {
+        TreeNode<K,V> node = this.findNode(key, path);
         if ( node == null ) {
             return null;
         }
@@ -131,15 +199,14 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
         } else if (node.getRightNode() == null) {
             this.joinTrees(node.getLeftNode(), null, null);
         } else {
-            lastStep.setRightPath(node);
-            TreeNode<K, V> minNode = this.getLeafBySide(node.getRightNode(), lastStep.getSide());
+            path.addRightStep(node);
+            TreeNode<K, V> minNode = this.getLeafBySide(node.getRightNode(), path.getLastSide());
             node.setKey(minNode.getKey());
             node.setValue(minNode.getValue());
-            this.joinTrees(minNode.getLeftNode(), lastStep.getParent(), lastStep.getSide());
+            this.joinTrees(minNode.getLeftNode(), path.getLastParent(), path.getLastSide());
         }
         super.size--;
         return result;
-
     }
 
     @Override
