@@ -7,7 +7,7 @@ package aed.dataStructures;
  */
 public interface HashTable<E> extends Collection<E> {
 
-    static final int DEFAULT_INITIAL_CAPACITY = 100;
+    static final int DEFAULT_INITIAL_CAPACITY = 10;
     static final int GROWTH_TAX = 3;
 
     /**

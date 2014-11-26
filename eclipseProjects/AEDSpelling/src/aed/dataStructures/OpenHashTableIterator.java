@@ -15,6 +15,7 @@ public class OpenHashTableIterator<E> implements Iterator<E> {
     public OpenHashTableIterator(Collection<E>[] hashTable, int size){
         this.hashTable = hashTable;
         this.size = size;
+        this.reset();
     }
 
     /**
@@ -22,7 +23,7 @@ public class OpenHashTableIterator<E> implements Iterator<E> {
      */
     private void initializeIterator(){
         this.current = 0;
-        this.currentHashIndex = 0;
+        this.currentHashIndex = -1;
         this.getNextIndexIterator();
     }
 
@@ -31,8 +32,10 @@ public class OpenHashTableIterator<E> implements Iterator<E> {
      * @return True if there is a next hash index false if not
      */
     private boolean getNextIndexIterator(){
-        while(this.currentHashIndex < this.hashTable.length && this.hashTable[this.currentHashIndex] == null)
+        do{
             this.currentHashIndex++;
+        }
+        while(this.currentHashIndex < this.hashTable.length && (this.hashTable[this.currentHashIndex] == null || this.hashTable[currentHashIndex].isEmpty()));
 
         if(this.currentHashIndex < this.hashTable.length) {
             this.indexIterator = this.hashTable[this.currentHashIndex].iterator();
@@ -58,7 +61,8 @@ public class OpenHashTableIterator<E> implements Iterator<E> {
             throw new NoSuchElementException();
 
         if(!this.indexIterator.hasNext())
-            this.getNextIndexIterator();
+            if(!this.getNextIndexIterator())
+                throw new NoSuchElementException();
 
         this.current++;
         return this.indexIterator.next();

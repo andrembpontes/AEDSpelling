@@ -139,7 +139,8 @@ public class OpenHashTable<E> extends AbstractCollection<E> implements HashTable
 
     @Override
     public boolean contains(E element) {
-        return this.hashTable[this.getHashCode(element)].contains(element);
+        Collection<E> index = this.hashTable[this.getHashCode(element)];
+        return (index == null ? false : index.contains(element));
     }
 
     @Override
