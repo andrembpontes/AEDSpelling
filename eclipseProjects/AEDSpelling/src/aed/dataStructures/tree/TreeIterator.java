@@ -12,7 +12,7 @@ import aed.dataStructures.*;
 class TreeIterator<K extends Comparable<K>, V> implements Iterator<Entry<K, V>> {
 
     private TreeNode<K, V> root;
-    private InsertionList<PathStep<TreeNode<K, V>>> path;
+    private Path<TreeNode<K, V>> path;
     private int current;
     private int size;
 
@@ -27,14 +27,11 @@ class TreeIterator<K extends Comparable<K>, V> implements Iterator<Entry<K, V>> 
 
     @Override
     public void reset() {
-        this.path = new LinkedList<PathStep<TreeNode<K, V>>>();
-        this.path.addFirst(new PathStep<TreeNode<K, V>>(this.root, Side.LEFT));
+        this.path = new Path<TreeNode<K, V>>();
+        this.path.addLeftStep(this.root);
 
-        TreeNode<K, V> current = this.path.getFirst().getParent();
-        while(current.getLeftNode() != null) {
-            current = current.getLeftNode();
-            this.path.addLast(new PathStep<TreeNode<K, V>>(current, Side.LEFT));
-        }
+        TreeNode<K, V> current = this.path.getLastParent();
+        this.addLeftPath(current);
     }
 
     @Override
@@ -45,21 +42,29 @@ class TreeIterator<K extends Comparable<K>, V> implements Iterator<Entry<K, V>> 
     @Override
     public Entry<K, V> next() throws NoSuchElementException {
         if(!this.hasNext()) throw new NoSuchElementException();
-        PathStep<TreeNode<K, V>> current = this.path.removeLast();
+        PathStep<TreeNode<K, V>> current = this.path.removeLastStep();
 
         if(this.size - this.current > 1) {
             TreeNode<K, V> next = current.getParent().getRightNode();
 
             if (next != null) {
-                this.path.addLast(new PathStep<TreeNode<K, V>>(next, Side.RIGHT));
-                while (next.getLeftNode() != null) {
-                    next = next.getLeftNode();
-                    this.path.addLast(new PathStep<TreeNode<K, V>>(next, Side.LEFT));
-                }
+                this.path.addRightStep(next);
+                this.addLeftPath(next);
             }
         }
 
         this.current++;
         return current.getParent().getEntry();
+    }
+
+    /**
+     * Adds the entire left path to the path variable
+     * @param next Node
+     */
+    private void addLeftPath(TreeNode<K, V> next) {
+        while (next.getLeftNode() != null) {
+            next = next.getLeftNode();
+            this.path.addLeftStep(next);
+        }
     }
 }
