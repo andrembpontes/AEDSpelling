@@ -12,11 +12,11 @@ public class Spelling implements ISpelling {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private Map<String, IAnalisableText> texts;
+	private Map<String, IAnalysableText> texts;
 	private IDictionary dictionary;
 	
 	public Spelling() {
-		this.texts = new HashMap<String, IAnalisableText>();
+		this.texts = new HashMap<String, IAnalysableText>();
 		this.dictionary = new Dictionary();
 	}
 	
@@ -25,7 +25,7 @@ public class Spelling implements ISpelling {
 		if (this.texts.containsKey(id))
 			return false;
 
-		this.texts.put(id, new AnalisableText(id, text, this.dictionary));
+		this.texts.put(id, new AnalysableText(id, text, this.dictionary));
 		return true;
 	}
 	
@@ -38,7 +38,7 @@ public class Spelling implements ISpelling {
 		}
 		
 		if (anyAdded)
-			this.texts = new HashMap<String, IAnalisableText>();
+			this.texts = new HashMap<String, IAnalysableText>();
 
         return anyAdded;
 	}
@@ -51,7 +51,7 @@ public class Spelling implements ISpelling {
 	
 	@Override
 	public int frequencyOf(String id, String word) {
-		IAnalisableText text = this.searchText(id);
+		IAnalysableText text = this.searchText(id);
 		if (text != null)
 			return text.frequency(word);
 		return -1;
@@ -63,13 +63,13 @@ public class Spelling implements ISpelling {
 	 * @param id Id to search for
 	 * @return The text with the specified id, null if the text is not found 
 	 */
-	private IAnalisableText searchText(String id) {
+	private IAnalysableText searchText(String id) {
         return this.texts.get(id);
 	}
 	
 	@Override
 	public Iterator<IWordInText> textCorrects(String id, int frequency) {
-		IAnalisableText text = this.searchText(id);
+		IAnalysableText text = this.searchText(id);
 		if (text == null)
 			throw new TextNotFoundException();
 		
@@ -78,7 +78,7 @@ public class Spelling implements ISpelling {
 	
 	@Override
 	public Iterator<IWordInText> textErrors(String id) {
-		IAnalisableText text = this.searchText(id);
+		IAnalysableText text = this.searchText(id);
 		if (text == null)
 			throw new TextNotFoundException();
 		
@@ -87,7 +87,7 @@ public class Spelling implements ISpelling {
 
 	@Override
 	public Iterator<IWordInText> textErrors(String id, int frequency) {
-		IAnalisableText text = this.searchText(id);
+		IAnalysableText text = this.searchText(id);
 		if (text == null)
 			throw new TextNotFoundException();
 
@@ -96,7 +96,7 @@ public class Spelling implements ISpelling {
 
 	@Override
 	public Iterator<IWordInText> wordsWithFrequency(String id, int frequency) {
-		IAnalisableText text = this.searchText(id);
+		IAnalysableText text = this.searchText(id);
 
 		if (text == null)
 			throw new TextNotFoundException();
@@ -106,7 +106,7 @@ public class Spelling implements ISpelling {
 
 	@Override
 	public Iterator<Line> textLines(String id) {
-		IAnalisableText text = this.searchText(id);
+		IAnalysableText text = this.searchText(id);
 		
 		if (text == null)
 			throw new TextNotFoundException();
@@ -116,7 +116,7 @@ public class Spelling implements ISpelling {
 	
 	@Override
 	public Iterator<Line> textLines(String id, int firstLine, int lastLine) throws InvalidIndexException, InvalidIndexRangeException {
-		IAnalisableText text = this.searchText(id);
+		IAnalysableText text = this.searchText(id);
 		if (text == null)
 			throw new TextNotFoundException();
 		

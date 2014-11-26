@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
  * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
  */
-public interface IAnalisableText extends Serializable {
+public interface IAnalysableText extends Serializable {
 	
 	/**
 	 * Return text words that are found in Dictionary with specified frequency

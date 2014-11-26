@@ -8,16 +8,16 @@ import aed.spelling.Line;
  * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
  * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
  */
-class AnalisysResults implements IAnalysisResults {
+class AnalysisResults implements IAnalysisResults {
 
 	public static int AVERRAGE_TEXT_WORDS_N = 100;
 
-	class AnalisysData {
+	class AnalysisData {
 		Map<String, IWordOccurrence> wordMap;
 		Map<String, IWordOccurrence> errorTree;
 		List<IWordOccurrence> correctList;
 
-		AnalisysData(){
+		AnalysisData(){
 			wordMap = new HashMap<String, IWordOccurrence>();
 			errorTree = new AVLTree<String, IWordOccurrence>();
 			correctList = new LinkedList<IWordOccurrence>();
@@ -42,7 +42,7 @@ class AnalisysResults implements IAnalysisResults {
 	}
 
 	private static final long	serialVersionUID	= 1L;
-	private IAnalisableText		analisableText;
+	private IAnalysableText analisableText;
 	private IDictionary			dictionary;
 
 	//Index Occurrences by WordString
@@ -56,7 +56,7 @@ class AnalisysResults implements IAnalysisResults {
 	private Map<Integer, Map<String, IWordInText>> frequenciesCorrectMap;
 	private Map<Integer, Map<String, IWordInText>> frequenciesWordMap;
 	
-	public AnalisysResults(IAnalisableText analisableText, IDictionary dictionary) {
+	public AnalysisResults(IAnalysableText analisableText, IDictionary dictionary) {
 		this.analisableText = analisableText;
 		this.dictionary = dictionary;
 		
@@ -68,7 +68,7 @@ class AnalisysResults implements IAnalysisResults {
 	 * @param word Word to add 
 	 * @param lineNumber Line number of the occurence
 	 */
-	private void addOccurrence(String word, int lineNumber, AnalisysData data) {
+	private void addOccurrence(String word, int lineNumber, AnalysisData data) {
 		IWordOccurrence occurrence = data.getWord(word);
 
 		if (occurrence == null)
@@ -81,7 +81,7 @@ class AnalisysResults implements IAnalysisResults {
 	 * Analyzes a text
 	 */
 	private void analise() {
-		AnalisysData data = new AnalisysData();
+		AnalysisData data = new AnalysisData();
 		
 		Iterator<Line> lines = this.analisableText.lines();
 		
@@ -95,16 +95,16 @@ class AnalisysResults implements IAnalysisResults {
 					this.addOccurrence(word.toLowerCase(), line.getNr(), data);
 		}
 
-		this.storeAnaliseData(data);
+		this.storeAnalysisData(data);
 	}
 
-	private void storeAnaliseData(AnalisysData data){
+	private void storeAnalysisData(AnalysisData data){
 		this.wordMap = (Map<String, IWordInText>) (Map<String, ? extends IWordInText>) data.wordMap;
 		this.errorTree = (Map<String, IWordInText>) (Map<String, ? extends IWordInText>) data.errorTree;
 		this.indexWordByFrequency(data);
 	}
 
-	private void indexWordByFrequency(AnalisysData data){
+	private void indexWordByFrequency(AnalysisData data){
 		this.frequenciesErrorMap = new HashMap<Integer, Map<String, IWordInText>>();
 		this.frequenciesCorrectMap = new HashMap<Integer, Map<String, IWordInText>>();
 		this.frequenciesWordMap = new HashMap<Integer, Map<String, IWordInText>>();
