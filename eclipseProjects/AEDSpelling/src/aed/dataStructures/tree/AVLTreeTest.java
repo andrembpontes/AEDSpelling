@@ -39,11 +39,6 @@ public class AVLTreeTest {
         System.out.println();
     }
 
-
-
-
-
-
     @Test
     public void avlTreeShouldKeepStructureAfterInsertionAndThenRemoval() {
 
@@ -51,7 +46,7 @@ public class AVLTreeTest {
         int NUMBER_OF_INSERTIONS = 20000;
         int NUMBER_OF_REMOVALS = 2000;
 
-        Random randomGenerator = new Random(2222);
+        Random randomGenerator = new Random();
         BinarySearchTree<Integer, Integer> tree;
 
 
@@ -78,11 +73,6 @@ public class AVLTreeTest {
         System.out.println("##################################################");
         System.out.println();
     }
-
-
-
-
-
 
     @Test
     public void avlTreeShouldKeepStructureAfterRemovalAndInsertion() {
@@ -131,13 +121,6 @@ public class AVLTreeTest {
 
     }
 
-
-
-
-
-
-
-
     public void testNodeBalance(TreeNode root) {
         if(root == null) {
             return;
@@ -161,13 +144,6 @@ public class AVLTreeTest {
 
         TestCase.assertTrue("Your tree is not balanced", Math.abs(leftHeight - rightHeight) <= 1);
     }
-
-
-
-
-
-
-
 
     public int getTreeNodeHeight(TreeNode node) {
         if(node == null) {
