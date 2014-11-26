@@ -4,14 +4,14 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 
-public class APITest {
+public class ExtraTests {
 
-	String TEST_INPUT_DIR = "tests/test/input/";
-	String TEST_OUTPUT_DIR = "tests/test/output/";
-	String TEST_TEST_DIR = "tests/test/test/";
+	String TEST_INPUT_DIR = "tests/test/inputExtra/";
+	String TEST_OUTPUT_DIR = "tests/test/outputExtra/";
+	String TEST_TEST_DIR = "tests/test/testExtra/";
 	String CH_INPUT = "in";
 	String CH_OUTPUT = "out";
 	
