@@ -42,6 +42,10 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
         return result;
     }
 
+    /**
+     * Reorganizes tree and defines new balances for the nodes after insertion
+     * @param path Path used in insertion
+     */
     protected void reorganizeInsertion(Path<TreeNode<K, V>> path ) {
         boolean grew = true;
 
@@ -89,6 +93,10 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
         }
     }
 
+    /**
+     * Reorganizes tree and defines new balances for the nodes after removal
+     * @param path Path used in removal
+     */
     protected void reorganizeRemoval(Path<TreeNode<K, V>> path ) {
         boolean shrinked = true;
 
@@ -117,7 +125,7 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
                 case RIGHT:
                     switch (parent.getBalance()) {
                         case LEFT:
-                            this.rebalaceRemovalLeft(parent, path);
+                            this.rebalanceRemovalLeft(parent, path);
                             break;
                         case EQUAL:
                             parent.setBalance(AVLNodeBalance.LEFT);
@@ -138,6 +146,11 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
         }
     }
 
+    /**
+     * Depending on the node balance executes a single rotation or a double
+     * rotation to the left in order to keep the tree balanced after a node insertion
+     * @param path Path used in insertion
+     */
     protected void rebalaceInsertionLeft(AVLTreeNode<K,V> node, Path<TreeNode<K, V>> path) {
         AVLTreeNode<K,V> child = (AVLTreeNode<K,V>) node.getLeftNode();
         switch (child.getBalance() ) {
@@ -152,6 +165,11 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
         }
     }
 
+    /**
+     * Depending on the node balance executes a single rotation or a double
+     * rotation to the right in order to keep the tree balanced after a node insertion
+     * @param path Path used in insertion
+     */
     protected void rebalanceInsertionRight(AVLTreeNode<K,V> node, Path<TreeNode<K, V>> path )
     {
         AVLTreeNode<K,V> rightChild = (AVLTreeNode<K,V>) node.getRightNode();
@@ -168,7 +186,12 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
         }
     }
 
-    protected void rebalaceRemovalLeft(AVLTreeNode<K,V> node, Path<TreeNode<K, V>> path) {
+    /**
+     * Depending on the node balance executes a single rotation or a double
+     * rotation to the left in order to keep the tree balanced after a node removal
+     * @param path Path used in insertion
+     */
+    protected void rebalanceRemovalLeft(AVLTreeNode<K,V> node, Path<TreeNode<K, V>> path) {
         AVLTreeNode<K,V> child = (AVLTreeNode<K,V>) node.getLeftNode();
         switch (child.getBalance() ) {
             case LEFT:
@@ -183,6 +206,11 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
         }
     }
 
+    /**
+     * Depending on the node balance executes a single rotation or a double
+     * rotation to the right in order to keep the tree balanced after a node removal
+     * @param path Path used in insertion
+     */
     protected void rebalanceRemovalRight(AVLTreeNode<K,V> node, Path<TreeNode<K, V>> path )
     {
         AVLTreeNode<K,V> rightChild = (AVLTreeNode<K,V>) node.getRightNode();
@@ -200,6 +228,13 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
         }
     }
 
+    /**
+     * Applies a double or single rotation to a node
+     * @param root Root of the rotation
+     * @param path Path used to get to the root node
+     * @param side Side to which the rotation will be executed
+     * @param doubleRotation Flag for single and double rotation
+     */
     protected void rotate(AVLTreeNode<K,V> root, Path<TreeNode<K, V>> path , Side side, boolean doubleRotation) {
 
         TreeNode<K,V> newSubTreeRoot = null;
@@ -227,6 +262,11 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
         this.joinTrees(newSubTreeRoot, step.getParent(), step.getSide());
     }
 
+    /**
+     * Performs a single left rotation based on the specified node and returns its left child
+     * @param root Specified node
+     * @return Child node
+     */
     private TreeNode<K, V> singleLeftRotation(AVLTreeNode<K, V> root) {
         AVLTreeNode<K, V> child = (AVLTreeNode<K, V>) root.getLeftNode();
 
@@ -237,6 +277,11 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
         return child;
     }
 
+    /**
+     * Performs a single right rotation based on the specified node and returns its right child
+     * @param root Specified node
+     * @return Child node
+     */
     private TreeNode<K, V> singleRightRotation(AVLTreeNode<K, V> root) {
         AVLTreeNode<K, V> child = (AVLTreeNode<K, V>) root.getRightNode();
 
@@ -247,6 +292,11 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
         return child;
     }
 
+    /**
+     * Performs a double left rotation based on the specified node and returns the right child of its left child
+     * @param root Specified node
+     * @return Child node
+     */
     private TreeNode<K, V> doubleLeftRotation(AVLTreeNode<K, V> root) {
         AVLTreeNode<K, V> child = (AVLTreeNode<K, V>) root.getLeftNode();
         AVLTreeNode<K, V>  grandChild = (AVLTreeNode<K, V>) child.getRightNode();
@@ -260,6 +310,11 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
         return grandChild;
     }
 
+    /**
+     * Performs a double left rotation based on the specified node and returns the left child of its right child
+     * @param root Specified node
+     * @return Child node
+     */
     private TreeNode<K, V> doubleRightRotation(AVLTreeNode<K, V> root) {
         AVLTreeNode<K, V>  child = (AVLTreeNode<K, V>) root.getRightNode();
         AVLTreeNode<K, V>  grandChild = (AVLTreeNode<K, V>) child.getLeftNode();
@@ -274,9 +329,10 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
     }
 
     /**
-     * EXECUTED PRE ROTATION!
-     * @param root
-     * @param child
+     * Sets new node balances for root node and its child before executing a single left rotation
+     * @pre must be executed before the rotation occurs
+     * @param root Root of the rotation
+     * @param child Root node's child
      */
     private void leftSingleRotationNewBalance(AVLTreeNode<K, V> root, AVLTreeNode<K ,V> child) {
         switch (child.getBalance()) {
@@ -292,9 +348,10 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
     }
 
     /**
-     * EXECUTED PRE ROTATION!
-     * @param root
-     * @param child
+     * Sets new node balances for root node and its child before executing a single right rotation
+     * @pre must be executed before the rotation occurs
+     * @param root Root of the rotation
+     * @param child Root node's child
      */
     private void rightSingleRotationNewBalance(AVLTreeNode<K, V> root, AVLTreeNode<K ,V> child) {
         switch (child.getBalance()) {
@@ -310,9 +367,11 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
     }
 
     /**
-     * EXECUTED PRE ROTATION!
-     * @param root
-     * @param child
+     * Sets new node balances for root node and its children before executing a double left rotation
+     * @pre must be executed before the rotation occurs
+     * @param root Root of the rotation
+     * @param child node's child
+     * @param grandChild child node's child
      */
     private void leftDoubleRotationNewBalance(AVLTreeNode<K, V> root, AVLTreeNode<K ,V> child, AVLTreeNode<K ,V> grandChild) {
         switch ( grandChild.getBalance() )
@@ -335,9 +394,11 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
     }
 
     /**
-     * EXECUTED PRE ROTATION!
-     * @param root
-     * @param child
+     * Sets new node balances for root node and its children before executing a double right rotation
+     * @pre must be executed before the rotation occurs
+     * @param root Root of the rotation
+     * @param child node's child
+     * @param grandChild child node's child
      */
     private void rightDoubleRotationNewBalance(AVLTreeNode<K, V> root, AVLTreeNode<K ,V> child, AVLTreeNode<K ,V> grandChild) {
         switch (grandChild.getBalance() )

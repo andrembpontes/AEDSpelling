@@ -6,11 +6,8 @@ package aed.dataStructures;
  * @param <K> Key
  * @param <V> Value
  */
-public class OrderedLinkedMap<K extends Comparable<K>, V> implements Map<K, V> {
+public class OrderedLinkedMap<K extends Comparable<K>, V> extends AbstractMap<K, V> {
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private OrderedLinkedList<EntryComparableByKey<K, V>> list;
 
@@ -105,18 +102,8 @@ public class OrderedLinkedMap<K extends Comparable<K>, V> implements Map<K, V> {
     }
 
     @Override
-    public int size() {
-        return this.list.size();
-    }
-
-    @Override
     public boolean isFull() {
         return false;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return this.size() == 0;
     }
 
     @Override

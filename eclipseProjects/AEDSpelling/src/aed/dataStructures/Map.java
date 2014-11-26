@@ -55,4 +55,16 @@ public interface Map<K,V> extends Collection<Entry<K,V>>
      * @return Collection with map values
      */
     Collection<V> values();
+
+    /**
+     * Returns an iterator of the map's values
+     * @return An iterator of the map's values
+     */
+    public Iterator<V> valuesIterator();
+
+    /**
+     * Returns an iterator of the map's keys
+     * @return An iterator of the map's keys
+     */
+    public Iterator<K> keysIterator();
 }

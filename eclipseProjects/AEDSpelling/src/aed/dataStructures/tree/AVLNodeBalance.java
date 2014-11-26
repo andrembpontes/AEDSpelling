@@ -1,7 +1,8 @@
 package aed.dataStructures.tree;
 
 /**
- * Created by gbfm on 11/25/14.
+ * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
+ * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
  */
 enum AVLNodeBalance {
     EQUAL,

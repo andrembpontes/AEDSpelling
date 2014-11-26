@@ -1,6 +1,11 @@
 package aed.dataStructures.tree;
 
 
+/**
+ * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
+ * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ * @param <E> Element
+ */
 class PathStep<E> {
     private Side side;
     private E parent;
@@ -15,7 +20,7 @@ class PathStep<E> {
     }
 
     /**
-     * Returns the last visited node
+     * Returns step node
      * @return The last visited node
      */
     protected E getParent() {

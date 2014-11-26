@@ -186,6 +186,12 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
         return this.delete(key, path);
     }
 
+    /**
+     * Deletes a node with the specified key, if one is found, and stores the path traveled path in path
+     * @param key Key to remove
+     * @param path Traveled path
+     * @return The deleted node's value, if no node was found returns null
+     */
     protected V delete(K key, Path<TreeNode<K, V>> path) {
         TreeNode<K,V> node = this.findNode(key, path);
         if ( node == null ) {
