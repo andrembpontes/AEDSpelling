@@ -68,12 +68,12 @@ public class Spelling implements ISpelling {
 	}
 	
 	@Override
-	public Iterator<IWordInText> textCorrects(String id) {
+	public Iterator<IWordInText> textCorrects(String id, int frequency) {
 		IAnalisableText text = this.searchText(id);
 		if (text == null)
 			throw new TextNotFoundException();
 		
-		return text.correct();
+		return text.correct(frequency);
 	}
 	
 	@Override
@@ -84,7 +84,26 @@ public class Spelling implements ISpelling {
 		
 		return text.errors();
 	}
-	
+
+	@Override
+	public Iterator<IWordInText> textErrors(String id, int frequency) {
+		IAnalisableText text = this.searchText(id);
+		if (text == null)
+			throw new TextNotFoundException();
+
+		return text.errors(frequency);
+	}
+
+	@Override
+	public Iterator<IWordInText> wordsWithFrequency(String id, int frequency) {
+		IAnalisableText text = this.searchText(id);
+
+		if (text == null)
+			throw new TextNotFoundException();
+
+		return text.occurrences(frequency);
+	}
+
 	@Override
 	public Iterator<Line> textLines(String id) {
 		IAnalisableText text = this.searchText(id);
@@ -110,16 +129,6 @@ public class Spelling implements ISpelling {
 	@Override
 	public boolean verifyWord(String word) {
 		return this.dictionary.verifyWord(word);
-	}
-	
-	@Override
-	public Iterator<IWordInText> wordsOf(String id) {
-		IAnalisableText text = this.searchText(id);
-		
-		if (text == null)
-			throw new TextNotFoundException();
-		
-		return text.occurrences();
 	}
 	
 }

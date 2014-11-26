@@ -281,34 +281,28 @@ public class Main {
 		try {
 			wType = WordType.valueOf(scan.next());
 			freq = scan.nextInt();
-			
+
 			Iterator<IWordInText> words = null;
-			
+
 			switch (wType) {
 				case C:
-					words = spelling.textCorrects(textId);
+					words = spelling.textCorrects(textId, freq);
 					break;
 				case E:
-					words = spelling.textErrors(textId);
+					words = spelling.textErrors(textId, freq);
 					break;
 				case P:
-					words = spelling.wordsOf(textId);
+					words = spelling.wordsWithFrequency(textId, freq);
 					break;
 			}
-			 
 
-			int printed = 0;
-			while (words.hasNext()){
-				IWordInText word = words.next();
-				if (word.getFrequency() == freq) {
-					OUT.println(word.getWord());
-					printed++;
-				}
+			if (words.hasNext()) {
+				do {
+					OUT.println(words.next().getWord());
+				} while (words.hasNext());
 			}
-
-			if (printed == 0){
+			else
 				OUT.printMsg(Output.NO_WORD_WITH_FREQUENCY);
-			}
 
 
 		}

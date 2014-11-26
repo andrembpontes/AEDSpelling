@@ -51,12 +51,13 @@ public interface ISpelling extends Serializable {
 	int frequencyOf(String id, String word);
 	
 	/**
-	 * Returns an iterator of correct words off a given text
+	 * Returns an iterator of correct words off a given text with specified frequency
 	 * 
 	 * @param id Id
+	 * @param frequency frequency
 	 * @return An iterator of correct words off a given text
 	 */
-	Iterator<IWordInText> textCorrects(String id);
+	Iterator<IWordInText> textCorrects(String id, int frequency);
 	
 	/**
 	 * Returns an iterator of wrong words off a given text
@@ -65,7 +66,25 @@ public interface ISpelling extends Serializable {
 	 * @return An iterator of wrong words off a given text
 	 */
 	Iterator<IWordInText> textErrors(String id);
-	
+
+	/**
+	 * Returns an iterator of wrong words off a given text with specified frequency
+	 *
+	 * @param id Id
+	 * @param frequency frequency
+	 * @return An iterator of wrong words off a given text
+	 */
+	Iterator<IWordInText> textErrors(String id, int frequency);
+
+	/**
+	 * Returns an iterator of words off a given text with specified frequency
+	 *
+	 * @param id Id
+	 * @param frequency frequency
+	 * @return An iterator of correct words off a given text
+	 */
+	Iterator<IWordInText> wordsWithFrequency(String id, int frequency);
+
 	/**
 	 * Returns an iterator of lines off a given text
 	 * 
@@ -91,12 +110,4 @@ public interface ISpelling extends Serializable {
 	 * @return True if than iterator of lines off a given text enumerated between boundariese word exists in the dictionary, false if not
 	 */
 	boolean verifyWord(String word);
-	
-	/**
-	 * Returns an iterator of words off a given text
-	 * 
-	 * @param id Id
-	 * @return An iterator of words off a given text
-	 */
-	Iterator<IWordInText> wordsOf(String id);
 }

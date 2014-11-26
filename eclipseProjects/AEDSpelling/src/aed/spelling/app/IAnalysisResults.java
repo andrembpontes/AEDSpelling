@@ -11,19 +11,28 @@ import aed.dataStructures.Iterator;
 public interface IAnalysisResults extends Serializable {
 	
 	/**
-	 * Returns an iterator for the correct found
-	 * 
+	 * Returns an iterator for the correct words with specified frequency
+	 *
+	 * @param frequency frequency
 	 * @return An iterator for the correct found
 	 */
-	Iterator<IWordInText> correct();
+	Iterator<IWordInText> correct(int frequency);
 	
 	/**
-	 * Returns an iterator for the errors found
-	 * 
+	 * Returns an iterator for the wrong words with specified frequency
+	 *
+	 * @param frequency frequency
+	 * @return An iterator for the errors found
+	 */
+	Iterator<IWordInText> errors(int frequency);
+
+	/**
+	 * Returns an iterator for the wrong words with specified frequency
+	 *
 	 * @return An iterator for the errors found
 	 */
 	Iterator<IWordInText> errors();
-	
+
 	/**
 	 * Returns the frequency of a word
 	 * 
@@ -33,9 +42,10 @@ public interface IAnalysisResults extends Serializable {
 	int frequency(String word);
 	
 	/**
-	 * Returns an iterator of occurrences of a word
-	 * 
+	 * Returns an iterator of occurrences of words with specified frequency
+	 *
+	 * @param frequency frequency
 	 * @return An iterator of occurrences of a word
 	 */
-	Iterator<IWordInText> occurrences();
+	Iterator<IWordInText> occurrences(int frequency);
 }

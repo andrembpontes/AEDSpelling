@@ -36,11 +36,17 @@ class AnalisableText extends Text implements IAnalisableText {
 	}
 
 	@Override
-	public Iterator<IWordInText> correct() {
+	public Iterator<IWordInText> correct(int frequency) {
 		this.checkAnalisys();
-		return this.analysisResults.correct();
+		return this.analysisResults.correct(frequency);
 	}
 	
+	@Override
+	public Iterator<IWordInText> errors(int frequency) {
+		this.checkAnalisys();
+		return this.analysisResults.errors(frequency);
+	}
+
 	@Override
 	public Iterator<IWordInText> errors() {
 		this.checkAnalisys();
@@ -54,9 +60,9 @@ class AnalisableText extends Text implements IAnalisableText {
 	}
 	
 	@Override
-	public Iterator<IWordInText> occurrences() {
+	public Iterator<IWordInText> occurrences(int frequency) {
 		this.checkAnalisys();
-		return this.analysisResults.occurrences();
+		return this.analysisResults.occurrences(frequency);
 	}
 	
 }

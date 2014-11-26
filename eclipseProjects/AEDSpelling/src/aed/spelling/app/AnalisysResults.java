@@ -1,11 +1,7 @@
 package aed.spelling.app;
 
-import aed.dataStructures.Collection;
-import aed.dataStructures.HashMap;
-import aed.dataStructures.Iterator;
-import aed.dataStructures.Map;
+import aed.dataStructures.*;
 import aed.dataStructures.tree.AVLTree;
-import aed.dataStructures.tree.BinarySearchTree;
 import aed.spelling.Line;
 
 /**
@@ -13,11 +9,52 @@ import aed.spelling.Line;
  * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
  */
 class AnalisysResults implements IAnalysisResults {
-	
+
+	public static int AVERRAGE_TEXT_WORDS_N = 100;
+
+	class AnalisysData {
+		Map<String, IWordOccurrence> wordMap;
+		Map<String, IWordOccurrence> errorTree;
+		List<IWordOccurrence> correctList;
+
+		AnalisysData(){
+			wordMap = new HashMap<String, IWordOccurrence>();
+			errorTree = new AVLTree<String, IWordOccurrence>();
+			correctList = new LinkedList<IWordOccurrence>();
+		}
+
+		IWordOccurrence getWord(String word){
+			return this.wordMap.get(word);
+		}
+
+		void addWord(String word, int lineNr){
+			String key = word;
+			IWordOccurrence occurrence = new WordOccurrence(word, dictionary);
+			occurrence.incrementFrequency(lineNr);
+
+			this.wordMap.put(key, occurrence);
+
+			if(occurrence.isCorrect())
+				correctList.add(occurrence);
+			else
+				errorTree.put(key, occurrence);
+		}
+	}
+
 	private static final long	serialVersionUID	= 1L;
 	private IAnalisableText		analisableText;
 	private IDictionary			dictionary;
-	private Map<String, IWordOccurrence> errors, corrects,  occurrences, orderedOccurrences;
+
+	//Index Occurrences by WordString
+	private Map<String, IWordInText> wordMap;
+
+	//All errors sort alphabetical
+	private Map<String, IWordInText> errorTree;
+
+	//Index occurrences by frequency and by type (Error, Correct or both)
+	private Map<Integer, Map<String, IWordInText>> frequenciesErrorMap;
+	private Map<Integer, Map<String, IWordInText>> frequenciesCorrectMap;
+	private Map<Integer, Map<String, IWordInText>> frequenciesWordMap;
 	
 	public AnalisysResults(IAnalisableText analisableText, IDictionary dictionary) {
 		this.analisableText = analisableText;
@@ -31,33 +68,20 @@ class AnalisysResults implements IAnalysisResults {
 	 * @param word Word to add 
 	 * @param lineNumber Line number of the occurence
 	 */
-	private void addOccurrence(String word, int lineNumber) {
-		IWordOccurrence occurrence = this.getWordOccurrence(word);
-		
-		if (occurrence == null) {
-            String key = word.toLowerCase();
+	private void addOccurrence(String word, int lineNumber, AnalisysData data) {
+		IWordOccurrence occurrence = data.getWord(word);
 
-			occurrence = new WordOccurrence(key, this.dictionary);
-
-			this.occurrences.put(key, occurrence);
-            this.orderedOccurrences.put(key, occurrence);
-			
-			if (occurrence.isCorrect())
-				this.corrects.put(key, occurrence);
-			else
-				this.errors.put(key, occurrence);
-		}
-		occurrence.incrementFrequency(lineNumber);
+		if (occurrence == null)
+			data.addWord(word, lineNumber);
+		else
+			occurrence.incrementFrequency(lineNumber);
 	}
 	
 	/**
 	 * Analyzes a text
 	 */
 	private void analise() {
-		this.occurrences = new HashMap<String, IWordOccurrence>();
-        this.orderedOccurrences = new AVLTree<String, IWordOccurrence>();
-		this.errors = new AVLTree<String, IWordOccurrence>();
-		this.corrects = new AVLTree<String, IWordOccurrence>();
+		AnalisysData data = new AnalisysData();
 		
 		Iterator<Line> lines = this.analisableText.lines();
 		
@@ -68,43 +92,86 @@ class AnalisysResults implements IAnalysisResults {
 			
 			for (String word : words)
 				if (!word.isEmpty())
-					this.addOccurrence(word.toLowerCase(), line.getNr());
+					this.addOccurrence(word.toLowerCase(), line.getNr(), data);
+		}
+
+		this.storeAnaliseData(data);
+	}
+
+	private void storeAnaliseData(AnalisysData data){
+		this.wordMap = (Map<String, IWordInText>) (Map<String, ? extends IWordInText>) data.wordMap;
+		this.errorTree = (Map<String, IWordInText>) (Map<String, ? extends IWordInText>) data.errorTree;
+		this.indexWordByFrequency(data);
+	}
+
+	private void indexWordByFrequency(AnalisysData data){
+		this.frequenciesErrorMap = new HashMap<Integer, Map<String, IWordInText>>();
+		this.frequenciesCorrectMap = new HashMap<Integer, Map<String, IWordInText>>();
+		this.frequenciesWordMap = new HashMap<Integer, Map<String, IWordInText>>();
+
+		Iterator<Entry<String, IWordOccurrence>> errorIterator = data.errorTree.iterator();
+		while(errorIterator.hasNext()){
+			this.indexWordByFrequency(errorIterator.next().getValue());
+		}
+
+		Iterator<IWordOccurrence> correctIterator = data.correctList.iterator();
+		while(correctIterator.hasNext()){
+			this.indexWordByFrequency(correctIterator.next());
 		}
 	}
-	
-	@Override
-    @SuppressWarnings("unchecked")
-	public Iterator<IWordInText> correct() {
-		return  ((Collection<IWordInText>)(Collection<? extends IWordInText>)this.corrects.values()).iterator();
+
+	private void indexWordByFrequency(IWordOccurrence word){
+		int frequency = word.getFrequency();
+		String wordString = word.getWord();
+
+		this.getFrequencyMap(this.frequenciesWordMap, frequency).put(wordString, word);
+
+		if(word.isCorrect())
+			this.getFrequencyMap(this.frequenciesCorrectMap, frequency).put(wordString, word);
+		else
+			this.getFrequencyMap(this.frequenciesErrorMap, frequency).put(wordString, word);
+	}
+
+	private Map<String, IWordInText> getFrequencyMap(Map<Integer, Map<String, IWordInText>> mapByFrequency, int frequency){
+		Map<String, IWordInText> frequencyMap = mapByFrequency.get(frequency);
+		if(frequencyMap == null) {
+			frequencyMap = new AVLTree<String, IWordInText>();
+			mapByFrequency.put(frequency, frequencyMap);
+		}
+
+		return frequencyMap;
 	}
 	
 	@Override
-    @SuppressWarnings("unchecked")
+	public Iterator<IWordInText> correct(int frequency) {
+		//TODO improve with values iterator
+		return this.getFrequencyMap(this.frequenciesCorrectMap, frequency).values().iterator();
+	}
+	
+	@Override
+	public Iterator<IWordInText> errors(int frequency) {
+		//TODO improve with values iterator
+		return this.getFrequencyMap(this.frequenciesErrorMap, frequency).values().iterator();
+	}
+
+	@Override
 	public Iterator<IWordInText> errors() {
-		return ((Collection<IWordInText>)(Collection<? extends IWordInText>)this.errors.values()).iterator();
+		//TODO improve with values iterator
+		return this.errorTree.values().iterator();
 	}
 	
 	@Override
 	public int frequency(String word) {
-		IWordOccurrence wordOccurrence = this.getWordOccurrence(word);
+		IWordInText wordOccurrence = this.wordMap.get(word.toLowerCase());
 		if (wordOccurrence != null)
 			return wordOccurrence.getFrequency();
 		return 0;
 	}
-	
-	/**
-	 * Returns an iterator of the occurrences of a specified word
-	 * @param word Word to search for
-	 * @return An iterator of the occurrences of a specified word
-	 */
-	private IWordOccurrence getWordOccurrence(String word) {
-		return this.occurrences.get(word.toLowerCase());
-	}
-	
+
 	@Override
-    @SuppressWarnings("unchecked")
-	public Iterator<IWordInText> occurrences() {
-		return ((Collection<IWordInText>)(Collection<? extends IWordInText>)this.orderedOccurrences.values()).iterator();
+	public Iterator<IWordInText> occurrences(int frequency) {
+		//TODO improve with values iterator
+		return this.getFrequencyMap(this.frequenciesWordMap, frequency).values().iterator();
 	}
 	
 }

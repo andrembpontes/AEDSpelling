@@ -14,11 +14,11 @@ import java.io.Serializable;
 public interface IAnalisableText extends Serializable {
 	
 	/**
-	 * Return text words that are found in Dictionary
+	 * Return text words that are found in Dictionary with specified frequency
 	 * 
 	 * @return Text word that are not in Dictionary
 	 */
-	Iterator<IWordInText> correct();
+	Iterator<IWordInText> correct(int frequency);
 	
 	/**
 	 * Return text words that are not found in Dictionary
@@ -26,6 +26,14 @@ public interface IAnalisableText extends Serializable {
 	 * @return Text words that are not in Dictionary
 	 */
 	Iterator<IWordInText> errors();
+
+	/**
+	 * Return text words that are not found in Dictionary with specified frequency
+	 *
+	 * @param frequency frequency
+	 * @return Text words that are not in Dictionary
+	 */
+	Iterator<IWordInText> errors(int frequency);
 	
 	/**
 	 * Calculate word frequency
@@ -63,9 +71,10 @@ public interface IAnalisableText extends Serializable {
 	Iterator<Line> lines(int firstLine, int lastLine) throws InvalidIndexException, InvalidIndexRangeException;
 	
 	/**
-	 * Iterator for word occurrences in text
-	 * 
+	 * Iterator for word occurrences in text with specified frequency
+	 *
+	 * @param frequency frequency
 	 * @return Occurrences
 	 */
-	Iterator<IWordInText> occurrences();
+	Iterator<IWordInText> occurrences(int frequency);
 }
