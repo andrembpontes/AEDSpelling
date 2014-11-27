@@ -14,10 +14,14 @@ class Dictionary implements IDictionary {
 	private static final long serialVersionUID = 1L;
 	private Map<String, IDictionaryWord> words;
 	
-	public Dictionary() {
-		this.words = new HashMap<String, IDictionaryWord>();
+	public Dictionary(int startSize) {
+		this.words = new HashMap<String, IDictionaryWord>(startSize);
 	}
-	
+
+	public Dictionary(){
+		this(IDictionary.START_SIZE);
+	}
+
 	@Override
 	public Word addWord(String word) throws InvalidWordException {
 		String lowerWord = word.toLowerCase();

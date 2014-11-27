@@ -21,6 +21,10 @@ public interface Map<K,V> extends Collection<Entry<K,V>>
      * If there is an entry in the dictionary whose key is the specified key,
      * replaces its value by the specified value and returns the old value;
      * otherwise, inserts the entry (key, value) and returns null.
+     *
+     * @param key key to add
+     * @param value value to add
+     * @return Old value associated with same key
      */
     V put( K key, V value );
 

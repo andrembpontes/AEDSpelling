@@ -29,7 +29,7 @@ public interface ISpelling extends Serializable {
 	 * 
 	 * @param words Words to add
 	 * @return True if any word was added false if not
-	 * @throws InvalidWordException
+	 * @throws InvalidWordException Exists a not valid word in given list
 	 */
 	boolean addWords(List<String> words) throws InvalidWordException;
 	

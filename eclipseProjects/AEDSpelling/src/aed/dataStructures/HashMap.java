@@ -10,18 +10,21 @@ public class HashMap<K, V> extends AbstractMap<K, V> {
 	private static final long serialVersionUID = 1L;
 
     private HashTable<Entry<K, V>> hashTable;
+    private int startSize;
 
     public HashMap(){
+        this.startSize = -1;
         this.clear();
     }
 
     public HashMap(int startingSize) {
+        this.startSize = startingSize;
         this.clear();
     }
 
     @Override
     public void clear() {
-        this.hashTable = new OpenHashTable<Entry<K, V>>();
+        this.hashTable = this.startSize > 0 ? new OpenHashTable<Entry<K, V>>(this.startSize) : new OpenHashTable<Entry<K, V>>();
         this.size = 0;
     }
 

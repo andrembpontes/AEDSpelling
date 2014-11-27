@@ -149,6 +149,7 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
     /**
      * Depending on the node balance executes a single rotation or a double
      * rotation to the left in order to keep the tree balanced after a node insertion
+     * @param node child node
      * @param path Path used in insertion
      */
     protected void rebalaceInsertionLeft(AVLTreeNode<K,V> node, Path<TreeNode<K, V>> path) {
@@ -168,6 +169,7 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
     /**
      * Depending on the node balance executes a single rotation or a double
      * rotation to the right in order to keep the tree balanced after a node insertion
+     * @param node child node
      * @param path Path used in insertion
      */
     protected void rebalanceInsertionRight(AVLTreeNode<K,V> node, Path<TreeNode<K, V>> path )
@@ -189,6 +191,7 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
     /**
      * Depending on the node balance executes a single rotation or a double
      * rotation to the left in order to keep the tree balanced after a node removal
+     * @param node child node
      * @param path Path used in insertion
      */
     protected void rebalanceRemovalLeft(AVLTreeNode<K,V> node, Path<TreeNode<K, V>> path) {
@@ -209,6 +212,7 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
     /**
      * Depending on the node balance executes a single rotation or a double
      * rotation to the right in order to keep the tree balanced after a node removal
+     * @param node child node
      * @param path Path used in insertion
      */
     protected void rebalanceRemovalRight(AVLTreeNode<K,V> node, Path<TreeNode<K, V>> path )

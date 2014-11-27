@@ -14,6 +14,7 @@ public interface IDictionaryWord extends Serializable {
 	 * Returns true if this is equal to the specified word, false if not
 	 * 
 	 * @param word Word to check
+	 * @return True if equals, else False
 	 */
 	boolean equals(Word word);
 	

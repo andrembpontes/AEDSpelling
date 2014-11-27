@@ -9,6 +9,8 @@ public interface IWordOccurrence extends IWordInText {
 
 	/**
 	 * Increments the word frequency
+	 *
+	 * @param lineNumber line where are frequency
 	 */
 	void incrementFrequency(int lineNumber);
 

@@ -15,7 +15,8 @@ public interface IAnalysableText extends Serializable {
 	
 	/**
 	 * Return text words that are found in Dictionary with specified frequency
-	 * 
+	 *
+	 * @param frequency frequency
 	 * @return Text word that are not in Dictionary
 	 */
 	Iterator<IWordInText> correct(int frequency);
@@ -77,4 +78,10 @@ public interface IAnalysableText extends Serializable {
 	 * @return Occurrences
 	 */
 	Iterator<IWordInText> occurrences(int frequency);
+
+	/**
+	 * Return number of lines
+	 * @return number of lines
+	 */
+	int numberOfLines();
 }

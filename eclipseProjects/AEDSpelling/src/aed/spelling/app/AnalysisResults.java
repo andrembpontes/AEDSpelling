@@ -10,7 +10,7 @@ import aed.spelling.Line;
  */
 class AnalysisResults implements IAnalysisResults {
 
-	public static int AVERRAGE_TEXT_WORDS_N = 100;
+	public static int AVERRAGE_WORDS_PER_LINE = 15;
 
 	class AnalysisData {
 		Map<String, IWordOccurrence> wordMap;
@@ -18,7 +18,7 @@ class AnalysisResults implements IAnalysisResults {
 		List<IWordOccurrence> correctList;
 
 		AnalysisData(){
-			wordMap = new HashMap<String, IWordOccurrence>();
+			wordMap = new HashMap<String, IWordOccurrence>(AVERRAGE_WORDS_PER_LINE * analisableText.numberOfLines());
 			errorTree = new AVLTree<String, IWordOccurrence>();
 			correctList = new LinkedList<IWordOccurrence>();
 		}

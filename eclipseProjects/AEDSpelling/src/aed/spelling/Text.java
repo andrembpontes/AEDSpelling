@@ -77,4 +77,12 @@ public class Text implements Serializable {
 	public Iterator<Line> lines(int firstLine, int lastLine) throws InvalidLineNumberException, InvalidLineRangeException {
 		return this.getLinesIterator(firstLine, lastLine);
 	}
+
+	/**
+	 * Return number of lines
+	 * @return number of lines
+	 */
+	public int numberOfLines(){
+		return this.lines.size();
+	}
 }

@@ -64,5 +64,5 @@ class AnalysableText extends Text implements IAnalysableText {
 		this.checkAnalisys();
 		return this.analysisResults.occurrences(frequency);
 	}
-	
+
 }

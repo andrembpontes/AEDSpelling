@@ -26,7 +26,7 @@ public class OpenHashTable<E> extends AbstractCollection<E> implements HashTable
             };
 
     public OpenHashTable(){
-        this(DEFAULT_INITIAL_CAPACITY);
+        this(HashTable.DEFAULT_INITIAL_CAPACITY);
     }
 
     public OpenHashTable(int initialCapacity) {

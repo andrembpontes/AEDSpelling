@@ -78,7 +78,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
     /**
      * Returns the smallest member of the tree
      * @return The smallest member of the tree
-     * @throws EmptyTreeException
+     * @throws EmptyTreeException Tree have no entries
      */
     public V getMinimum() throws EmptyTreeException {
         return this.getLeafBySide(Side.LEFT).getValue();
@@ -87,7 +87,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
     /**
      * Returns the bigger entry of the tree
      * @return The bigger entry of the tree
-     * @throws EmptyTreeException
+     * @throws EmptyTreeException Tree have no entries
      */
     public V getMaximum() throws EmptyTreeException{
         return this.getLeafBySide(Side.RIGHT).getValue();
@@ -100,7 +100,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
      * @param side Specified side
      * @param path Path variable to fill
      * @return The leaf most to the right or to the left based on a root node and a specified side
-     * @throws EmptyTreeException
+     * @throws EmptyTreeException Tree have no entries
      */
     protected TreeNode<K, V> getLeafBySide(TreeNode<K, V> base, Side side, Path<TreeNode<K, V>> path) throws EmptyTreeException{
         TreeNode<K, V> node = base;
@@ -125,7 +125,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
      *
      * @param side Specified side
      * @return The leaf most to the right or to the left of the tree based on a specified side
-     * @throws EmptyTreeException
+     * @throws EmptyTreeException Tree have no entries
      */
     protected TreeNode<K, V> getLeafBySide(Side side) throws EmptyTreeException{
         return this.getLeafBySide(this.root, side, null);
@@ -137,7 +137,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> extends AbstractMap<K,
      * @param base Base node
      * @param side Specified side
      * @return The leaf most to the right or to the left based on a root node and a specified side
-     * @throws EmptyTreeException
+     * @throws EmptyTreeException Tree have no entries
      */
     protected TreeNode<K, V> getLeafBySide(TreeNode<K, V> base, Side side) throws EmptyTreeException{
         return this.getLeafBySide(base, side, null);
