@@ -10,14 +10,12 @@ import aed.spelling.Word;
  * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
  */
 class Dictionary implements IDictionary {
-
-    private static final int STARTING_DICTIONARY_SIZE = 100;
-
+	
 	private static final long serialVersionUID = 1L;
-	private Map<String, Word> words;
+	private Map<String, IDictionaryWord> words;
 	
 	public Dictionary() {
-		this.words = new HashMap<String, Word>(STARTING_DICTIONARY_SIZE);
+		this.words = new HashMap<String, IDictionaryWord>();
 	}
 	
 	@Override
