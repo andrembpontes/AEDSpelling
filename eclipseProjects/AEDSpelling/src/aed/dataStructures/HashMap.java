@@ -7,14 +7,15 @@ package aed.dataStructures;
  * @param <V> Value
  */
 public class HashMap<K, V> extends AbstractMap<K, V> {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
     private HashTable<Entry<K, V>> hashTable;
 
     public HashMap(){
+        this.clear();
+    }
+
+    public HashMap(int startingSize) {
         this.clear();
     }
 
