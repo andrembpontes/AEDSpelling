@@ -330,7 +330,7 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
 
     /**
      * Sets new node balances for root node and its child before executing a single left rotation
-     * @pre must be executed before the rotation occurs
+     * Must be executed before the rotation occurs
      * @param root Root of the rotation
      * @param child Root node's child
      */
@@ -349,7 +349,7 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
 
     /**
      * Sets new node balances for root node and its child before executing a single right rotation
-     * @pre must be executed before the rotation occurs
+     * Must be executed before the rotation occurs
      * @param root Root of the rotation
      * @param child Root node's child
      */
@@ -368,7 +368,7 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
 
     /**
      * Sets new node balances for root node and its children before executing a double left rotation
-     * @pre must be executed before the rotation occurs
+     * Must be executed before the rotation occurs
      * @param root Root of the rotation
      * @param child node's child
      * @param grandChild child node's child
@@ -395,7 +395,7 @@ public class AVLTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> 
 
     /**
      * Sets new node balances for root node and its children before executing a double right rotation
-     * @pre must be executed before the rotation occurs
+     * Must be executed before the rotation occurs
      * @param root Root of the rotation
      * @param child node's child
      * @param grandChild child node's child
