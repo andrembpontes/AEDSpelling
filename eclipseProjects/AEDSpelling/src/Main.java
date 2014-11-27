@@ -1,7 +1,10 @@
 import aed.dataStructures.Iterator;
 import aed.dataStructures.LinkedList;
 import aed.dataStructures.List;
-import aed.spelling.*;
+import aed.spelling.InvalidLineNumberException;
+import aed.spelling.InvalidLineRangeException;
+import aed.spelling.InvalidWordException;
+import aed.spelling.Line;
 import aed.spelling.app.ISpelling;
 import aed.spelling.app.IWordInText;
 import aed.spelling.app.Spelling;
@@ -12,8 +15,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
- * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ * @author Andre Pontes (42845) {@literal <am.pontes@campus.fct.unl.pt>}
+ * @author Goncalo Marcelino (43178) {@literal <gb.marcelino@campus.fct.unl.pt>}
  */
 public class Main {
 	
@@ -100,7 +103,6 @@ public class Main {
 	 * 
 	 * @param spelling Instance to add the text to
 	 * @param scan Input scanner
-	 * @return Output string
 	 */
 	private static void addText(ISpelling spelling, Scanner scan) {
 		String textId = Main.processInput(scan.next());
@@ -122,7 +124,6 @@ public class Main {
 	 * 
 	 * @param spelling Instance containing the dictionary to add word to
 	 * @param scan Input scanner
-	 * @return Output string
 	 */
 	private static void addWordsToDictionary(ISpelling spelling, Scanner scan) {
 		int numberOfWords = scan.nextInt();
@@ -162,7 +163,6 @@ public class Main {
 	 * 
 	 * @param spelling Instance to get the word and text from
 	 * @param scan Input scanner
-	 * @return Output string
 	 */
 	private static void getWordFrequency(ISpelling spelling, Scanner scan) {
 		String textId = Main.processInput(scan.next());
@@ -190,7 +190,6 @@ public class Main {
 	 * 
 	 * @param spelling Instance to get the text from
 	 * @param scan Input scanner
-	 * @return Output string
 	 */
 	private static void listError(ISpelling spelling, Scanner scan) {
 		String textId = scan.next();
@@ -229,7 +228,6 @@ public class Main {
 	 * 
 	 * @param spelling Instance to get the text from
 	 * @param scan Input scanner
-	 * @return Output string
 	 */
 	private static void listText(ISpelling spelling, Scanner scan) {
 		String textId = Main.processInput(scan.nextLine());
@@ -243,7 +241,6 @@ public class Main {
 	 * 
 	 * @param spelling Instance to get the text from
 	 * @param scan Input scanner
-	 * @return Output string
 	 */
 	private static void listTextExcerpt(ISpelling spelling, Scanner scan) {
 		String textId = Main.processInput(scan.next());
@@ -271,7 +268,6 @@ public class Main {
 	 * 
 	 * @param spelling Instance to get the text from
 	 * @param scan Input scanner
-	 * @return Output string
 	 */
 	private static void listWordFrequency(ISpelling spelling, Scanner scan) {
 		String textId = scan.next();
@@ -348,7 +344,6 @@ public class Main {
 	 * 
 	 * @param spelling Instance to remove the text from
 	 * @param scan Input scanner
-	 * @return Output string
 	 */
 	private static void removeText(ISpelling spelling, Scanner scan) {
 		String textId = Main.processInput(scan.nextLine());
@@ -364,7 +359,6 @@ public class Main {
 	 * 
 	 * @param spelling Instance containing the dictionary to search in
 	 * @param scan Input scanner
-	 * @return Output string
 	 */
 	private static void searchWordInDictionary(ISpelling spelling, Scanner scan) {
 		String word = Main.processInput(scan.nextLine());

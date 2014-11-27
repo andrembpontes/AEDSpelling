@@ -1,8 +1,8 @@
 package aed.dataStructures;
 
 /**
- * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
- * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ * @author Andre Pontes (42845) {@literal <am.pontes@campus.fct.unl.pt>}
+ * @author Goncalo Marcelino (43178) {@literal <gb.marcelino@campus.fct.unl.pt>}
  * @param <E> Type of HashTable Elements
  */
 public class OpenHashTable<E> extends AbstractCollection<E> implements HashTable<E>{
@@ -140,7 +140,7 @@ public class OpenHashTable<E> extends AbstractCollection<E> implements HashTable
     @Override
     public boolean contains(E element) {
         Collection<E> index = this.hashTable[this.getHashCode(element)];
-        return (index == null ? false : index.contains(element));
+        return index != null && index.contains(element);
     }
 
     @Override

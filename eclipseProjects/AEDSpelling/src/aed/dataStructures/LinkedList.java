@@ -1,8 +1,8 @@
 package aed.dataStructures;
 
 /**
- * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
- * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ * @author Andre Pontes (42845) {@literal <am.pontes@campus.fct.unl.pt>}
+ * @author Goncalo Marcelino (43178) {@literal <gb.marcelino@campus.fct.unl.pt>}
  * @param <E> Type of List Elements
  */
 public class LinkedList<E> extends AbstractLinkedList<E> implements InsertionList<E>{
@@ -76,7 +76,7 @@ public class LinkedList<E> extends AbstractLinkedList<E> implements InsertionLis
         else {
             Node<E> prev = this.getNode(index - 1);
             Node<E> next = prev.getNext();
-            Node<E> toInsert = new Node(element, prev, next);
+            Node<E> toInsert = new Node<E>(element, prev, next);
             prev.setNext(toInsert);
             next.setPrevious(toInsert);
             super.size++;

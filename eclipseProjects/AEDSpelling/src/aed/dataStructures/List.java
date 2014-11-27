@@ -1,8 +1,8 @@
 package aed.dataStructures;
 
 /**
- * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
- * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ * @author Andre Pontes (42845) {@literal <am.pontes@campus.fct.unl.pt>}
+ * @author Goncalo Marcelino (43178) {@literal <gb.marcelino@campus.fct.unl.pt>}
  * @param <E>Type of list elements
  */
 public interface List<E> extends Collection<E> {
@@ -27,7 +27,7 @@ public interface List<E> extends Collection<E> {
 	 * 
 	 * @param index Index of element
 	 * @return Element at given index
-	 * @throws InvalidPositionException
+	 * @throws InvalidPositionException {@literal index < 0 || index >= size()}
 	 */
 	E get(int index) throws InvalidPositionException;
 

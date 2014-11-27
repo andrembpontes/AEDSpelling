@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>aed.spelling</OriginalElement>
+  <nodes>
+    <node x="2207.5" y="1980.5">aed.spelling.Line</node>
+    <node x="1397.5" y="694.5">aed.spelling.InvalidWordException</node>
+    <node x="323.5" y="1446.0">aed.spelling.app.IAnalysableText</node>
+    <node x="2273.5" y="2334.5">aed.spelling.InvalidLineRangeException</node>
+    <node x="954.0" y="1021.0">aed.spelling.app.IWordInText</node>
+    <node x="577.5" y="787.0">aed.spelling.app.WordOccurrence</node>
+    <node x="287.5" y="328.5">aed.spelling.app.Spelling</node>
+    <node x="1817.5" y="2223.5">aed.spelling.LinesIterator</node>
+    <node x="1908.0" y="2574.5">aed.spelling.InvalidLineNumberException</node>
+    <node x="-2.5" y="494.5">aed.spelling.app.TextNotFoundException</node>
+    <node x="1847.5" y="1936.0">aed.spelling.Text</node>
+    <node x="1385.0" y="1003.0">aed.spelling.app.IDictionaryWord</node>
+    <node x="1677.5" y="809.5">aed.spelling.app.Dictionary</node>
+    <node x="1367.5" y="820.0">aed.spelling.Word</node>
+    <node x="1443.5" y="1490.5">aed.spelling.app.IAnalysisResults</node>
+    <node x="770.5" y="1313.5">aed.spelling.app.AnalysisResults</node>
+    <node x="294.5" y="-15.5">aed.spelling.app.ISpelling</node>
+    <node x="615.0" y="1054.5">aed.spelling.app.IWordOccurrence</node>
+    <node x="1703.5" y="1163.5">aed.spelling.app.IDictionary</node>
+    <node x="897.5" y="1903.5">aed.spelling.app.AnalysableText</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="aed.spelling.app.Dictionary" target="aed.spelling.app.IDictionaryWord">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="aed.spelling.app.AnalysableText" target="aed.spelling.app.IAnalysisResults">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="aed.spelling.app.AnalysableText" target="aed.spelling.Text">
+      <point x="182.5" y="-0.0" />
+      <point x="-152.5" y="-0.0" />
+    </edge>
+    <edge source="aed.spelling.app.Spelling" target="aed.spelling.app.Dictionary">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="aed.spelling.app.Dictionary" target="aed.spelling.app.IDictionary">
+      <point x="0.0" y="70.5" />
+      <point x="0.0" y="-36.5" />
+    </edge>
+    <edge source="aed.spelling.app.Spelling" target="aed.spelling.app.AnalysableText">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="aed.spelling.app.Spelling" target="aed.spelling.app.IAnalysableText">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="aed.spelling.app.AnalysableText" target="aed.spelling.app.IAnalysableText">
+      <point x="-182.5" y="-40.0" />
+      <point x="520.0" y="2000.0" />
+      <point x="0.0" y="114.0" />
+    </edge>
+    <edge source="aed.spelling.Text" target="aed.spelling.LinesIterator">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="aed.spelling.app.Spelling" target="aed.spelling.app.IDictionary">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="aed.spelling.app.AnalysisResults" target="aed.spelling.app.IDictionary">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="aed.spelling.app.WordOccurrence" target="aed.spelling.Word">
+      <point x="142.5" y="-0.0" />
+      <point x="-112.5" y="-0.0" />
+    </edge>
+    <edge source="aed.spelling.LinesIterator" target="aed.spelling.InvalidLineNumberException">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="aed.spelling.app.WordOccurrence" target="aed.spelling.app.IWordOccurrence">
+      <point x="0.0" y="93.0" />
+      <point x="0.0" y="-25.5" />
+    </edge>
+    <edge source="aed.spelling.LinesIterator" target="aed.spelling.InvalidLineRangeException">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="aed.spelling.Word" target="aed.spelling.app.IDictionaryWord">
+      <point x="0.0" y="60.0" />
+      <point x="0.0" y="-37.0" />
+    </edge>
+    <edge source="aed.spelling.Word" target="aed.spelling.InvalidWordException">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="aed.spelling.app.IWordOccurrence" target="aed.spelling.app.IWordInText">
+      <point x="105.0" y="-0.0" />
+      <point x="-126.0" y="-0.0" />
+    </edge>
+    <edge source="aed.spelling.app.Spelling" target="aed.spelling.app.ISpelling">
+      <point x="0.0" y="-191.5" />
+      <point x="0.0" y="135.5" />
+    </edge>
+    <edge source="aed.spelling.app.AnalysisResults" target="aed.spelling.app.IAnalysisResults">
+      <point x="309.5" y="-0.0" />
+      <point x="-156.5" y="-0.0" />
+    </edge>
+    <edge source="aed.spelling.app.AnalysableText" target="aed.spelling.app.AnalysisResults">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="aed.spelling.app.AnalysisResults" target="aed.spelling.app.IAnalysableText">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="aed.spelling.app.AnalysableText" target="aed.spelling.app.IDictionary">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="aed.spelling.app.Dictionary" target="aed.spelling.Word">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="aed.spelling.Text" target="aed.spelling.Line">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="aed.spelling.app.Spelling" target="aed.spelling.app.TextNotFoundException">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="aed.spelling.app.AnalysisResults" target="aed.spelling.app.IWordInText">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.32644628099173556" x="1222.3291139240505" y="1385.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

@@ -5,8 +5,8 @@ import aed.dataStructures.tree.AVLTree;
 import aed.spelling.Line;
 
 /**
- * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
- * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ * @author Andre Pontes (42845) {@literal <am.pontes@campus.fct.unl.pt>}
+ * @author Goncalo Marcelino (43178) {@literal <gb.marcelino@campus.fct.unl.pt>}
  */
 class AnalysisResults implements IAnalysisResults {
 
@@ -28,16 +28,15 @@ class AnalysisResults implements IAnalysisResults {
 		}
 
 		void addWord(String word, int lineNr){
-			String key = word;
 			IWordOccurrence occurrence = new WordOccurrence(word, dictionary);
 			occurrence.incrementFrequency(lineNr);
 
-			this.wordMap.put(key, occurrence);
+			this.wordMap.put(word, occurrence);
 
 			if(occurrence.isCorrect())
 				correctList.add(occurrence);
 			else
-				errorTree.put(key, occurrence);
+				errorTree.put(word, occurrence);
 		}
 	}
 

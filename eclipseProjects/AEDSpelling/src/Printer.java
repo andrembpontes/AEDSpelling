@@ -1,10 +1,10 @@
-import java.io.PrintStream;
-
 import aed.dataStructures.Iterator;
 
+import java.io.PrintStream;
+
 /**
- * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
- * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ * @author Andre Pontes (42845) {@literal <am.pontes@campus.fct.unl.pt>}
+ * @author Goncalo Marcelino (43178) {@literal <gb.marcelino@campus.fct.unl.pt>}
  */
 public class Printer {
 	

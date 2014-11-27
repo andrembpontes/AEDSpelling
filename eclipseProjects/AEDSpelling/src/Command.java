@@ -1,6 +1,6 @@
 /**
- * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
- * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ * @author Andre Pontes (42845) {@literal <am.pontes@campus.fct.unl.pt>}
+ * @author Goncalo Marcelino (43178) {@literal <gb.marcelino@campus.fct.unl.pt>}
  */
 public enum Command {
 	
@@ -52,5 +52,5 @@ public enum Command {
 	/**
 	 * Invalid command
 	 */
-	INVALID;
+	INVALID
 }

@@ -1,8 +1,8 @@
 package aed.dataStructures;
 
 /**
- * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
- * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ * @author Andre Pontes (42845) {@literal <am.pontes@campus.fct.unl.pt>}
+ * @author Goncalo Marcelino (43178) {@literal <gb.marcelino@campus.fct.unl.pt>}
  * @param <E> Type of List Elements
  */
 public interface InsertionList<E> extends List<E> {
@@ -25,7 +25,7 @@ public interface InsertionList<E> extends List<E> {
      * Returns first list element
      *
      * @return First element
-     * @throws EmptyListException
+     * @throws EmptyListException List is empty
      */
     E getFirst() throws EmptyListException;
 
@@ -33,7 +33,7 @@ public interface InsertionList<E> extends List<E> {
      * Returns last list element
      *
      * @return Last element
-     * @throws EmptyListException
+     * @throws EmptyListException List is empty
      */
     E getLast() throws EmptyListException;
 

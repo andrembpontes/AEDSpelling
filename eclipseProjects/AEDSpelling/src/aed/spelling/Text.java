@@ -1,13 +1,15 @@
 package aed.spelling;
 
-import aed.dataStructures.*;
+import aed.dataStructures.ArrayList;
+import aed.dataStructures.Iterator;
+import aed.dataStructures.List;
 
 import java.io.Serializable;
 
 /**
  * Represents a text identified by its id
- * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
- * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
+ * @author Andre Pontes (42845) {@literal <am.pontes@campus.fct.unl.pt>}
+ * @author Goncalo Marcelino (43178) {@literal <gb.marcelino@campus.fct.unl.pt>}
  */
 public class Text implements Serializable {
 	
@@ -72,7 +74,7 @@ public class Text implements Serializable {
 	 * @param firstLine first line of the text
 	 * @param lastLine last line of the text
 	 * @return An iterator of lines
-	 * @throws aed.dataStructures.InvalidIndexRangeException
+	 * @throws aed.dataStructures.InvalidIndexRangeException {@literal FirstLine < 1 || LastLine > numberOfLines()}
 	 */
 	public Iterator<Line> lines(int firstLine, int lastLine) throws InvalidLineNumberException, InvalidLineRangeException {
 		return this.getLinesIterator(firstLine, lastLine);
