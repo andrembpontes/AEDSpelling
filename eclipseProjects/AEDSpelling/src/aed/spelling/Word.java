@@ -1,13 +1,13 @@
 package aed.spelling;
 
-import java.io.Serializable;
+import aed.spelling.app.IDictionaryWord;
 
 /**
  * Represents a word. Its considered a word a char sequence without spaces
  * @author Andre Pontes (42845) <am.pontes@campus.fct.unl.pt>
  * @author Goncalo Marcelino (43178) <gb.marcelino@campus.fct.unl.pt>
  */
-public class Word implements Serializable {
+public class Word implements IDictionaryWord {
 	
 	/**
 	 * 
@@ -27,7 +27,12 @@ public class Word implements Serializable {
 		
 		this.word = word;
 	}
-	
+
+	@Override
+	public boolean equals(Word word) {
+		return this.word.equals(word.getWord());
+	}
+
 	/**
 	 * Return Word
 	 *

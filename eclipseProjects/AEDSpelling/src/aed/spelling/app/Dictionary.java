@@ -12,10 +12,10 @@ import aed.spelling.Word;
 class Dictionary implements IDictionary {
 	
 	private static final long serialVersionUID = 1L;
-	private Map<String, Word> words;
+	private Map<String, IDictionaryWord> words;
 	
 	public Dictionary() {
-		this.words = new HashMap<String, Word>();
+		this.words = new HashMap<String, IDictionaryWord>();
 	}
 	
 	@Override
